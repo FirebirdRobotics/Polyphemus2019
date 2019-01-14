@@ -19,17 +19,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
   public XboxController xboxController = new XboxController(0);
 
-  Button intake = new JoystickButton(xboxController, 1);
-  Button outtake = new JoystickButton(xboxController, 2);
-  Button elevatorUp = new JoystickButton(xboxController, 3);
-  Button elevatorDown = new JoystickButton(xboxController, 4);
+  Button hatchMacro = new JoystickButton(xboxController, 1); // A button
+  Button hatchMiddleMacro = new JoystickButton(xboxController, 2); // B button
+  Button hatchHighMacro = new JoystickButton(xboxController, 4); // Y button
   Button activateClimb = new JoystickButton(xboxController, 5);
   
   public OI() {
-    // intake.whenPressed(new ActivateIntake(true)); // intake(true) = intake
-    // outtake.whenPressed(new ActivateIntake(false)); // intake(false) = outtake
-    // elevatorUp.whileHeld(new ActivateElevator(true)); // elevator(true) = elevator up
-    // elevatorDown.whileHeld(new ActivateElevator(false)); // elevator(false) = elevator down
-    // activateClimb.whenPressed(new ActivateClimb()); // macro
+    // hatchMacro.whenPressed(new PlaceHatchMacro());
+    // hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
+    // hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
+    // activateClimb.whenPressed(new ActivateClimb()); // gatlin replace this with whatever you have
   }
 }
