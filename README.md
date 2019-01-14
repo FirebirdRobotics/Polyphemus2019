@@ -4,7 +4,7 @@ Robot Template Type: Command-Based
 
 control ideas for now:
 
-abxy buttons will be used to control the 3 stage eklevator macros for hatch placement. bottom button placing on bottom right button mioddle and top button top
+abxy buttons will be used to control the 3 stage elevator macros for hatch placement. bottom button placing on bottom right button middle and top button top
 
 right trigger and bumper for hatch pickup, floor and loader
 
