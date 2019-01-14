@@ -22,12 +22,12 @@ public class OI {
   Button hatchMacro = new JoystickButton(xboxController, 1); // A button
   Button hatchMiddleMacro = new JoystickButton(xboxController, 2); // B button
   Button hatchHighMacro = new JoystickButton(xboxController, 4); // Y button
-  Button activateClimb = new JoystickButton(xboxController, 5);
+  Button activateStilts = new JoystickButton(xboxController, 5); // replace with joystick button
   
   public OI() {
     // hatchMacro.whenPressed(new PlaceHatchMacro());
     // hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
     // hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
-    // activateClimb.whenPressed(new ActivateClimb()); // gatlin replace this with whatever you have
+    // activateStilts.whenPressed(new StiltMacro()); // gatlin you can replace this with whatever you have
   }
 }
