@@ -8,29 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 
-public class StiltMacro extends Command {
-  public StiltMacro() {
+public class drive extends Command {
+  public drive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-
-    // requires(Stilts);
+    // requires(Subsystem.Drivetrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    //do nothing
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //in english what i want to accomplish is drive forward at a currently undetermined speed and drop the first stilt at the proper distance away from the wall
-    //then i will after a proper time drop the other stilt 
-    //the second stilt should ideally drop when the front wheels are on the platform already
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,13 +37,11 @@ public class StiltMacro extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //this doesnt matter the game will be over
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //please dont interrupt this command
   }
 }
