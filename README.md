@@ -11,3 +11,6 @@ right trigger and bumper for hatch pickup, floor and loader
 dpad for ball placement
 
 joystick button for stilts
+
+Read this to install the Phoenix CTRE stuff:
+https://phoenix-documentation.readthedocs.io/en/latest/index.html
