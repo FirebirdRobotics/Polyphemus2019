@@ -12,5 +12,5 @@ dpad for ball placement
 
 joystick button for stilts
 
-Read this to install the CTR-Electronics Phoenix software framework:
+Read this to install the CTR-Electronics Phoenix software framework (for CAN motors/motor controllers):
 https://phoenix-documentation.readthedocs.io/en/latest/index.html
