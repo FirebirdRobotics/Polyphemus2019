@@ -7,22 +7,17 @@
 
 package frc.robot;
 
+import frc.robot.subsystems.*;
+
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.*;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +28,7 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  // public static Drivetrain driveTrain = new Drivetrain();
+  public static Drivetrain driveTrain = new Drivetrain();
   // public static Elevator elevator = new Elevator();
   // public static IntakeSystem intakeSystem = new IntakeSystem();
   // public static Climb climb = new Climb();
@@ -41,7 +36,7 @@ public class Robot extends TimedRobot {
   // public static ColorSensor colorSensor = new ColorSensor();
   // public static VisionProcessing visionProcessing = new VisionProcessing();
   public static OI m_oi;
-
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
