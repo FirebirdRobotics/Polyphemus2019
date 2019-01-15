@@ -12,5 +12,5 @@ dpad for ball placement
 
 joystick button for stilts
 
-Read this to install the Phoenix CTRE stuff:
+Read this to install the CTR-Electronics Phoenix software framework:
 https://phoenix-documentation.readthedocs.io/en/latest/index.html
