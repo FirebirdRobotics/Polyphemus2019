@@ -25,5 +25,5 @@ public class RobotMap {
 	public static int rightBack = 4;
 
   // PWM Ports
-  
+  public static int elevatorPort = 1; // temporary
 }
