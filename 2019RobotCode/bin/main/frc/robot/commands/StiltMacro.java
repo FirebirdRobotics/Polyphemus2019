@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class StiltMacro extends Command {
@@ -22,6 +24,7 @@ public class StiltMacro extends Command {
   protected void initialize() {
 
     //do nothing
+    //gonna need to reset and start a timer for stilt timing
   }
 
   // Called repeatedly when this Command is scheduled to run
