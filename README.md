@@ -16,3 +16,5 @@ Read this to install the CTR-Electronics Phoenix software framework (for CAN mot
 https://phoenix-documentation.readthedocs.io/en/latest/index.html
 
 This is me updating the readme to test something with the git bash terminal, sorry if it annoys you branden
+
+whoa i think im starting to figure this out
