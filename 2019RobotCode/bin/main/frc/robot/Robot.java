@@ -29,8 +29,8 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static Drivetrain driveTrain = new Drivetrain();
-  // public static Elevator elevator = new Elevator();
-  // public static IntakeSystem intakeSystem = new IntakeSystem();
+  public static ElevatorSystem elevator = new ElevatorSystem();
+  public static HatchSystem hatchSystem = new HatchSystem();
   // public static Climb climb = new Climb();
   // public static ProximitySensor proximitySensor = new ProximitySensor();
   // public static ColorSensor colorSensor = new ColorSensor();
