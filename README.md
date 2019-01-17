@@ -19,7 +19,7 @@ This is me updating the readme to test something with the git bash terminal, sor
 
 whoa i think im starting to figure this out
 
-Stuff to add to code:
+Stuff to do:
 - Ball pickup
 - Dance function
-- Maybe a sheet showing off our code to judges (vision, macros, etc.)
+- Maybe a document showing off our code to judges (vision, macros, etc.)
