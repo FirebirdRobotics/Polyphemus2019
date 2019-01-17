@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
   
-  WPI_TalonSRX leftFrontMotor;
+  	WPI_TalonSRX leftFrontMotor;
 	WPI_TalonSRX leftRearMotor;
 	WPI_TalonSRX rightFrontMotor;
 	WPI_TalonSRX rightRearMotor;
@@ -27,17 +27,13 @@ public class Drivetrain extends Subsystem {
 		
 		leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFront);
 		leftRearMotor = new WPI_TalonSRX(RobotMap.leftBack);
-		
-		/*leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
-		leftRearMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 20);
-		leftFrontMotor.setSensorPhase(false);
-		leftRearMotor.setSensorPhase(false);*/
+		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
+		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
 		
 		SpeedControllerGroup left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
 		left.setInverted(true);
-		
-		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
-		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
+		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+		right.setInverted(true);
 		
 		//Sets max current for talon srxs
 		int maxCurr = 25;
@@ -45,9 +41,6 @@ public class Drivetrain extends Subsystem {
 		setTalonCurrLimit(leftRearMotor, maxCurr);
 		setTalonCurrLimit(rightFrontMotor, maxCurr);
 		setTalonCurrLimit(rightRearMotor, maxCurr);
-		
-		SpeedControllerGroup right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
-		right.setInverted(true);
 		
 		dd = new DifferentialDrive(left, right);
 		dd.setSafetyEnabled(false);
@@ -68,7 +61,7 @@ public class Drivetrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  public void arcadeDrive(double moveValue, double rotateValue){
+ 	public void arcadeDrive(double moveValue, double rotateValue){
 		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.TURN_SCALE_FACTOR);
 	}
 	
