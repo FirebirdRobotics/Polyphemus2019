@@ -19,10 +19,10 @@ public class RobotMap {
   public static double TURN_SCALE_FACTOR = 1.0;
 
   // CAN Motor Controller Ports (DriveTrain)
-	public static int leftFront = 2;
-	public static int leftBack = 1;
-	public static int rightFront = 3;
-	public static int rightBack = 4;
+  public static int leftFront = 2;
+  public static int leftBack = 1;
+  public static int rightFront = 3;
+  public static int rightBack = 4;
 
   // PWM Ports
   public static int elevatorPort = 0; // temporary
