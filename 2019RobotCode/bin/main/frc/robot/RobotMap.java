@@ -18,7 +18,7 @@ public class RobotMap {
   public static double DRIVE_SCALE_FACTOR = 1.0;
   public static double TURN_SCALE_FACTOR = 1.0;
 
-  // CAN Motor Controller Ports (DriveTrain)
+  // CAN Motor Controller Ports (Drivetrain)
   public static int leftFront = 2;
   public static int leftBack = 1;
   public static int rightFront = 3;
