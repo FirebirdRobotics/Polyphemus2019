@@ -22,3 +22,4 @@ whoa i think im starting to figure this out
 Stuff to add to code:
 - Ball pickup
 - Dance function
+- Maybe a sheet showing off our code to judges (vision, macros, etc.)
