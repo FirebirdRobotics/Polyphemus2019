@@ -39,6 +39,7 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    // replace with whatever interface we r using (Shuffleboard?)
     // SmartDashboard.putNumber("move", move);
 		// SmartDashboard.putNumber("turn", turn);
 
@@ -53,7 +54,8 @@ public class Drive extends Command {
 		// stick only
 		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
 
-    // add other methods to drive here (ex. curvature drive)
+    // add other methods to drive here (ex. curvature drive) - use this link:
+    // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/914148-driving-a-robot-using-differential-drive
   }
 
   // Make this return true when this Command no longer needs to run execute()
