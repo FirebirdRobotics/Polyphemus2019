@@ -13,23 +13,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive extends Command {
 
   double move;
-	double turn;
+  double turn;
 
-	public Drive(double timeout) {
-		super(timeout);
-		requires(Robot.driveTrain);
-	}
+   public Drive(double timeout) {
+	super(timeout);
+	requires(Robot.driveTrain);
+   }
 
-	public Drive() {
-		super();
-		requires(Robot.driveTrain);
-  }
+   public Drive() {
+	super();
+	requires(Robot.driveTrain);
+   }
   
-  public Drive(double move, double turn, double timeout) {
-		this(timeout);
-		this.move = move;
-		this.turn = turn;
-	}
+   public Drive(double move, double turn, double timeout) {
+	this(timeout);
+	this.move = move;
+	this.turn = turn;
+   }
 
   // Called just before this Command runs the first time
   @Override
@@ -41,18 +41,18 @@ public class Drive extends Command {
   protected void execute() {
     // replace with whatever interface we r using (Shuffleboard?)
     // SmartDashboard.putNumber("move", move);
-		// SmartDashboard.putNumber("turn", turn);
+    // SmartDashboard.putNumber("turn", turn);
+    
+    // if (RobotMap.orientForward) {
+    // 	move = -Robot.oi.xbox.getY(Hand.kLeft);
+    // 	turn = Robot.oi.xbox.getX(Hand.kLeft);
+    // } else {
+    // 	move = Robot.oi.xbox.getY(Hand.kLeft);
+    // 	turn = Robot.oi.xbox.getX(Hand.kLeft);
+    // }
 
-		// if (RobotMap.orientForward) {
-		// 	move = -Robot.oi.xbox.getY(Hand.kLeft);
-		// 	turn = Robot.oi.xbox.getX(Hand.kLeft);
-		// } else {
-		// 	move = Robot.oi.xbox.getY(Hand.kLeft);
-		// 	turn = Robot.oi.xbox.getX(Hand.kLeft);
-		// }
-
-		// stick only
-		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
+    // stick only
+    Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
 
     // add other methods to drive here (ex. curvature drive) - use this link:
     // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/914148-driving-a-robot-using-differential-drive
