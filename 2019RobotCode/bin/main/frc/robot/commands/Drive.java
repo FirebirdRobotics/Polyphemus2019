@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import frc.robot.*;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Drive extends Command {
@@ -24,6 +23,12 @@ public class Drive extends Command {
 	public Drive() {
 		super();
 		requires(Robot.driveTrain);
+  }
+  
+  public Drive(double move, double turn, double timeout) {
+		this(timeout);
+		this.move = move;
+		this.turn = turn;
 	}
 
   // Called just before this Command runs the first time
@@ -34,6 +39,21 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    // SmartDashboard.putNumber("move", move);
+		// SmartDashboard.putNumber("turn", turn);
+
+		// if (RobotMap.orientForward) {
+		// 	move = -Robot.oi.xbox.getY(Hand.kLeft);
+		// 	turn = Robot.oi.xbox.getX(Hand.kLeft);
+		// } else {
+		// 	move = Robot.oi.xbox.getY(Hand.kLeft);
+		// 	turn = Robot.oi.xbox.getX(Hand.kLeft);
+		// }
+
+		// stick only
+		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
+
+    // add other methods to drive here (ex. curvature drive)
   }
 
   // Make this return true when this Command no longer needs to run execute()
