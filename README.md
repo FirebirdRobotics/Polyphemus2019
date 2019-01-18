@@ -23,3 +23,8 @@ Stuff to do:
 - Ball pickup
 - Dance function
 - Maybe a document showing off our code to judges (vision, macros, etc.)
+
+Stuff we want to display on the SmartDashboard//Shuffleboard:
+- camera feed (vision stuff)
+- type of drive
+- eagle-eye view of robot & pathing (arrow showing where the robot might go next)
