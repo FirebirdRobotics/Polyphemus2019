@@ -8,28 +8,24 @@
 package frc.robot.commands;
 
 import frc.robot.*;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Drive extends Command {
 
   double move;
-  double turn;
+	double turn;
 
-   public Drive(double timeout) {
-	super(timeout);
-	requires(Robot.driveTrain);
-   }
-
-   public Drive() {
-	super();
-	requires(Robot.driveTrain);
-   }
-  
-   public Drive(double move, double turn, double timeout) {
-	this(timeout);
-	this.move = move;
-	this.turn = turn;
-   }
+	public Drive() {
+		super();
+		requires(Robot.driveTrain);
+	}
+	public Drive(double move, double turn){
+		super();
+		requires(Robot.driveTrain);
+		this.move = move;
+		this.turn = turn;
+	}
 
   // Called just before this Command runs the first time
   @Override
@@ -43,18 +39,20 @@ public class Drive extends Command {
     // SmartDashboard.putNumber("move", move);
     // SmartDashboard.putNumber("turn", turn);
     
-    // if (RobotMap.orientForward) {
-    // 	move = -Robot.oi.xbox.getY(Hand.kLeft);
-    // 	turn = Robot.oi.xbox.getX(Hand.kLeft);
-    // } else {
-    // 	move = Robot.oi.xbox.getY(Hand.kLeft);
-    // 	turn = Robot.oi.xbox.getX(Hand.kLeft);
-    // }
+    // just in case we have the drivetrain going backwards (whether it be electrical or programming)
+    // we have this code to change the value of the move
+		if (RobotMap.orientForward) {
+			move = -Robot.oi.xboxController.getY(Hand.kLeft);
+			turn = Robot.oi.xboxController.getX(Hand.kLeft);
+		} else {
+			move = Robot.oi.xboxController.getY(Hand.kLeft);
+			turn = Robot.oi.xboxController.getX(Hand.kLeft);
+		}
 
-    // stick only
-    Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
+		// stick only
+		Robot.driveTrain.arcadeDrive(move * RobotMap.DRIVE_SCALE_FACTOR, -turn * RobotMap.TURN_SCALE_FACTOR);
 
-    // add other methods to drive here (ex. curvature drive) - use this link:
+    // add other methods to drive (located in DriveTrain) here (ex. curvature drive) - use this link:
     // https://wpilib.screenstepslive.com/s/currentCS/m/java/l/914148-driving-a-robot-using-differential-drive
   }
 
