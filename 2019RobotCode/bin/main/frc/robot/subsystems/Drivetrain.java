@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.*;
-
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -55,13 +55,12 @@ public class Drivetrain extends Subsystem {
 		tal.enableCurrentLimit(true);
 	}
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+  	@Override
+ 	public void initDefaultCommand() {
+    	setDefaultCommand(new Drive());
+  	}
 
- 	public void arcadeDrive(double moveValue, double rotateValue){
+	public void arcadeDrive(double moveValue, double rotateValue) {
 		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.TURN_SCALE_FACTOR);
 	}
 	

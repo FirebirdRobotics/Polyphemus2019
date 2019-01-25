@@ -8,16 +8,12 @@
 package frc.robot;
 
 import frc.robot.subsystems.*;
-
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import edu.wpi.cscore.*;
-import edu.wpi.cscore.VideoMode.PixelFormat;
-import edu.wpi.first.wpilibj.CameraServer;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,15 +23,17 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static Drivetrain driveTrain = new Drivetrain();
-  public static ElevatorSystem elevator = new ElevatorSystem();
-  public static HatchSystem hatchSystem = new HatchSystem();
+  public static OI oi;
+  public static ExampleSubsystem m_subsystem;
+  public static Drivetrain driveTrain;
+  public static ElevatorSystem elevator;
+  public static HatchSystem hatchSystem;
+  public static Solenoids sol;
+    
   // public static Climb climb = new Climb();
   // public static ProximitySensor proximitySensor = new ProximitySensor();
   // public static ColorSensor colorSensor = new ColorSensor();
   // public static VisionProcessing visionProcessing = new VisionProcessing();
-  public static OI m_oi;
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -46,7 +44,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
+    oi = new OI();
+    m_subsystem = new ExampleSubsystem();
+    driveTrain = new Drivetrain();
+    elevator = new ElevatorSystem();
+    hatchSystem = new HatchSystem();
+    sol = new Solenoids();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
@@ -151,5 +154,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    
   }
 }

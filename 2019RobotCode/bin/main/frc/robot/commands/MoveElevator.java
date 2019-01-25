@@ -9,8 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StiltMacro extends Command {
-  public StiltMacro() {
+public class MoveElevator extends Command {
+  public MoveElevator() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
