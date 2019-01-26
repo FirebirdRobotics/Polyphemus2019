@@ -7,26 +7,18 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.*;
-import frc.robot.*;
 
-public class ElevatorSystem extends Subsystem {
+/**
+ * Add your docs here.
+ */
+public class Stilts extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    static Talon elevator;
-
-    public ElevatorSystem(){
-
-        elevator = new Talon(RobotMap.elevatorPort);    
-    
-    }
-
-    @Override
-    public void initDefaultCommand() {
-        setDefaultCommand(new MoveElevator());
-    }
+  @Override
+  public void initDefaultCommand() {
+    setDefaultCommand(new StiltMacro());
+  }
 }
-

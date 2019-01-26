@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
 public class HatchSystem extends Subsystem {
   // Put methods for controlling this subsystem
@@ -19,7 +19,7 @@ public class HatchSystem extends Subsystem {
 
   public HatchSystem() {
 
-    // hatchMotor = new Talon(RobotMap.hatchSystemPort);    
+    hatchMotor = new Talon(RobotMap.hatchSystemPort);    
 
   }
 

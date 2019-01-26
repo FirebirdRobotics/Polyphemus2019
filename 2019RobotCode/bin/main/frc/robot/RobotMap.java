@@ -23,14 +23,14 @@ public class RobotMap {
 	public static int leftBack = 1;
 	public static int rightFront = 3;
   public static int rightBack = 4;
-
-  public static int pistonIn = 1;
-  public static int pistonOut = 0;
   
   // also for Drivetrain
   public static boolean orientForward = false;
 
   // PWM Ports
-  // public static int elevatorPort = 0; // temporary
-  // public static int hatchSystemPort = 1; // temporary
+  public static int elevatorPort = 0; // temporary
+  public static int hatchSystemPort = 1; // temporary
+  public static int pistonIn = 2; // temporary
+  public static int pistonOut = 3; // temporary
+  public static int stiltsPort = 4; // temporary
 }
