@@ -7,15 +7,22 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.*;
+import frc.robot.*;
 
-/**
- * Add your docs here.
- */
 public class Stilts extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  static Talon StiltMotor;
+
+  public Stilts() {
+
+      StiltMotor = new Talon(RobotMap.stiltsPort);
+
+  }
 
   @Override
   public void initDefaultCommand() {
