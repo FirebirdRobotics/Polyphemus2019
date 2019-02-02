@@ -8,12 +8,18 @@
 package frc.robot;
 
 import frc.robot.subsystems.*;
+import java.util.ArrayList;
+import java.util.List;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,8 +34,16 @@ public class Robot extends TimedRobot {
   public static Drivetrain driveTrain;
   public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
-  public static Solenoids sol;
-    
+  public static Solenoids solenoids;
+
+  // Vision stuff
+  public static NetworkTable table;
+  public static GripPipeline gripPipeline;
+  public List<MatOfPoint> contours;
+  public List<Number> centerXs;
+  public List<Number> centerYs;
+
+  
   // public static Climb climb = new Climb();
   // public static ProximitySensor proximitySensor = new ProximitySensor();
   // public static ColorSensor colorSensor = new ColorSensor();
@@ -49,7 +63,24 @@ public class Robot extends TimedRobot {
     driveTrain = new Drivetrain();
     elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
-    sol = new Solenoids();
+    solenoids = new Solenoids();
+
+    // vision code
+    table = NetworkTableInstance.getDefault().getTable("datatable");
+    gripPipeline = new GripPipeline();
+    centerXs = new ArrayList<>();
+    centerYs = new ArrayList<>();
+
+    for (MatOfPoint contour : contours) {
+      Rect boundingRect = Imgproc.boundingRect(contour);
+      centerXs.add(boundingRect.x + boundingRect.width / 2);
+      centerYs.add(boundingRect.y + boundingRect.height / 2);
+      // etc for width, height, ...
+    }
+    
+    table.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
+    table.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
