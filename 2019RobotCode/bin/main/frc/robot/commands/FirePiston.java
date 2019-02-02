@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.subsystems.Solenoids;
 
@@ -16,8 +17,7 @@ public class FirePiston extends Command {
   public FirePiston() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    super();
-    requires(Robot.sol);
+    requires(Robot.solenoids);
   }
 
   // Called just before this Command runs the first time
@@ -35,7 +35,7 @@ public class FirePiston extends Command {
     // Robot.elevatorSystem.raiseElevator([insert speed here], [insert time here]);
     // Thread.sleep(1000);
     // Robot.armSystem.setMotors([speed], [time]);
-    Robot.sol.fire();
+    Robot.solenoids.fire();
   }
 
   // Make this return true when this Command no longer needs to run execute()
