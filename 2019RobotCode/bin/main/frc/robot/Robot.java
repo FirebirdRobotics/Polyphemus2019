@@ -58,12 +58,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
     m_subsystem = new ExampleSubsystem();
     driveTrain = new Drivetrain();
     elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
     solenoids = new Solenoids();
+    oi = new OI(); // Make sure the OI is last to be initialized
 
     // vision code
     table = NetworkTableInstance.getDefault().getTable("datatable");
