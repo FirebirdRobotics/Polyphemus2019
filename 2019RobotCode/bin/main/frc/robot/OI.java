@@ -25,14 +25,15 @@ public class OI {
   Button hatchHighMacro = new JoystickButton(xboxController, 4); // Y button
   Button activateStilts = new JoystickButton(xboxController, 5); // replace with joystick button
   Button toggleDriveOrientation = new JoystickButton(xboxController, 8); // start button
-  Button pistonButton = new JoystickButton(xboxController, 6); // RB button
+  Button climbButton = new JoystickButton(xboxController, 6); // RB button
   
   public OI() {
     hatchMacro.whenPressed(new PlaceHatchMacro());
     hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
     hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
-    pistonButton.whenPressed(new FirePiston());
-    // activateStilts.whenPressed(new StiltMacro()); // gatlin you can replace this with whatever you have
+    climbButton.whenPressed(new FirePiston());
+    activateStilts.whenPressed(new StiltMacro());
+    
     toggleDriveOrientation.whenPressed(new InstantCommand() {
 			@Override
 			protected void initialize() {
