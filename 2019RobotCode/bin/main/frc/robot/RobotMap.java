@@ -30,7 +30,9 @@ public class RobotMap {
   // PWM Ports
   public static int elevatorPort = 0; // temporary
   public static int hatchSystemPort = 1; // temporary
-  public static int pistonIn = 2; // temporary
-  public static int pistonOut = 3; // temporary
+  public static int frontIn = 0; // temporary
+  public static int frontOut = 1; // temporary
+  public static int backIn = 2;
+  public static int backOut = 3;
   public static int stiltsPort = 4; // temporary
 }
