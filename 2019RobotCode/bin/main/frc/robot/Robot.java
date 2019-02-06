@@ -8,15 +8,21 @@
 package frc.robot;
 
 import frc.robot.subsystems.*;
+import frc.robot.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.vision.VisionThread;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -35,20 +41,22 @@ public class Robot extends TimedRobot {
   public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
   public static Solenoids solenoids;
-
-  // Vision stuff
-  public static NetworkTable table;
-  public static GripPipeline gripPipeline;
-  public List<MatOfPoint> contours;
-  public List<Number> centerXs;
-  public List<Number> centerYs;
-
   
-  // public static Climb climb = new Climb();
-  // public static ProximitySensor proximitySensor = new ProximitySensor();
-  // public static ColorSensor colorSensor = new ColorSensor();
-  // public static VisionProcessing visionProcessing = new VisionProcessing();
+  // Camera
+  private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 240;
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+  private final Object imgLock = new Object();
   
+  // NetworkTables
+  NetworkTable contoursTable;
+  GripPipeline gripPipeline;
+  List<MatOfPoint> contours;
+  List<Number> centerXs;
+  List<Number> centerYs;
+
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -63,40 +71,45 @@ public class Robot extends TimedRobot {
     elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
     solenoids = new Solenoids();
-    oi = new OI(); // Make sure the OI is last to be initialized
+    oi = new OI(); // Make sure the OI is initialized LAST
 
-    // vision code
-    table = NetworkTableInstance.getDefault().getTable("datatable");
+    // Camera
+    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    
+    // NetworkTables
+    contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
     gripPipeline = new GripPipeline();
+    contours = gripPipeline.filterContoursOutput();
     centerXs = new ArrayList<>();
     centerYs = new ArrayList<>();
 
+    // Vision thread
+    // visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+    //   if (!pipeline.filterContoursOutput().isEmpty()) {
+    //       Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+    //       synchronized (imgLock) {
+    //           centerX = r.x + (r.width / 2);
+    //       }
+    //   }
+    // });
+    visionThread.start();
+
+    // Add stuff to NetworkTables
     for (MatOfPoint contour : contours) {
       Rect boundingRect = Imgproc.boundingRect(contour);
       centerXs.add(boundingRect.x + boundingRect.width / 2);
       centerYs.add(boundingRect.y + boundingRect.height / 2);
       // etc for width, height, ...
     }
-    
-    table.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
-    table.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+    contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
+    contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+    // etc for width, height, ...
+
 
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
-    
-    // This thread is for camera feed (1st line is simple vision, rest of it doesn't work idk)
-    // UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    // camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 120);
-    // new Thread(() -> {
-    //     CvSink cvSink = CameraServer.getInstance().getVideo();
-    //     CvSource outputStream = CameraServer.getInstance().putVideo("camera stream", 320, 240);
-    //     Mat source = new Mat();
-    //     while(!Thread.interrupted()) {
-    //         cvSink.grabFrame(source);
-    //         outputStream.putFrame(source);
-    //     }
-    // }).start();
   }
 
   /**
