@@ -31,8 +31,7 @@ public class OI {
     hatchMacro.whenPressed(new PlaceHatchMacro());
     hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
     hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
-    climbButton.whenPressed(new FirePiston());
-    activateStilts.whenPressed(new StiltMacro());
+    climbButton.whenPressed(new Climb());
     
     toggleDriveOrientation.whenPressed(new InstantCommand() {
 			@Override
