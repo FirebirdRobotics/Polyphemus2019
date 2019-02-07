@@ -25,7 +25,7 @@ public class HatchSystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    // create a command that sets the hatch system back to default
+    // setDefaultCommand(new SetHatchSystemDefault());
   }
 }
