@@ -43,18 +43,18 @@ public class Robot extends TimedRobot {
   public static Solenoids solenoids;
   
   // Camera
-  private static final int IMG_WIDTH = 320;
-	private static final int IMG_HEIGHT = 240;
-	private VisionThread visionThread;
-	private double centerX = 0.0;
-  private final Object imgLock = new Object();
+  // private static final int IMG_WIDTH = 320;
+	// private static final int IMG_HEIGHT = 240;
+	// private VisionThread visionThread;
+	// private double centerX = 0.0;
+  // private final Object imgLock = new Object();
   
   // NetworkTables
-  NetworkTable contoursTable;
-  GripPipeline gripPipeline;
-  List<MatOfPoint> contours;
-  List<Number> centerXs;
-  List<Number> centerYs;
+  // NetworkTable contoursTable;
+  // GripPipeline gripPipeline;
+  // List<MatOfPoint> contours;
+  // List<Number> centerXs;
+  // List<Number> centerYs;
 
 
   Command m_autonomousCommand;
@@ -74,15 +74,15 @@ public class Robot extends TimedRobot {
     oi = new OI(); // Make sure the OI is initialized LAST
 
     // Camera
-    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    // UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    // camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
     
     // NetworkTables
-    contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
-    gripPipeline = new GripPipeline();
-    contours = gripPipeline.filterContoursOutput();
-    centerXs = new ArrayList<>();
-    centerYs = new ArrayList<>();
+    // contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
+    // gripPipeline = new GripPipeline();
+    // contours = gripPipeline.filterContoursOutput();
+    // centerXs = new ArrayList<>();
+    // centerYs = new ArrayList<>();
 
     // Vision thread
     // visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
@@ -93,17 +93,17 @@ public class Robot extends TimedRobot {
     //       }
     //   }
     // });
-    visionThread.start();
+    // visionThread.start();
 
     // Add stuff to NetworkTables
-    for (MatOfPoint contour : contours) {
-      Rect boundingRect = Imgproc.boundingRect(contour);
-      centerXs.add(boundingRect.x + boundingRect.width / 2);
-      centerYs.add(boundingRect.y + boundingRect.height / 2);
+    // for (MatOfPoint contour : contours) {
+    //   Rect boundingRect = Imgproc.boundingRect(contour);
+    //   centerXs.add(boundingRect.x + boundingRect.width / 2);
+    //   centerYs.add(boundingRect.y + boundingRect.height / 2);
       // etc for width, height, ...
-    }
-    contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
-    contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+    // }
+    // contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
+    // contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
     // etc for width, height, ...
 
 
@@ -179,7 +179,7 @@ public class Robot extends TimedRobot {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
-    // this line or comment it out.
+    // this line or comment it out. 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
