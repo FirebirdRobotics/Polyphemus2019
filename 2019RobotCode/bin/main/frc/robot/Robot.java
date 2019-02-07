@@ -9,13 +9,11 @@ package frc.robot;
 
 import frc.robot.subsystems.*;
 import frc.robot.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
@@ -36,25 +34,24 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
  */
 public class Robot extends TimedRobot {
   public static OI oi;
-  public static ExampleSubsystem m_subsystem;
   public static Drivetrain driveTrain;
   public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
   public static Solenoids solenoids;
   
   // Camera
-  // private static final int IMG_WIDTH = 320;
-	// private static final int IMG_HEIGHT = 240;
-	// private VisionThread visionThread;
-	// private double centerX = 0.0;
-  // private final Object imgLock = new Object();
+  private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 240;
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+  private final Object imgLock = new Object();
   
   // NetworkTables
-  // NetworkTable contoursTable;
-  // GripPipeline gripPipeline;
-  // List<MatOfPoint> contours;
-  // List<Number> centerXs;
-  // List<Number> centerYs;
+  NetworkTable contoursTable;
+  GripPipeline gripPipeline;
+  List<MatOfPoint> contours;
+  List<Number> centerXs;
+  List<Number> centerYs;
 
 
   Command m_autonomousCommand;
@@ -66,7 +63,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_subsystem = new ExampleSubsystem();
     driveTrain = new Drivetrain();
     elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
@@ -74,15 +70,15 @@ public class Robot extends TimedRobot {
     oi = new OI(); // Make sure the OI is initialized LAST
 
     // Camera
-    // UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    // camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
     
     // NetworkTables
-    // contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
-    // gripPipeline = new GripPipeline();
-    // contours = gripPipeline.filterContoursOutput();
-    // centerXs = new ArrayList<>();
-    // centerYs = new ArrayList<>();
+    contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
+    gripPipeline = new GripPipeline();
+    contours = gripPipeline.filterContoursOutput();
+    centerXs = new ArrayList<>();
+    centerYs = new ArrayList<>();
 
     // Vision thread
     // visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
@@ -96,14 +92,14 @@ public class Robot extends TimedRobot {
     // visionThread.start();
 
     // Add stuff to NetworkTables
-    // for (MatOfPoint contour : contours) {
-    //   Rect boundingRect = Imgproc.boundingRect(contour);
-    //   centerXs.add(boundingRect.x + boundingRect.width / 2);
-    //   centerYs.add(boundingRect.y + boundingRect.height / 2);
+    for (MatOfPoint contour : contours) {
+      Rect boundingRect = Imgproc.boundingRect(contour);
+      centerXs.add(boundingRect.x + boundingRect.width / 2);
+      centerYs.add(boundingRect.y + boundingRect.height / 2);
       // etc for width, height, ...
-    // }
-    // contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
-    // contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+    }
+    contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
+    contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
     // etc for width, height, ...
 
 
