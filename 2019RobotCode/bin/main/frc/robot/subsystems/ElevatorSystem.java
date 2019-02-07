@@ -9,24 +9,23 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.*;
 import frc.robot.*;
 
-public class ElevatorSystem extends Subsystem {
+public class HatchSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    static Talon elevator;
+  static Talon hatchMotor;
 
-    public ElevatorSystem(){
+  public HatchSystem() {
 
-        elevator = new Talon(RobotMap.elevatorPort);    
-    
-    }
+    hatchMotor = new Talon(RobotMap.hatchSystemPort);    
 
-    @Override
-    public void initDefaultCommand() {
-        setDefaultCommand(new MoveElevator());
-    }
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    // create a command that sets the hatch system back to default
+    // setDefaultCommand(new SetHatchSystemDefault());
+  }
 }
-
