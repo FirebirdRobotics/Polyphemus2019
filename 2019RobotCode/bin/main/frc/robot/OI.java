@@ -18,13 +18,13 @@ import frc.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  public XboxController xboxController = new XboxController(0);
+  public XboxController xboxController = new XboxController(1);
 
   Button hatchMacro = new JoystickButton(xboxController, 1); // A button
   Button hatchMiddleMacro = new JoystickButton(xboxController, 2); // B button
   Button hatchHighMacro = new JoystickButton(xboxController, 4); // Y button
   Button activateStilts = new JoystickButton(xboxController, 5); // replace with joystick button
-  Button toggleDriveOrientation = new JoystickButton(xboxController, 8); // start button
+  Button toggleDriveOrientation = new JoystickButton(xboxController, 8); // start button, which isn't available for some reason
   Button climbButton = new JoystickButton(xboxController, 6); // RB button
   
   public OI() {
