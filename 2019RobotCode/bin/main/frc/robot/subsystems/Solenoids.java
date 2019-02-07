@@ -34,12 +34,12 @@ public class Solenoids extends Subsystem {
     
     }
 
-    public void climb(){
+    public void climb() {
         
             frontPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
                 while(climbTime.get()< 3){
-                    Robot.driveTrain.autoDrive(.2);
+                    Robot.driveTrain.autoDrive(.3);
                 }
              climbTime.reset();
             frontPiston.set(DoubleSolenoid.Value.kReverse);
@@ -47,16 +47,16 @@ public class Solenoids extends Subsystem {
             backPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
                 while(climbTime.get()< 3){
-                    Robot.driveTrain.autoDrive(.2);
+                    Robot.driveTrain.autoDrive(.3);
                 }
+             climbTime.stop();
             backPiston.set(DoubleSolenoid.Value.kReverse);
     }
 
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
-        setDefaultCommand(new Climb());
+        // setDefaultCommand(new Climb());
     }
 }
 
