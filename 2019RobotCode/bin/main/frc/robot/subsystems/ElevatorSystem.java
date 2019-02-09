@@ -12,79 +12,58 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.*;
 import frc.robot.*;
 
-
 public class ElevatorSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    static Talon elevator;
+    static Talon elevatorMotor;
+    // define elevator encoder
+    // define limit switch
     private static int lowCount;
     private static int midCount;
     private static int highCount;
 
-    public ElevatorSystem(){
+    public ElevatorSystem() {
 
-        elevator = new Talon(RobotMap.elevatorPort);    
+        elevatorMotor = new Talon(RobotMap.elevatorPort);    
     
     }
 
     public void lowLevel(){
-        /*
-            if(Robot.eleEncoder.get() < RobotMap.lowCount){
-                while(Robot.eleEncoder.get() < RobotMap.lowCount){
-                    elevatorMotor.set(.5);
-                }
-            }else if(Robot.eleEncoder.get() > RobotMap.lowCount)){
-                while(Robot.eleEncoder.get() > RobotMap.lowCount)
-                elevatorMotor.set(-.5);
-            }else{
-                //do nothing
-            }
-        */
-
+        // while(Robot.eleEncoder.get() < RobotMap.lowCount) {
+        //     elevatorMotor.set(.5);
+        // }
+        // while(Robot.eleEncoder.get() > RobotMap.lowCount) {
+        //     elevatorMotor.set(-.5);
+        // }
     }
 
     public void midLevel(){
-        /*
-            if(Robot.eleEncoder.get() < RobotMap.midCount){
-                while(Robot.eleEncoder.get() < RobotMap.midCount){
-                    elevatorMotor.set(.5);
-                }
-            }else if(Robot.eleEncoder.get() > RobotMap.midCount)){
-                while(Robot.eleEncoder.get() > RobotMap.midCount)
-                elevatorMotor.set(-.5);
-            }else{
-                //do nothing
-            }
-        */
+        // while(Robot.eleEncoder.get() < RobotMap.midCount) {
+        //     elevatorMotor.set(.5);
+        // }
+        // while(Robot.eleEncoder.get() > RobotMap.midCount) {
+        //     elevatorMotor.set(-.5);
+        // }
     }
 
     public void highLevel(){
-        /*
-            if(Robot.eleEncoder.get() < RobotMap.highCount){
-                while(eleEncoder.get() < RobotMap.highCount){
-                    elevatorMotor.set(.5);
-                }
-            }else if(Robot.eleEncoder.get() > RobotMap.highCount)){
-                while(Robot.eleEncoder.get() > RobotMap.highCount)
-                elevatorMotor.set(-.5);
-            }else{
-                //do nothing
-            }
-        */
+        // while(Robot.eleEncoder.get() < RobotMap.highCount) {
+        //     elevatorMotor.set(.5);
+        // }
+        // while(Robot.eleEncoder.get() > RobotMap.highCount) {
+        //     elevatorMotor.set(-.5);
+        // }
     }
+
     @Override
     public void initDefaultCommand() {
         // create a command that sets the elevator height back to default
         // setDefaultCommand(new SetElevatorDefault());
 
-        /*
-
-            while(switch.get  = false)
-                elevatorMotor.set(-.7);
-            Robot.eleEncoder.Reset();
-
-        */
+        // while(switch.get = false)
+        //     elevatorMotor.set(-.7);
+        // Robot.eleEncoder.reset();
     }
 }
 
