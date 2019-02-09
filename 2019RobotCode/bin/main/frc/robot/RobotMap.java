@@ -35,4 +35,15 @@ public class RobotMap {
   public static int backIn = 2;
   public static int backOut = 3;
   public static int stiltsPort = 4; // temporary
+
+  //encoder counts
+  private static int lowCount = 10;
+  private static int midCount = 50;
+  private static int highCount = 100;
+
+  private static int lowPivotCount = 10;
+  private static int midPivotCount = 50;
+  private static int highPivotCount = 100;
+
+  private static boolean panelIsUp;
 }

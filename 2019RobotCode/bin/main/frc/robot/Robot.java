@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.subsystems.*;
 import frc.robot.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.opencv.core.MatOfPoint;
@@ -22,9 +23,9 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,14 +40,22 @@ public class Robot extends TimedRobot {
   public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
   public static Solenoids solenoids;
+  public static Encoder pivEncoder;
+  public static Encoder eleEncoder;
   
-  // Vision Stuff
-  private boolean driverVision, tapeVision, cargoVision, cargoSeen, tapeSeen;
-  private NetworkTableEntry tapeDetected, cargoDetected, tapeYaw, cargoYaw, 
-                            videoTimestamp, driveWanted, tapeWanted, cargoWanted;
-  private double targetAngle;
-  NetworkTableInstance instance;
-  NetworkTable chickenVision;
+  // Camera
+  private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 240;
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+  private final Object imgLock = new Object();
+  
+  // NetworkTables
+  NetworkTable contoursTable;
+  GripPipeline gripPipeline;
+  List<MatOfPoint> contours;
+  List<Number> centerXs;
+  List<Number> centerYs;
 
 
   Command m_autonomousCommand;
@@ -62,25 +71,43 @@ public class Robot extends TimedRobot {
     elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
     solenoids = new Solenoids();
+    eleEncoder = new Encoder();
+    pivEncoder = new Encoder();
     oi = new OI(); // Make sure the OI is initialized LAST
 
-    // Vision
-    instance = NetworkTableInstance.getDefault();
-    chickenVision = instance.getTable("ChickenVision");
+    // Camera
+    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    
+    // NetworkTables
+    contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
+    gripPipeline = new GripPipeline();
+    contours = gripPipeline.filterContoursOutput();
+    centerXs = new ArrayList<>();
+    centerYs = new ArrayList<>();
 
-    tapeDetected = chickenVision.getEntry("tapeDetected");
-    cargoDetected = chickenVision.getEntry("cargoDetected");
-    tapeYaw = chickenVision.getEntry("tapeYaw");
-    cargoYaw = chickenVision.getEntry("cargoYaw");
+    // Vision thread
+    // visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+    //   if (!pipeline.filterContoursOutput().isEmpty()) {
+    //       Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+    //       synchronized (imgLock) {
+    //           centerX = r.x + (r.width / 2);
+    //       }
+    //   }
+    // });
+    // visionThread.start();
 
-    driveWanted = chickenVision.getEntry("Driver");
-    tapeWanted = chickenVision.getEntry("Tape");
-    cargoWanted = chickenVision.getEntry("Cargo");
+    // Add stuff to NetworkTables
+    for (MatOfPoint contour : contours) {
+      Rect boundingRect = Imgproc.boundingRect(contour);
+      centerXs.add(boundingRect.x + boundingRect.width / 2);
+      centerYs.add(boundingRect.y + boundingRect.height / 2);
+      // etc for width, height, ...
+    }
+    contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
+    contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
+    // etc for width, height, ...
 
-    videoTimestamp = chickenVision.getEntry("VideoTimestamp");
-
-    tapeVision = cargoVision = false;
-    driverVision = true;
 
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -166,59 +193,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    // Vision Code
-
-    // Change this to alter how quick or slow the feedback loop is
-    double kP = 1.2;
-
-    double forward = oi.xboxController.getY(Hand.kLeft);
-    double turn = oi.xboxController.getX(Hand.kRight);
-    boolean cargoDesired = oi.xboxController.getBumper(Hand.kLeft);
-    boolean tapeDesired = oi.xboxController.getBumper(Hand.kRight);
-
-    if (cargoDesired) { // If bumper on left side
-        driveWanted.setBoolean(false);
-        tapeWanted.setBoolean(false);
-        cargoWanted.setBoolean(true);
-        cargoSeen = cargoDetected.getBoolean(false);
-
-        if (cargoSeen)
-            targetAngle = cargoYaw.getDouble(0);
-        else
-            targetAngle = 0;
-    } else if (tapeDesired) { // If bumper on right side
-        driveWanted.setBoolean(false);
-        tapeWanted.setBoolean(true);
-        cargoWanted.setBoolean(false);
-        // Checks if vision sees cargo or vision targets. This may not get called unless
-        // cargo vision detected
-        tapeSeen = tapeDetected.getBoolean(false);
-
-        if (tapeSeen)
-            targetAngle = tapeYaw.getDouble(0);
-        else
-            targetAngle = 0;
-    } else {
-        driveWanted.setBoolean(true);
-        tapeWanted.setBoolean(false);
-        cargoWanted.setBoolean(false);
-
-        targetAngle = 0;
-    }
-    // Limit output to 0.3
-    double output = limitOutput(-kP * targetAngle, 0.3);
-
-    if (tapeDesired) {
-        System.out.println("Bot turning towards tape");
-        driveTrain.arcadeDrive(forward, output);
-    } else if (cargoDesired) {
-        System.out.println("Bot turning towards target");
-        driveTrain.arcadeDrive(forward, output);
-    } else {
-        System.out.println("Bot moving normally");
-        driveTrain.arcadeDrive(forward, output);
-    }
   }
 
   /**
@@ -226,23 +200,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-  }
-  
-  public double limitOutput(double number, double maxOutput) {
-    if (number > 1.0) {
-        return 1.0;
-    }
-    if (number < -1.0) {
-        return -1.0;
-    }
-
-    if (number > maxOutput) {
-        return maxOutput;
-    }
-    if (number < -maxOutput) {
-        return -maxOutput;
-    }
-
-    return number;
+    
   }
 }
