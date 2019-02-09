@@ -2,7 +2,7 @@
 
 Robot Template Type: Command-Based
 
-## Note:
+## Current Code Location:
 The current code is located in the bin directory
 
 control ideas for now:
