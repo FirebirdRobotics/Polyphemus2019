@@ -23,6 +23,21 @@ public class HatchSystem extends Subsystem {
 
   }
 
+
+  public void place(){
+    /*
+      
+    */
+  }
+
+  public void stationPickup(){
+
+  }
+
+  public void groundPickup(){
+
+  }
+
   @Override
   public void initDefaultCommand() {
     // create a command that sets the hatch system back to default
