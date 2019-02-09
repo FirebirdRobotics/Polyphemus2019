@@ -3,7 +3,7 @@
 Robot Template Type: Command-Based
 
 ## Current Code Location:
-The current code is located in the bin directory
+The current code is located in the bin directory, not the src directory (src directory is not updated)
 
 control ideas for now:
 
