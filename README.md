@@ -13,6 +13,7 @@ Y button - top elevator macro
 X button - climb? (still undecided)
 
 --- BELOW THIS IS STILL UNDECIDED (whatever was written down initially) ---
+ 
 right trigger and bumper for hatch pickup, floor and loader
 
 dpad for ball placement
