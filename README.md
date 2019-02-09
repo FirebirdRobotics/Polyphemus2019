@@ -2,6 +2,9 @@
 
 Robot Template Type: Command-Based
 
+## Note:
+The current code is located in the bin directory
+
 control ideas for now:
 
 abxy buttons will be used to control the 3 stage elevator macros for hatch placement. bottom button placing on bottom right button middle and top button top
