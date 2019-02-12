@@ -43,20 +43,12 @@ public class Robot extends TimedRobot {
   public static Encoder pivEncoder;
   public static Encoder eleEncoder;
   
-  // Camera
-  private static final int IMG_WIDTH = 320;
-	private static final int IMG_HEIGHT = 240;
-	private VisionThread visionThread;
-	private double centerX = 0.0;
-  private final Object imgLock = new Object();
-  
-  // NetworkTables
-  NetworkTable contoursTable;
-  GripPipeline gripPipeline;
-  List<MatOfPoint> contours;
-  List<Number> centerXs;
-  List<Number> centerYs;
-
+  // Vision Stuff
+//   private boolean driverVision, tapeVision, cargoVision, cargoSeen, tapeSeen;
+//   public static NetworkTableEntry tapeDetected, cargoDetected, tapeYaw, cargoYaw, videoTimestamp, driveWanted, tapeWanted, cargoWanted;
+//   private double targetAngle;
+//   NetworkTableInstance instance;
+//   NetworkTable chickenVision;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -75,39 +67,23 @@ public class Robot extends TimedRobot {
     pivEncoder = new Encoder();
     oi = new OI(); // Make sure the OI is initialized LAST
 
-    // Camera
-    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
-    
-    // NetworkTables
-    contoursTable = NetworkTableInstance.getDefault().getTable("/GRIP/contoursTable");
-    gripPipeline = new GripPipeline();
-    contours = gripPipeline.filterContoursOutput();
-    centerXs = new ArrayList<>();
-    centerYs = new ArrayList<>();
+   // Vision
+    // instance = NetworkTableInstance.getDefault();
+    // chickenVision = instance.getTable("ChickenVision");
 
-    // Vision thread
-    // visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-    //   if (!pipeline.filterContoursOutput().isEmpty()) {
-    //       Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-    //       synchronized (imgLock) {
-    //           centerX = r.x + (r.width / 2);
-    //       }
-    //   }
-    // });
-    // visionThread.start();
+    // tapeDetected = chickenVision.getEntry("tapeDetected");
+    // cargoDetected = chickenVision.getEntry("cargoDetected");
+    // tapeYaw = chickenVision.getEntry("tapeYaw");
+    // cargoYaw = chickenVision.getEntry("cargoYaw");
 
-    // Add stuff to NetworkTables
-    for (MatOfPoint contour : contours) {
-      Rect boundingRect = Imgproc.boundingRect(contour);
-      centerXs.add(boundingRect.x + boundingRect.width / 2);
-      centerYs.add(boundingRect.y + boundingRect.height / 2);
-      // etc for width, height, ...
-    }
-    contoursTable.getEntry("centerX").setNumberArray(centerXs.toArray(new Number[0]));
-    contoursTable.getEntry("centerY").setNumberArray(centerYs.toArray(new Number[0]));
-    // etc for width, height, ...
+    // driveWanted = chickenVision.getEntry("Driver");
+    // tapeWanted = chickenVision.getEntry("Tape");
+    // cargoWanted = chickenVision.getEntry("Cargo");
 
+    // videoTimestamp = chickenVision.getEntry("VideoTimestamp");
+
+    // tapeVision = cargoVision = false;
+    // driverVision = true;
 
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -193,6 +169,44 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    // Vision Code
+    // boolean cargoDesired = oi.xboxController.getBumper(Hand.kLeft);
+    // boolean tapeDesired = oi.xboxController.getBumper(Hand.kRight);
+
+    // if (cargoDesired) { // If bumper on left side
+    //     driveWanted.setBoolean(false);
+    //     tapeWanted.setBoolean(false);
+    //     cargoWanted.setBoolean(true);
+    //     cargoSeen = cargoDetected.getBoolean(false);
+
+    //     if (cargoSeen)
+    //         targetAngle = cargoYaw.getDouble(0);
+    //     else
+    //         targetAngle = 0;
+    // } else if (tapeDesired) { // If bumper on right side
+    //     driveWanted.setBoolean(false);
+    //     tapeWanted.setBoolean(true);
+    //     cargoWanted.setBoolean(false);
+    //     // Checks if vision sees cargo or vision targets. This may not get called unless
+    //     // cargo vision detected
+    //     tapeSeen = tapeDetected.getBoolean(false);
+
+    //     if (tapeSeen)
+    //         targetAngle = tapeYaw.getDouble(0);
+    //     else
+    //         targetAngle = 0;
+    // } else {
+    //     driveWanted.setBoolean(true);
+    //     tapeWanted.setBoolean(false);
+    //     cargoWanted.setBoolean(false);
+
+    //     targetAngle = 0;
+    // }
+
+    // if (tapeDesired) {
+    //     visionRoutine(0.2, 0.2);
+    // }
   }
 
   /**
@@ -202,4 +216,16 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     
   }
+	
+//   public void visionRoutine(double left, double right) {
+//     while (tapeYaw.getDouble(0) >= 2.00 || tapeYaw.getDouble(0) <= -2.00) {
+//         if (tapeYaw.getDouble(0) <= -2.00) { // if negative (on right)
+//             // put left backwards & right forwards (rotate counter-clockwise)
+//             driveTrain.camDrive(left, -right);
+//         } else if (tapeYaw.getDouble(0) >= 2.00) { // if positive (on right)
+//             // put left forwards & right backwards (rotate clockwise)
+//             driveTrain.camDrive(-left, right);
+//         }
+//     }
+//   }
 }
