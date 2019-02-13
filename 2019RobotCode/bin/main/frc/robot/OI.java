@@ -26,13 +26,16 @@ public class OI {
   Button activateStilts = new JoystickButton(xboxController, 5); // replace with joystick button
   Button toggleDriveOrientation = new JoystickButton(xboxController, 8); // start button, which isn't available for some reason
   Button climbButton = new JoystickButton(xboxController, 6); // RB button
+  Button visionButton = new JoystickButton(xboxController, 3); // X button
+
   
   public OI() {
     hatchMacro.whenPressed(new PlaceHatchMacro());
     hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
     hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
     climbButton.whenPressed(new Climb());
-    
+    visionButton.whileHeld(new VisionRoutine());
+	  
     toggleDriveOrientation.whenPressed(new InstantCommand() {
 			@Override
 			protected void initialize() {
