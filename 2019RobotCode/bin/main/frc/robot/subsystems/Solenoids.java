@@ -21,20 +21,32 @@ public class Solenoids extends Subsystem {
     DoubleSolenoid frontPiston;
     DoubleSolenoid backPiston;
     Timer climbTime;
+
+    //IF THERE IS AN ERROR THIS IS IT
+    ElevatorSystem ele;
     
-
-
-    public Solenoids(){
+    public Solenoids() {
 
         frontPiston = new DoubleSolenoid(RobotMap.frontIn, RobotMap.frontOut);
         backPiston = new DoubleSolenoid(RobotMap.backIn, RobotMap.backOut);
         climbTime = new Timer();
+        //THIS TOO
+        ele = new ElevatorSystem();
       
         // elevator = new Talon(RobotMap.elevatorPort);    
     
     }
 
     public void climb() {
+
+        /*
+            LOWER EVERYTING TO BOTTOM AND CENTER?!?!?!
+        */
+        
+
+        //THIS TOO
+            //will add a climb section which pulls shoulder up and elbow in with ele low
+            // ele.setArm("climb");    
         
             frontPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();

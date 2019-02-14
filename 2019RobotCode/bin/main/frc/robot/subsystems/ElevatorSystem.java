@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.*;
 import frc.robot.*;
@@ -17,53 +18,212 @@ public class ElevatorSystem extends Subsystem {
   // here. Call these from Commands.
 
     static Talon elevatorMotor;
+    static Talon shoulderMotor;
+    static Talon elbowMotor;
+
+    static Encoder eleEncoder;
+    static Encoder shoulderEncoder;
+    static Encoder elbowEncoder;
+        //i still dont kn ow if the wrist is gonna be encoded
+    // static encoder wristEncoder;
+
+
     // define elevator encoder
     // define limit switch
-    private static int lowCount;
-    private static int midCount;
-    private static int highCount;
 
     public ElevatorSystem() {
 
-        elevatorMotor = new Talon(RobotMap.elevatorPort);    
+        elevatorMotor = new Talon(RobotMap.elevatorPort);   
+        shoulderMotor = new Talon(RobotMap.shoulderPort);
+        elbowMotor = new Talon(RobotMap.elbowPort);
+
+        // 0 and 1 are the port numbers for the two digital inputs and false tells the encoder to not invert the counting direction.
+
+        //if then encoders are counting the wrong way, switch the false to true instead of changing all the < & > operators
+        eleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k2X);
+        shoulderEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k2X);
+        elbowEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k2X);
+            //idk if wrist is gonna be encoded
+        // wristEncoder = new Encoder(6, 7, false, Encoder.encodingType.k2X)
+
+    }
+    //im going to write one method with an input @PARAMETER string 
+    //that is going to be used to determine what level it is
+
+    /*
+     _____
+     |   |     ----------3
+     |   |   /  2         \
+     |   |  /              ----         //btw im not of good as a text artist as brandon 
+     |   | /              |    |        //but i wanted this year to help visualize
+  0  |   |1
+    */
+//0 - elevator
+//1 - shoulder
+//2 - elbow *    has 2 motors :((((     * ...will figure out l8r...
+//3 wrist hopefully one motor
+//i wanna die ya, still do
     
-    }
+        //This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
+    public void setArm(String s){
 
-    public void lowLevel(){
-        // while(Robot.eleEncoder.get() < RobotMap.lowCount) {
-        //     elevatorMotor.set(.5);
-        // }
-        // while(Robot.eleEncoder.get() > RobotMap.lowCount) {
-        //     elevatorMotor.set(-.5);
-        // }
-    }
+        //this compares the input to the different levels
+        //low, mid, hi
+        //then runs that part of the if else blocks for it
+        //and all of the loops have a bit of tollerance but no more than +- 5 counts, this can and most likely will be adjusted
 
-    public void midLevel(){
-        // while(Robot.eleEncoder.get() < RobotMap.midCount) {
-        //     elevatorMotor.set(.5);
-        // }
-        // while(Robot.eleEncoder.get() > RobotMap.midCount) {
-        //     elevatorMotor.set(-.5);
-        // }
-    }
+        if(s == "low"){
+            //done?
+            /*
+            test list for low:
+            elevator below needed with 
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+            elevator above with
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+            */
+            while(eleEncoder.get() > RobotMap.lowEle + 5 || eleEncoder.get() < RobotMap.lowEle - 5){
+                if(eleEncoder.get() > RobotMap.lowEle){
+                    elevatorMotor.set(.5);
+                }else if(eleEncoder.get() < RobotMap.lowEle){
+                    elevatorMotor.set(-.5);
+                }else{
+                    //dop nothing, loop will be exited
+                }
+            }
+            while(shoulderEncoder.get() < RobotMap.lowShoulder || shoulderEncoder.get() > RobotMap.lowShoulder){
+                if(shoulderEncoder.get() > RobotMap.lowShoulder){
+                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+                        //but then again im just an programmer
+                    shoulderMotor.set(-.5);
+                }else if (shoulderEncoder.get() < RobotMap.lowShoulder){
+                    shoulderMotor.set(.5);
+                }else{
+                    //do nothing
+                }
+            }
+            while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
+                if(elbowEncoder.get() < RobotMap.lowElbow){
+                    elbowMotor.set(.3);
+                }else if(elbowEncoder.get() > RobotMap.lowElbow){
+                    elbowMotor.set(-.3);
+                }else{
+                    //do nothing
+                }
+            }
 
-    public void highLevel(){
-        // while(Robot.eleEncoder.get() < RobotMap.highCount) {
-        //     elevatorMotor.set(.5);
-        // }
-        // while(Robot.eleEncoder.get() > RobotMap.highCount) {
-        //     elevatorMotor.set(-.5);
-        // }
+    }else if(s == "mid"){
+        /*
+        test list for mid:
+            elevator below needed with 
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+            elevator above with
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+        */
+            while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5){
+                if(eleEncoder.get() > RobotMap.midEle){
+                    elevatorMotor.set(.5);
+                }else if(eleEncoder.get() < RobotMap.midEle){
+                    elevatorMotor.set(-.5);
+                }else{
+                    //dop nothing, loop will be exited
+                }
+            }
+            while(shoulderEncoder.get() < RobotMap.midShoulder || shoulderEncoder.get() > RobotMap.midShoulder){
+                if(shoulderEncoder.get() > RobotMap.midShoulder){
+                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+                        //but then again im just an programmer
+                    shoulderMotor.set(-.5);
+                }else if (shoulderEncoder.get() < RobotMap.midShoulder){
+                    shoulderMotor.set(.5);
+                }else{
+                    //do nothing
+                }
+            }
+            while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
+                if(elbowEncoder.get() < RobotMap.midElbow){
+                    elbowMotor.set(.3);
+                }else if(elbowEncoder.get() > RobotMap.midElbow){
+                    elbowMotor.set(-.3);
+                }else{
+                    //do nothing
+                }
+            }
+        }if(s == "hi"){
+
+        /*
+            test list for hi:
+            elevator below needed with 
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+            elevator above with
+                shoudler above and elbow above
+                shoudler above and elbow below
+                shoulder below and elbow above
+                shoudler below and elbow below
+        */
+            while(eleEncoder.get() > RobotMap.hiEle + 5 || eleEncoder.get() < RobotMap.hiEle - 5){
+                if(eleEncoder.get() > RobotMap.hiEle){
+                    elevatorMotor.set(.5);
+                }else if(eleEncoder.get() < RobotMap.hiEle){
+                    //i dont think this case will ever happen but idk yet ?!?!?!?!
+                    elevatorMotor.set(-.5);
+                }else{
+                    //dop nothing, loop will be exited
+                }
+            }
+            while(shoulderEncoder.get() < RobotMap.hiShoulder || shoulderEncoder.get() > RobotMap.hiShoulder){
+                if(shoulderEncoder.get() > RobotMap.hiShoulder){
+                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+                        //but then again im just an programmer
+                    shoulderMotor.set(-.5);
+                }else if (shoulderEncoder.get() < RobotMap.hiShoulder){
+                    shoulderMotor.set(.5);
+                }else{
+                    //do nothing
+                }
+            }
+            while(elbowEncoder.get() < RobotMap.hiElbow - 3 || elbowEncoder.get() > RobotMap.hiElbow +3){
+                if(elbowEncoder.get() < RobotMap.hiElbow){
+                    elbowMotor.set(.3);
+                }else if(elbowEncoder.get() > RobotMap.hiElbow){
+                    elbowMotor.set(-.3);
+                }else{
+                    //do nothing
+                }
+            }
+        }
+        //add a ("climb") so that we can put ele low, shoudler up, elbow down
+        //^^^ will makes the Center of gravity as close to the bottom and middle as possible
     }
+ 
 
     @Override
     public void initDefaultCommand() {
         // create a command that sets the elevator height back to default
         // setDefaultCommand(new SetElevatorDefault());
 
-        // while(switch.get = false)
-        //     elevatorMotor.set(-.7);
-        // Robot.eleEncoder.reset();
+        //just make sure they are all at the bottom, OR starting in the same exact spot before every match and then we will be able to base our encoder counts on those spots
+
+        elbowEncoder.reset();
+        shoulderEncoder.reset();
+        eleEncoder.reset();
     }
+
+
+
 }
 
