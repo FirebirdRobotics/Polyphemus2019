@@ -8,11 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class PlaceHatchMiddleMacro extends Command {
   public PlaceHatchMiddleMacro() {
     // going to 'require(Robot.subsystem);' for elevator subsystem 
     // and whatever hatch claw/holder/thrower systems (arm & pistons)
+    super();
+    requires(Robot.elevator);
   }
 
   // Called just before this Command runs the first time
@@ -23,6 +26,7 @@ public class PlaceHatchMiddleMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.elevator.setArm("mid");
     // this code might be in here or it might be in initialize, idk for now
     // btw these '_systems' are NOT the actual names, they are just examples
     // and can be replaced with the names of the actual subsystems (same with methods):
