@@ -8,8 +8,11 @@ The current code is located in the bin directory, not the src directory (src dir
 ## Control Ideas/OI (for now):
 
 A button - bottom elevator macro
+ 
 B button - middle elevator macro
+ 
 Y button - top elevator macro
+ 
 X button - climb? (still undecided)
 
 --- BELOW THIS IS STILL UNDECIDED (whatever was written down initially) ---
