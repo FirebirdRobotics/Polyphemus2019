@@ -35,6 +35,9 @@ public class RobotMap {
   public static int backIn = 2;
   public static int backOut = 3;
   public static int stiltsPort = 4; // temporary
+	
+  public static int elbowPort = 4; // pivot at the elbow of the arm  TEMP
+  public static int shoulderPort = 5; //shoulder, motor connected directly to elevator box TEMP
 
   //encoder counts
   private static int lowCount = 10;
