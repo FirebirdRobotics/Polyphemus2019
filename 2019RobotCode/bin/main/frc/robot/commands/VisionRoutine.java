@@ -25,12 +25,14 @@ public class VisionRoutine extends Command {
   @Override
   protected void execute() {
     Robot.visionSystem.visionRoutine(0.2, 0.2);
+    System.out.println("executing vision routine");
+    System.out.println(Robot.oi.xboxController.getXButton());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
