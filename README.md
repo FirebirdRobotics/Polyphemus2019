@@ -7,14 +7,22 @@ The current code is located in the bin directory, not the src directory (src dir
 
 ## Control Ideas/OI (for now):
 
+Left Joystick - drive
+ 
+Right Joystick - arm
+ 
 A button - bottom elevator macro
  
 B button - middle elevator macro
  
 Y button - top elevator macro
  
-X button - climb? (still undecided)
-
+X button - vision centering code
+ 
+[insert button here] button - climb
+ 
+[insert button here] button - claw
+ 
 --- BELOW THIS IS STILL UNDECIDED (whatever was written down initially) ---
  
 right trigger and bumper for hatch pickup, floor and loader
@@ -32,10 +40,16 @@ This is me updating the readme to test something with the git bash terminal, sor
 
 whoa i think im starting to figure this out
 
-Stuff to do:
+Stuff to do (general ideas):
 - Ball pickup
 - Dance function
 - Maybe a document showing off our code to judges (vision, macros, etc.)
+
+Vision to-do list:
+- clean up the print lines
+- make better comments (especially on the 'false thing' in VisionRoutine.java)
+- maybe experiment w/ whether a timer or the iterations method is better (currently using the iterations thing)
+- change buttons maybe?
 
 Stuff we want to display on the SmartDashboard//Shuffleboard:
 - camera feed (vision stuff) 
