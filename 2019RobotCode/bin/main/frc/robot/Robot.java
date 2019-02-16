@@ -8,24 +8,10 @@
 package frc.robot;
 
 import frc.robot.subsystems.*;
-import frc.robot.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.vision.VisionThread;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Encoder; 
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,18 +23,12 @@ import edu.wpi.first.wpilibj.Encoder;
 public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain driveTrain;
-  public static ElevatorSystem elevator;
+  // public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
   public static Solenoids solenoids;
+  public static VisionSystem visionSystem;
   public static Encoder pivEncoder;
   public static Encoder eleEncoder;
-  
-  // Vision Stuff
-//   private boolean driverVision, tapeVision, cargoVision, cargoSeen, tapeSeen;
-//   public static NetworkTableEntry tapeDetected, cargoDetected, tapeYaw, cargoYaw, videoTimestamp, driveWanted, tapeWanted, cargoWanted;
-//   private double targetAngle;
-//   NetworkTableInstance instance;
-//   NetworkTable chickenVision;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -60,30 +40,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driveTrain = new Drivetrain();
-    elevator = new ElevatorSystem();
+    // elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
     solenoids = new Solenoids();
-    eleEncoder = new Encoder();
-    pivEncoder = new Encoder();
+    visionSystem = new VisionSystem();
+    
     oi = new OI(); // Make sure the OI is initialized LAST
-
-   // Vision
-    // instance = NetworkTableInstance.getDefault();
-    // chickenVision = instance.getTable("ChickenVision");
-
-    // tapeDetected = chickenVision.getEntry("tapeDetected");
-    // cargoDetected = chickenVision.getEntry("cargoDetected");
-    // tapeYaw = chickenVision.getEntry("tapeYaw");
-    // cargoYaw = chickenVision.getEntry("cargoYaw");
-
-    // driveWanted = chickenVision.getEntry("Driver");
-    // tapeWanted = chickenVision.getEntry("Tape");
-    // cargoWanted = chickenVision.getEntry("Cargo");
-
-    // videoTimestamp = chickenVision.getEntry("VideoTimestamp");
-
-    // tapeVision = cargoVision = false;
-    // driverVision = true;
 
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -169,44 +131,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    // Vision Code
-    // boolean cargoDesired = oi.xboxController.getBumper(Hand.kLeft);
-    // boolean tapeDesired = oi.xboxController.getBumper(Hand.kRight);
-
-    // if (cargoDesired) { // If bumper on left side
-    //     driveWanted.setBoolean(false);
-    //     tapeWanted.setBoolean(false);
-    //     cargoWanted.setBoolean(true);
-    //     cargoSeen = cargoDetected.getBoolean(false);
-
-    //     if (cargoSeen)
-    //         targetAngle = cargoYaw.getDouble(0);
-    //     else
-    //         targetAngle = 0;
-    // } else if (tapeDesired) { // If bumper on right side
-    //     driveWanted.setBoolean(false);
-    //     tapeWanted.setBoolean(true);
-    //     cargoWanted.setBoolean(false);
-    //     // Checks if vision sees cargo or vision targets. This may not get called unless
-    //     // cargo vision detected
-    //     tapeSeen = tapeDetected.getBoolean(false);
-
-    //     if (tapeSeen)
-    //         targetAngle = tapeYaw.getDouble(0);
-    //     else
-    //         targetAngle = 0;
-    // } else {
-    //     driveWanted.setBoolean(true);
-    //     tapeWanted.setBoolean(false);
-    //     cargoWanted.setBoolean(false);
-
-    //     targetAngle = 0;
-    // }
-
-    // if (tapeDesired) {
-    //     visionRoutine(0.2, 0.2);
-    // }
   }
 
   /**
@@ -216,16 +140,4 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
     
   }
-	
-//   public void visionRoutine(double left, double right) {
-//     while (tapeYaw.getDouble(0) >= 2.00 || tapeYaw.getDouble(0) <= -2.00) {
-//         if (tapeYaw.getDouble(0) <= -2.00) { // if negative (on right)
-//             // put left backwards & right forwards (rotate counter-clockwise)
-//             driveTrain.camDrive(left, -right);
-//         } else if (tapeYaw.getDouble(0) >= 2.00) { // if positive (on right)
-//             // put left forwards & right backwards (rotate clockwise)
-//             driveTrain.camDrive(-left, right);
-//         }
-//     }
-//   }
 }
