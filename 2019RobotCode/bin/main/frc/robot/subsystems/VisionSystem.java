@@ -62,48 +62,53 @@ public class VisionSystem extends Subsystem {
   public void visionRoutine(double left, double right) {
     // timer.start();
     timeInt = 0;
-    // System.out.println("vision routine, yaw is: " + tapeYaw.getDouble(0));
-      while (tapeYaw.getDouble(0) > 2.0 || tapeYaw.getDouble(0) < -2.0) {
-        yawValue = (long) Math.abs(tapeYaw.getDouble(0));
+    double rawYaw = tapeYaw.getDouble(0);
+      while (rawYaw > 2.0 || rawYaw < -2.0) {
+        yawValue = (long) Math.abs(rawYaw);
         System.out.println("----");
-        System.out.println("tapeYaw: " + tapeYaw.getDouble(0));
-          if (tapeYaw.getDouble(0) < -2.0) { // if negative (on right)
+        System.out.println("rawYaw: " + rawYaw);
+        System.out.println("absYaw: " + yawValue);
+          if (rawYaw < -2.0) { // if negative (on right)
               // put left backwards & right forwards (rotate counter-clockwise)
               Robot.driveTrain.camDrive(left, -right);
               System.out.println("tapeYaw is on left");
               System.out.println("timeInt: " + timeInt);
           }
-          else if (tapeYaw.getDouble(0) > 2.0) { // if positive (on right)
+          else if (rawYaw > 2.0) { // if positive (on right)
               // put left forwards & right backwards (rotate clockwise)
               Robot.driveTrain.camDrive(-left, right);
               System.out.println("tapeYaw is on right");
               System.out.println("timeInt: " + timeInt);
           }
-          if (timeInt++ > 10) {
+          if (timeInt++ >= 20) {
+            Robot.driveTrain.camDrive(0, 0);
+            System.out.println("stopping motors");
             return;
           }
           // use sleeps to control how long robot is running/stopping motors
           try {
-            Thread.sleep(yawValue * 40); // how long robot runs motors
+            Thread.sleep(yawValue * 25); // how long robot runs motors
             Robot.driveTrain.camDrive(0, 0);
-            Thread.sleep(50); // how long robot sets motors to 0
+
+            // IMPORTANT: THIS SLEEP MUST BE LONG ENOUGH FOR THE ROBOT TO ACTUALLY PAUSE
+            Thread.sleep(500); // how long robot sets motors to 0
 
             System.out.println("stopping motors");
           } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
+          rawYaw = tapeYaw.getDouble(0);
       }
-      // Set motors to zero after outside of loop
+      // stop motors after exiting while loop
       Robot.driveTrain.camDrive(0, 0);
       System.out.println("final yaw: " + tapeYaw.getDouble(0));
+      System.out.println("final rawYaw: " + rawYaw);
   }
 
 
   /*
-
   Drive TOWARDS THE TAPE STRAIGHT LINE?!
-
   public double l = .2;
   public double r = .2; 
   Timer camTime = new Timer();
