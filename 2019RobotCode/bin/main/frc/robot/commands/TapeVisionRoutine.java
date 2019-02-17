@@ -8,12 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.*;
 
-public class PlaceHatchHighMacro extends Command {
-  public PlaceHatchHighMacro() {
-    super();
-    requires(Robot.elevator);
+public class TapeVisionRoutine extends Command {
+  public TapeVisionRoutine() {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.visionSystem);
   }
 
   // Called just before this Command runs the first time
@@ -24,13 +24,15 @@ public class PlaceHatchHighMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setArm("hi");
+    Robot.visionSystem.tapeVisionRoutine(0.2, 0.2);
+    System.out.println("completed vision routine");
+    System.out.println(Robot.oi.xboxController.getXButton());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

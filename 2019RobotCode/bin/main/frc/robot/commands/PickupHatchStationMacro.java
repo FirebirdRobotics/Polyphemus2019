@@ -8,12 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 
-public class PlaceHatchHighMacro extends Command {
-  public PlaceHatchHighMacro() {
-    super();
-    requires(Robot.elevator);
+public class PickupHatchStationMacro extends Command {
+  public PickupHatchStationMacro() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +23,13 @@ public class PlaceHatchHighMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setArm("hi");
+    // this code might be in here or it might be in initialize, idk for now
+    // btw these '_systems' are NOT the actual names, they are just examples
+    // and can be replaced with the names of the actual subsystems (same with methods):
+
+    // Robot.elevatorSystem.raiseElevator([insert speed here], [insert time here]);
+    // Thread.sleep(1000);
+    // Robot.armSystem.setMotors([speed], [time]);
   }
 
   // Make this return true when this Command no longer needs to run execute()

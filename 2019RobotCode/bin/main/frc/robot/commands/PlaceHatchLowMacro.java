@@ -3,15 +3,15 @@
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PlaceHatchHighMacro extends Command {
-  public PlaceHatchHighMacro() {
+public class PlaceHatchLowMacro extends Command {
+  public PlaceHatchLowMacro() {
     super();
     requires(Robot.elevator);
   }
@@ -24,7 +24,7 @@ public class PlaceHatchHighMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setArm("hi");
+    Robot.elevator.setArm("low");
   }
 
   // Make this return true when this Command no longer needs to run execute()
