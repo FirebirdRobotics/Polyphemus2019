@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -21,7 +20,7 @@ public class Shoulder extends Subsystem {
   static TalonSRX shoulder;
 
   public void Shoudler(){
-    shoulder = new TalonSRX(RobotMap.shoulderPort);
+    // shoulder = new TalonSRX(RobotMap.shoulderPort);
   }
 
   public void low(){

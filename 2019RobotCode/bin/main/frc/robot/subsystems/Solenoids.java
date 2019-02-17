@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
-import frc.robot.commands.*;
-
 
 public class Solenoids extends Subsystem {
   // Put methods for controlling this subsystem
@@ -23,15 +21,15 @@ public class Solenoids extends Subsystem {
     Timer climbTime;
 
     //IF THERE IS AN ERROR THIS IS IT
-    ElevatorSystem ele;
+    // ElevatorSystem ele;
     
     public Solenoids() {
 
-        frontPiston = new DoubleSolenoid(RobotMap.frontIn, RobotMap.frontOut);
-        backPiston = new DoubleSolenoid(RobotMap.backIn, RobotMap.backOut);
+        // frontPiston = new DoubleSolenoid(RobotMap.frontIn, RobotMap.frontOut);
+        // backPiston = new DoubleSolenoid(RobotMap.backIn, RobotMap.backOut);
         climbTime = new Timer();
         //THIS TOO
-        ele = new ElevatorSystem();
+        // ele = new ElevatorSystem();
       
         // elevator = new Talon(RobotMap.elevatorPort);    
     

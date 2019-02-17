@@ -17,10 +17,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
   
-  	PWMTalonSRX leftFrontMotor; // Changed from WPI_TalonSRXs to PWMTalonSRXs for testing
-	PWMTalonSRX leftRearMotor;
-	PWMTalonSRX rightFrontMotor;
-	PWMTalonSRX rightRearMotor;
+  	WPI_TalonSRX leftFrontMotor;
+	WPI_TalonSRX leftRearMotor;
+	WPI_TalonSRX rightFrontMotor;
+	WPI_TalonSRX rightRearMotor;
 	DifferentialDrive dd;
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
@@ -28,10 +28,10 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		super();
 		
-		leftFrontMotor = new PWMTalonSRX(RobotMap.leftFront);
-		leftRearMotor = new PWMTalonSRX(RobotMap.leftBack);
-		rightFrontMotor = new PWMTalonSRX(RobotMap.rightFront);
-		rightRearMotor = new PWMTalonSRX(RobotMap.rightBack);
+		leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFront);
+		leftRearMotor = new WPI_TalonSRX(RobotMap.leftBack);
+		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
+		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
 		
 		left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
 		left.setInverted(true);
@@ -39,41 +39,52 @@ public class Drivetrain extends Subsystem {
 		right.setInverted(true);
 		
 		//Sets max current for talon srxs
-		// int maxCurr = 25;
-		// setTalonCurrLimit(leftFrontMotor, maxCurr);
-		// setTalonCurrLimit(leftRearMotor, maxCurr);
-		// setTalonCurrLimit(rightFrontMotor, maxCurr);
-		// setTalonCurrLimit(rightRearMotor, maxCurr);
+		int maxCurr = 25;
+		setTalonCurrLimit(leftFrontMotor, maxCurr);
+		setTalonCurrLimit(leftRearMotor, maxCurr);
+		setTalonCurrLimit(rightFrontMotor, maxCurr);
+		setTalonCurrLimit(rightRearMotor, maxCurr);
 		
+		// dd = new DifferentialDrive(left, right);
 		dd = new DifferentialDrive(left, right);
 		dd.setSafetyEnabled(false);
 		dd.setDeadband(0.1);
 	}
 	
 	//Sets max current/amps for talon srxs
-	// private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
-	// 	tal.configContinuousCurrentLimit(amps, 1000);
-	// 	tal.configPeakCurrentLimit(amps, 1000);
-	// 	tal.configPeakCurrentDuration(0, 1000);
-	// 	tal.enableCurrentLimit(true);
-	// }
+	private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
+		tal.configContinuousCurrentLimit(amps, 1000);
+		tal.configPeakCurrentLimit(amps, 1000);
+		tal.configPeakCurrentDuration(0, 1000);
+		tal.enableCurrentLimit(true);
+	}
 
   	@Override
  	public void initDefaultCommand() {
     	setDefaultCommand(new Drive());
-  	}
+	  }
+	
+	// Below are the various drives that we use throughout the robot code
 
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		dd.arcadeDrive(moveValue * RobotMap.DRIVE_SCALE_FACTOR, rotateValue * RobotMap.TURN_SCALE_FACTOR);
+	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+		dd.arcadeDrive(moveSpeed * RobotMap.driveSpeed, rotateSpeed * RobotMap.turnSpeed);
 	}
 	
-	public void curvatureDrive(double moveSpeed, double turn) {
-		dd.curvatureDrive(moveSpeed * RobotMap.DRIVE_SCALE_FACTOR, turn * RobotMap.TURN_SCALE_FACTOR, true);
+	public void curvatureDrive(double moveSpeed, double rotateSpeed) {
+		dd.curvatureDrive(moveSpeed * RobotMap.driveSpeed, rotateSpeed * RobotMap.turnSpeed, true);
+	}
+
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+		dd.tankDrive(leftSpeed, rightSpeed);
+	}
+
+	public void camDrive(double leftSpeed, double rightSpeed) {
+		left.set(leftSpeed);
+		right.set(rightSpeed);
 	}
 	
 	public void autoDrive(double speed) {
-		left.set(-speed);
+		left.set(speed);
 		right.set(speed);
-		
 	}
 }
