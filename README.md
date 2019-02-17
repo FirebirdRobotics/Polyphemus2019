@@ -1,38 +1,50 @@
 # Team 3019 Robot Code, 2018-2019 FRC Season
-
 Robot Template Type: Command-Based
-
+ 
 ## Current Code Location:
-The current code is located in the bin directory, not the src directory (src directory is not updated)
+The current code is located in the bin directory, not the src directory (src directory is not updated & file directories are weird so idk)
+
+## Full List of Macros:
+- Climb
+- PlaceHatchLowMacro
+- PlaceHatchMiddleMacro
+- PickupHatchStationMacro
+- PickupBallMacro
+- TapeVisionRoutine
+- BallVisionRoutine
 
 ## Control Ideas/OI (for now):
+*WE WILL GET JADEN & AUSTIN TO HELP DECIDE THIS B/C IM CONFUSION*
+- Left Joystick = drive
+- Right Joystick = arm
+- A Button = deliver low hatch
+- B Button = deliver mid hatch
+- X Button = pickup cargo/ball
+- Y Button = pickup hatch load station
+- Right bumper = vision, center on tape
+- Left bumper = vision, center on cargo/ball
+- Right trigger = hold claw out
+- Left trigger = hold claw in
+- Dpad y-axis = elevator
+- Start button = climb
 
-Left Joystick - drive
- 
-Right Joystick - arm
- 
-A button - bottom elevator macro
- 
-B button - middle elevator macro
- 
-Y button - top elevator macro
- 
-X button - vision centering code
- 
-[insert button here] button - climb
- 
-[insert button here] button - claw
- 
---- BELOW THIS IS STILL UNDECIDED (whatever was written down initially) ---
- 
-right trigger and bumper for hatch pickup, floor and loader
+## Stuff we want to display on the SmartDashboard//Shuffleboard:
+- camera feed (vision stuff) 
+- type of drive
+- distance from robot (or camera) to detected field element
+- eagle-eye view of robot & pathing (arrow showing where the robot might go next)
 
-dpad for ball placement
+## Stuff to do/Improvements:
+- Ball pickup
+- SetLowestPosition macro-
+   a) put a method in each subsystem to do that & just run it in climb macro file
+   b) make a new command file to do that
+- Distance detection
+- Dance function
+- Make a document w/ what to do when code doesn't work (ex. check firmware, PCM must be id 0)
+- Maybe a document showing off our code to judges (vision, macros, etc.)
 
-joystick button for stilts
-
-## Other stuff:
-
+## Other stuff (idk):
 Read this to install the CTR-Electronics Phoenix software framework (for CAN motors/motor controllers):
 https://phoenix-documentation.readthedocs.io/en/latest/index.html
 
@@ -40,18 +52,3 @@ This is me updating the readme to test something with the git bash terminal, sor
 
 whoa i think im starting to figure this out
 
-Stuff to do (general ideas):
-- Ball pickup
-- Dance function
-- Maybe a document showing off our code to judges (vision, macros, etc.)
-
-Vision to-do list:
-- clean up the print lines
-- make better comments (especially on the 'false thing' in VisionRoutine.java)
-- maybe experiment w/ whether a timer or the iterations method is better (currently using the iterations thing)
-- change buttons maybe?
-
-Stuff we want to display on the SmartDashboard//Shuffleboard:
-- camera feed (vision stuff) 
-- type of drive
-- eagle-eye view of robot & pathing (arrow showing where the robot might go next)
