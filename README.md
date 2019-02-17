@@ -1,7 +1,7 @@
 # Team 3019 Robot Code, 2018-2019 FRC Season
 Robot Template Type: Command-Based
  
-## **Current Code Location:**
+## Current Code Location:
 The current code is located in the ***bin directory***, not the src directory (src directory is not updated & file directories are weird so idk)
 
 ## Full List of Macros:
@@ -14,7 +14,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - BallVisionRoutine
 
 ## Control Ideas/OI (for now):
-**WE WILL GET JADEN & AUSTIN TO HELP DECIDE THIS B/C IM CONFUSION**
+***WE WILL GET JADEN & AUSTIN TO HELP DECIDE THIS B/C IM CONFUSION***
 - Left Joystick = drive
 - Right Joystick = arm
 - A Button = deliver low hatch
