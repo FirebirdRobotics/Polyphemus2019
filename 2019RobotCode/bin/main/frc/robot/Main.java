@@ -16,10 +16,6 @@ import edu.wpi.first.wpilibj.RobotBase;
  */
 public final class Main {
   private Main() {
-    // NetworkTableInstance instance = NetworkTableInstance.getDefault();
-    // NetworkTable rootTable = instance.getTable("");
-
-    // do stuff with instance and table
   }
 
   /**

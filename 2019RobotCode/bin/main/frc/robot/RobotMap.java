@@ -15,43 +15,63 @@ package frc.robot;
  */
 public class RobotMap {
   // Scale Factors
-  public static double DRIVE_SCALE_FACTOR = 0.1;
-  public static double TURN_SCALE_FACTOR = 1.0;
+  public static double driveSpeed = 0.1;
+  public static double turnSpeed = 1.0;
 
   // CAN Motor Controller Ports (Drivetrain)
-	// public static int leftFront = 0;
-	// public static int leftBack = 1;
-	// public static int rightFront = 2;
-  // public static int rightBack = 3;
-  public static int tempLeftMotor = 1;
-  public static int tempRightMotor = 6;
+	public static int rightFront = 1;
+  public static int rightBack = 2;
+	public static int leftFront = 3;
+	public static int leftBack = 4;
   
   // also for Drivetrain
-  public static boolean orientForward = false;
+  // public static boolean orientForward = false;
 
   // PWM Ports
   public static int elevatorPort = 7; // temporary
   public static int hatchSystemPort = 8; // temporary
-  public static int frontIn = 0; // solenoids
-  public static int frontOut = 1; // solenoids
-  public static int backIn = 2; // solenoids
-  public static int backOut = 3; // solenoids
-  public static int elbowPort = 4; // pivot at the elbow of the arm
+  public static int wristPort = 4; // pivot at the elbow of the arm
   public static int shoulderPort = 5; //shoulder, motor connected directly to elevator box
+
+  // Solenoids
+  public static int frontIn = 0;
+  public static int frontOut = 1;
+  public static int backIn = 2;
+  public static int backOut = 3;
 
   //encoderCounts
     //all #s are psuedo until we have the robot
     //these need to be given values before the placeHatch method can be called because it relies on comparing to these vals
-  public static int lowEle;
-  public static int midEle;
-  public static int hiEle;
+  public static int lowEle = 50;
+  public static int midEle = 100;
+  public static int hiEle = 200; //cant do hi
+  public static int climbEle = 50;
 
-  public static int lowShoulder;
-  public static int midShoulder;
-  public static int hiShoulder;
+  public static int lowShoulder = 50;
+  public static int midShoulder = 100;
+  public static int hiShoulder = 120; // cant do hi
+  public static int climbShoulder = 50;
 
-  public static int lowElbow;
+  public static int lowWrist = 50;
+  public static int midWrist = 50;
+  public static int climbWrist = 50;
+
+  /*public static int lowElbow;
   public static int midElbow;
   public static int hiElbow;
+  */
+  public static int lowBallEle = 50;
+  public static int lowBallShoulder = 50;
+  public static int lowBallWrist = 50;
 
+  public static int midBallEle = 50;
+  public static int midBallShoulder = 50;
+  public static int midBallWrist = 50;
+
+  public static int ballPickEle = 50;
+  public static int ballPickShoulder = 50;
+  public static int ballPickWrist = 50;
+
+
+  //cant do ball hi
 }

@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.Encoder;
 public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain driveTrain;
-  // public static ElevatorSystem elevator;
+  public static ElevatorSystem elevator;
   public static HatchSystem hatchSystem;
   public static Solenoids solenoids;
   public static VisionSystem visionSystem;
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driveTrain = new Drivetrain();
-    // elevator = new ElevatorSystem();
+    elevator = new ElevatorSystem();
     hatchSystem = new HatchSystem();
     solenoids = new Solenoids();
     visionSystem = new VisionSystem();
