@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain driveTrain;
   public static ElevatorSystem elevator;
-  public static HatchSystem hatchSystem;
+  public static Claw hatchSystem;
   public static Solenoids solenoids;
   public static VisionSystem visionSystem;
   public static Encoder pivEncoder;
@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     driveTrain = new Drivetrain();
     elevator = new ElevatorSystem();
-    hatchSystem = new HatchSystem();
+    hatchSystem = new Claw();
     solenoids = new Solenoids();
     visionSystem = new VisionSystem();
     
