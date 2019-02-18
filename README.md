@@ -17,7 +17,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 ##### XBOX1 = MOVEMENT
 ##### XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
 
-**--XBOX1--**
+**-=XBOX1=-**
  
 - Left Joystick = drive
 - Back button = climb
@@ -26,7 +26,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - right trigger = cargo vision routine
 - left trigger = tape vision routine
  
-**--XBOX2--**
+**-=XBOX2=-**
  
 - left joystick = arm
 - right joystick = wrist
