@@ -32,10 +32,7 @@ The current code is located in the ***bin directory***, not the src directory (s
  - right joystick = wrist
  - right trigger = claw out
  - left trigger = claw in
- 
- - left bumper = ele down macro
- - left trigger = ele down manual
- - right bumper = ele up macro
+ - left bumper = ele down manual
  - right bumper = ele up manual
  
  - A button = set arm to hatch low macro
