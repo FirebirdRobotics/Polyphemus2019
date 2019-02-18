@@ -11,16 +11,18 @@ import frc.robot.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
   
-  	WPI_TalonSRX leftFrontMotor;
+  	WPI_VictorSPX leftFrontMotor;
 	WPI_TalonSRX leftRearMotor;
 	WPI_TalonSRX rightFrontMotor;
-	WPI_TalonSRX rightRearMotor;
+	WPI_VictorSPX rightRearMotor;
 	DifferentialDrive dd;
 	SpeedControllerGroup left;
 	SpeedControllerGroup right;
@@ -28,41 +30,43 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		super();
 		
-		leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFront);
+		// define motors
+		leftFrontMotor = new WPI_VictorSPX(RobotMap.leftFront);
 		leftRearMotor = new WPI_TalonSRX(RobotMap.leftBack);
 		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
-		rightRearMotor = new WPI_TalonSRX(RobotMap.rightBack);
+		rightRearMotor = new WPI_VictorSPX(RobotMap.rightBack);
 		
+		// set motors inverted if needed
+		leftFrontMotor.setInverted(false);
+		leftRearMotor.setInverted(false);
+		rightFrontMotor.setInverted(false);
+		rightRearMotor.setInverted(false);
+
+		// create motor controller groups
 		left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
-		left.setInverted(true);
 		right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+
+		// set motor controller groups inverted if needed
+		left.setInverted(true);
 		right.setInverted(true);
 		
-		//Sets max current for talon srxs
-		int maxCurr = 25;
-		setTalonCurrLimit(leftFrontMotor, maxCurr);
-		setTalonCurrLimit(leftRearMotor, maxCurr);
-		setTalonCurrLimit(rightFrontMotor, maxCurr);
-		setTalonCurrLimit(rightRearMotor, maxCurr);
-		
-		// dd = new DifferentialDrive(left, right);
 		dd = new DifferentialDrive(left, right);
 		dd.setSafetyEnabled(false);
 		dd.setDeadband(0.1);
 	}
 	
 	//Sets max current/amps for talon srxs
-	private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
-		tal.configContinuousCurrentLimit(amps, 1000);
-		tal.configPeakCurrentLimit(amps, 1000);
-		tal.configPeakCurrentDuration(0, 1000);
-		tal.enableCurrentLimit(true);
-	}
+	// private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
+	// 	tal.configContinuousCurrentLimit(amps, 1000);
+	// 	tal.configPeakCurrentLimit(amps, 1000);
+	// 	tal.configPeakCurrentDuration(0, 1000);
+	// 	tal.enableCurrentLimit(true);
+	// }
 
   	@Override
  	public void initDefaultCommand() {
     	setDefaultCommand(new Drive());
-	  }
+	}
 	
 	// Below are the various drives that we use throughout the robot code
 

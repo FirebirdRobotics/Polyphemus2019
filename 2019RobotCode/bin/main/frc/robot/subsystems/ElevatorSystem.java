@@ -7,42 +7,109 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 
+
+//Look at TalonSRX set(ControlMode.Position, EncoderTicks); !!!! asdlkfnbsdxlkfvnlxskdncvx lkzdnvxclk 
 public class ElevatorSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-    static Talon elevatorMotor;
-    static Talon shoulderMotor;
-    static Talon wristMotor;
+    public static TalonSRX elevatorMotor;
+    public static TalonSRX shoulderMotor;
+    public static TalonSRX wristMotor;
+
+    public DigitalInput elevatorState;
+    public DigitalInput shoulderState;
+    public DigitalInput wristState;
 
     static Encoder eleEncoder;
     static Encoder shoulderEncoder;
     static Encoder wristEncoder;
 
-    //i still dont know if the wrist is gonna be encoded
-    // static encoder wristEncoder;
-    
-    // define elevator encoder
-    // define limit switch
-
     public ElevatorSystem() {
+        // define motors
+        elevatorMotor = new TalonSRX(RobotMap.elevatorPort);   
+        shoulderMotor = new TalonSRX(RobotMap.shoulderPort);
+        wristMotor = new TalonSRX(RobotMap.wristPort);
 
-        elevatorMotor = new Talon(RobotMap.elevatorPort);   
-        shoulderMotor = new Talon(RobotMap.shoulderPort);
-        wristMotor = new Talon(RobotMap.wristPort);
+        // create DigitalInputs
+        elevatorState = new DigitalInput(RobotMap.elevatorPort);
+        shoulderState = new DigitalInput(RobotMap.shoulderPort);
+        wristState = new DigitalInput(RobotMap.wristPort);
+
+        // set motors inverted if needed
+        elevatorMotor.setInverted(true);
+        shoulderMotor.setInverted(false);
+        wristMotor.setInverted(false);
 
         // 0 and 1 are the port numbers for the two digital inputs and false tells the encoder to not invert the counting direction.
-
         //if then encoders are counting the wrong way, switch the false to true instead of changing all the < & > operators
-        eleEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k2X);
-        shoulderEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k2X);
-        wristEncoder = new Encoder(4, 5, false, Encoder.EncodingType.k2X);
+       
+        elevatorMotor.configFactoryDefault();
+        shoulderMotor.configFactoryDefault();
+        wristMotor.configFactoryDefault();
+
+        // initQuadrature();
+
+        elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+        shoulderMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+        wristMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+
+        elevatorMotor.setSensorPhase(true);
+        shoulderMotor.setSensorPhase(true);
+        wristMotor.setSensorPhase(true);
     }
+
+    public void printEncoders(){
+        int elePos = elevatorMotor.getSelectedSensorPosition(0);
+        int shldrPos = shoulderMotor.getSelectedSensorPosition(0);
+        int wrstPos = wristMotor.getSelectedSensorPosition(0);
+    
+        System.out.println("elevator Position: " + elePos + " ");
+        System.out.println("shoulder position: " + shldrPos + " ");
+        System.out.println("Wrist Position: " + wrstPos + " ");
+    }
+    
+    
+        // public void initQuadrature() {
+        //     /* get the absolute pulse width position */
+        //     int pulseWidth = elevatorMotor.getSensorCollection().getPulseWidthPosition();
+    
+        //     /**
+        //      * If there is a discontinuity in our measured range, subtract one half
+        //      * rotation to remove it
+        //      */
+        //     if (kDiscontinuityPresent) {
+    
+        //         /* Calculate the center */
+        //         int newCenter;
+        //         newCenter = (kBookEnd_0 + kBookEnd_1) / 2;
+        //         newCenter &= 0xFFF;
+    
+        //         /**
+        //          * Apply the offset so the discontinuity is in the unused portion of
+        //          * the sensor
+        //          */
+        //         pulseWidth -= newCenter;
+        //     }
+    
+        //     /**
+        //      * Mask out the bottom 12 bits to normalize to [0,4095],
+        //      * or in other words, to stay within [0,360) degrees 
+        //      */
+        //     pulseWidth = pulseWidth & 0xFFF;
+    
+        //     /* Update Quadrature position */
+        //     elevatorMotor.getSensorCollection().setQuadraturePosition(pulseWidth, RobotMap.kTimeoutMs);
+        // }
     //im going to write one method with an input @PARAMETER string 
     //that is going to be used to determine what level it is
 
@@ -59,8 +126,47 @@ public class ElevatorSystem extends Subsystem {
 //2 - elbow *    has 2 motors :((((     * ...will figure out l8r...
 //3 wrist hopefully one motor
 //i wanna die ya, still do
-    
-        //This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
+
+public void moveElevator(double speed){
+    elevatorMotor.set(ControlMode.PercentOutput, speed);
+}
+public void eleUp(){
+    elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
+}   
+public void eleDown(){
+    elevatorMotor.set(ControlMode.PercentOutput, -RobotMap.eleSpeed);
+}  
+public void eleStop(){
+    elevatorMotor.set(ControlMode.PercentOutput, 0);
+}
+
+public void moveShoulder(double speed){
+    shoulderMotor.set(ControlMode.PercentOutput, speed);
+}
+public void shoulderUp(){
+    shoulderMotor.set(ControlMode.PercentOutput, RobotMap.shoulderSpeed);
+}
+public void shoulderDown(){
+    shoulderMotor.set(ControlMode.PercentOutput, -RobotMap.shoulderSpeed);
+}
+public void shoulderStop(){
+    shoulderMotor.set(ControlMode.PercentOutput, 0);
+}
+
+public void moveWrist(double speed) {
+    wristMotor.set(ControlMode.PercentOutput, speed);
+}
+public void wristUp(){
+    wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
+}
+public void wristDown(){
+    wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
+}
+public void wristStop(){
+    wristMotor.set(ControlMode.PercentOutput, 0);
+}
+
+//This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
     public void setArm(String s) {
 
         //this compares the input to the different levels
@@ -69,7 +175,7 @@ public class ElevatorSystem extends Subsystem {
         //and all of the loops have a bit of tollerance but no more than +- 5 counts, this can and most likely will be adjusted
 
         if(s == "low") {
-            //done?
+            // done?
             /*
             test list for low:
             elevator below needed with 
@@ -85,9 +191,9 @@ public class ElevatorSystem extends Subsystem {
             */
             while(eleEncoder.get() > RobotMap.lowEle + 5 || eleEncoder.get() < RobotMap.lowEle - 5) {
                 if(eleEncoder.get() > RobotMap.lowEle) {
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
                 } else if(eleEncoder.get() < RobotMap.lowEle) {
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 } else {
                     //dop nothing, loop will be exited
                 }
@@ -96,9 +202,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.lowShoulder) {
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 } else if (shoulderEncoder.get() < RobotMap.lowShoulder) {
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 } else {
                     //do nothing
                 }
@@ -107,9 +213,9 @@ public class ElevatorSystem extends Subsystem {
                 if(wristEncoder.get() > RobotMap.lowWrist) {
                     //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                     //but then again im just an programmer
-                wristMotor.set(-.5);
+                wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
             } else if (wristEncoder.get() < RobotMap.lowWrist) {
-                wristMotor.set(.5);
+                wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
             } else {
                 //do nothing
             }
@@ -140,9 +246,9 @@ public class ElevatorSystem extends Subsystem {
         */
             while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5){
                 if(eleEncoder.get() > RobotMap.midEle){
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
                 }else if(eleEncoder.get() < RobotMap.midEle){
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
                 }
@@ -151,9 +257,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.midShoulder){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 }else if (shoulderEncoder.get() < RobotMap.midShoulder){
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 }else{
                     //do nothing
                 }
@@ -164,9 +270,9 @@ public class ElevatorSystem extends Subsystem {
                     if(wristEncoder.get() > RobotMap.midWrist){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    wristMotor.set(-.5);
+                    wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
                 }else if (wristEncoder.get() < RobotMap.midWrist){
-                    wristMotor.set(.5);
+                    wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
                 }else{
                     //do nothing
                 }
@@ -236,9 +342,9 @@ public class ElevatorSystem extends Subsystem {
         if(s == "climb"){
             while(eleEncoder.get() > RobotMap.climbEle + 5 || eleEncoder.get() < RobotMap.climbEle - 5){
                 if(eleEncoder.get() > RobotMap.climbEle){
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
                 }else if(eleEncoder.get() < RobotMap.climbEle){
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
                 }
@@ -247,9 +353,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.climbShoulder){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 }else if (shoulderEncoder.get() < RobotMap.climbShoulder){
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 }else{
                     //do nothing
                 }
@@ -260,9 +366,9 @@ public class ElevatorSystem extends Subsystem {
                     if(wristEncoder.get() > RobotMap.midWrist){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    wristMotor.set(-.5);
+                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
                 }else if (wristEncoder.get() < RobotMap.midWrist){
-                    wristMotor.set(.5);
+                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
                 }else{
                     //do nothing
                 }
@@ -271,9 +377,9 @@ public class ElevatorSystem extends Subsystem {
         if(s == "ballPick"){
             while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5){
                 if(eleEncoder.get() > RobotMap.ballPickEle){
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
                 }else if(eleEncoder.get() < RobotMap.ballPickEle){
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
                 }
@@ -282,9 +388,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.ballPickShoulder){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 }else if (shoulderEncoder.get() < RobotMap.ballPickShoulder){
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 }else{
                     //do nothing
                 }
@@ -295,9 +401,9 @@ public class ElevatorSystem extends Subsystem {
                     if(wristEncoder.get() > RobotMap.ballPickWrist){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    wristMotor.set(-.5);
+                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
                 }else if (wristEncoder.get() < RobotMap.ballPickWrist){
-                    wristMotor.set(.5);
+                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
                 }else{
                     //do nothing
                 }
@@ -305,9 +411,9 @@ public class ElevatorSystem extends Subsystem {
         }if(s == "lowBall"){
             while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5){
                 if(eleEncoder.get() > RobotMap.lowBallEle){
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
                 }else if(eleEncoder.get() < RobotMap.lowBallEle){
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
                 }
@@ -316,9 +422,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.lowBallShoulder){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 }else if (shoulderEncoder.get() < RobotMap.lowBallShoulder){
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 }else{
                     //do nothing
                 }
@@ -329,9 +435,9 @@ public class ElevatorSystem extends Subsystem {
                     if(wristEncoder.get() > RobotMap.lowBallWrist){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    wristMotor.set(-.5);
+                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
                 }else if (wristEncoder.get() < RobotMap.lowBallWrist){
-                    wristMotor.set(.5);
+                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
                 }else{
                     //do nothing
                 }
@@ -340,9 +446,9 @@ public class ElevatorSystem extends Subsystem {
         }if(s == "midBall"){
             while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5){
                 if(eleEncoder.get() > RobotMap.midBallEle){
-                    elevatorMotor.set(.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
                 }else if(eleEncoder.get() < RobotMap.midBallEle){
-                    elevatorMotor.set(-.5);
+                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
                 }
@@ -351,9 +457,9 @@ public class ElevatorSystem extends Subsystem {
                 if(shoulderEncoder.get() > RobotMap.midBallShoulder){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    shoulderMotor.set(-.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
                 }else if (shoulderEncoder.get() < RobotMap.midBallShoulder){
-                    shoulderMotor.set(.5);
+                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
                 }else{
                     //do nothing
                 }
@@ -364,9 +470,9 @@ public class ElevatorSystem extends Subsystem {
                     if(wristEncoder.get() > RobotMap.midBallWrist){
                         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                         //but then again im just an programmer
-                    wristMotor.set(-.5);
+                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
                 }else if (wristEncoder.get() < RobotMap.midBallWrist){
-                    wristMotor.set(.5);
+                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
                 }else{
                     //do nothing
                 }
@@ -374,19 +480,9 @@ public class ElevatorSystem extends Subsystem {
         
         }
     }
- 
 
     @Override
     public void initDefaultCommand() {
-        // create a command that sets the elevator height back to default
-        // setDefaultCommand(new SetElevatorDefault());
-
-        //just make sure they are all at the bottom, OR starting in the same exact spot before every match and then we will be able to base our encoder counts on those spots
-        shoulderEncoder.reset();
-        eleEncoder.reset();
     }
-
-
-
 }
 

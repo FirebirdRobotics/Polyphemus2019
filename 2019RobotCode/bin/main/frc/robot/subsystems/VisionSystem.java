@@ -98,7 +98,7 @@ public class VisionSystem extends Subsystem {
       System.out.println("final rawYaw: " + rawYaw);
   }
 
-  public void ballVisionRoutine(double left, double right) {
+  public void cargoVisionRoutine(double left, double right) {
     timeInt = 0;
     double rawYaw = cargoYaw.getDouble(0);
       while (rawYaw > 2.0 || rawYaw < -2.0) {

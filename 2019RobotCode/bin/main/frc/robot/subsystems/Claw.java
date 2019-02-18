@@ -7,6 +7,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,13 +19,13 @@ public class Claw extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  static Talon clawMotor;
+  static VictorSPX clawMotor;
   Timer clawTime;
   
 
   public Claw() {
 
-    clawMotor = new Talon(RobotMap.hatchSystemPort);
+    clawMotor = new VictorSPX(RobotMap.clawPort);
     clawTime = new Timer();
 
   }
@@ -78,8 +81,16 @@ public class Claw extends Subsystem {
     while(clawTime.get() < 3){
       Robot.driveTrain.camDrive(-.2, -.2);
     }
-   
-
+  }
+  
+  public void openClaw(){
+    clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
+  }
+  public void closeClaw(){
+    clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
+  }
+  public void stopClaw(){
+    clawMotor.set(ControlMode.PercentOutput, 0);
   }
 
   public void ballPickup(){
@@ -110,7 +121,7 @@ public class Claw extends Subsystem {
     clawTime.reset();
     clawTime.start();
     while(clawTime.get() <= .5) {
-      clawMotor.set(.3);
+      clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
     }
   }
 
@@ -118,7 +129,7 @@ public class Claw extends Subsystem {
     clawTime.reset();
     clawTime.start();
     while(clawTime.get() <= .5) {
-      clawMotor.set(-.3);
+      clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
     }
   }
 
