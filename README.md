@@ -34,7 +34,6 @@ The current code is located in the ***bin directory***, not the src directory (s
  * left trigger = claw in
  * left bumper = ele down manual
  * right bumper = ele up manual
- 
  * A button = set arm to hatch low macro
  * B button = set arm to hatch middle macro
  * X button = hatch station pickup macro
