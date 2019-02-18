@@ -14,32 +14,32 @@ The current code is located in the ***bin directory***, not the src directory (s
 - BallVisionRoutine
 
 ## Control Ideas/OI (for now):
-###### XBOX1 = MOVEMENT
-###### XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
+##### XBOX1 = MOVEMENT
+##### XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
 
 ----XBOX1----
  
- - Left Joystick = drive
- - Back button = climb
- - left bumper = bump left
- - right bumper = bump right
- - right trigger = cargo vision routine
- - left trigger = tape vision routine
+ * Left Joystick = drive
+ * Back button = climb
+ * left bumper = bump left
+ * right bumper = bump right
+ * right trigger = cargo vision routine
+ * left trigger = tape vision routine
  
 ----XBOX2----
  
- - left joystick = arm
- - right joystick = wrist
- - right trigger = claw out
- - left trigger = claw in
- - left bumper = ele down manual
- - right bumper = ele up manual
+ * left joystick = arm
+ * right joystick = wrist
+ * right trigger = claw out
+ * left trigger = claw in
+ * left bumper = ele down manual
+ * right bumper = ele up manual
  
- - A button = set arm to hatch low macro
- - B button = set arm to hatch middle macro
- - X button = hatch station pickup macro
- - Y button = place/release hatch macro & drive back
- - start button? = dance macro (?)
+ * A button = set arm to hatch low macro
+ * B button = set arm to hatch middle macro
+ * X button = hatch station pickup macro
+ * Y button = place/release hatch macro & drive back
+ * start button? = dance macro (?)
  
 ## Stuff we want to display on the SmartDashboard//Shuffleboard:
 - camera feed (vision stuff) 
