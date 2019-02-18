@@ -41,10 +41,10 @@ The current code is located in the ***bin directory***, not the src directory (s
 - start button? = dance macro (?)
 
 ## Stuff we want to display on the SmartDashboard//Shuffleboard:
-- [] camera feed (vision stuff) 
-- [] type of drive
-- [] distance from robot (or camera) to detected field element
-- [] eagle-eye view of robot & pathing (arrow showing where the robot might go next)
+- [ ] camera feed (vision stuff) 
+- [ ] type of drive
+- [ ] distance from robot (or camera) to detected field element
+- [ ] eagle-eye view of robot & pathing (arrow showing where the robot might go next)
 
 ## Stuff to do/Improvements:
 - Ball pickup
