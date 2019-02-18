@@ -15,12 +15,13 @@ package frc.robot;
  */
 public class RobotMap {
   // Speed Constants
-  public static double driveSpeed = 0.1;
-  public static double turnSpeed = 1.0;
+  public static double driveSpeed = 0.7;
+  public static double turnSpeed = 0.3;
   public static double eleSpeed = .1;
-  public static double shoulderSpeed = .1;
-  public static double wristSpeed = .1;
-  public static double clawSpeed = .1;
+  public static double shoulderSpeed = .2;
+  public static double wristSpeed = .2;
+  public static double clawSpeed = .2;
+  public static double visionSpeed = .1;
 
   // CAN Motor Controller Ports (Drivetrain)
 	public static int rightFront = 1;
@@ -29,10 +30,10 @@ public class RobotMap {
 	public static int leftBack = 4;
 
   // PWM Ports
-  public static int elevatorPort = 7; // temporary
-  public static int hatchSystemPort = 8; // temporary
-  public static int wristPort = 4; // pivot at the elbow of the arm
-  public static int shoulderPort = 5; //shoulder, motor connected directly to elevator box
+  public static int shoulderPort = 5;
+  public static int elevatorPort = 6;
+  public static int wristPort = 7;
+  public static int clawPort = 8;
 
   // Solenoids
   public static int frontIn = 0;
@@ -41,8 +42,8 @@ public class RobotMap {
   public static int backOut = 3;
 
   //encoderCounts
-    //all #s are psuedo until we have the robot
-    //these need to be given values before the placeHatch method can be called because it relies on comparing to these vals
+  //all #s are psuedo until we have the robot
+  //these need to be given values before the placeHatch method can be called because it relies on comparing to these vals
   public static int lowEle = 50;
   public static int midEle = 100;
   public static int hiEle = 200; //cant do hi
@@ -75,4 +76,6 @@ public class RobotMap {
 
 
   //cant do ball hi
+
+  public static int kTimeoutMs = 30;
 }

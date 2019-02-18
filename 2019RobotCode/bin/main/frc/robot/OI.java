@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
@@ -17,29 +18,69 @@ import frc.robot.commands.*;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  public XboxController xboxController = new XboxController(1);
+  public XboxController xboxControllerOne = new XboxController(1);
+  public XboxController xboxControllerTwo = new XboxController(2);
 
-  Button hatchLowMacro = new JoystickButton(xboxController, 1); // A button
-  Button hatchMiddleMacro = new JoystickButton(xboxController, 2); // B button
-  Button hatchHighMacro = new JoystickButton(xboxController, 4); // Y button
-  Button climbButton = new JoystickButton(xboxController, 6); // RB button
-  Button visionButton = new JoystickButton(xboxController, 3); // X button
+  // xbox controller one
+  // left joystick = drive
+  // Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
+  // Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
+  // Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
+  // Button cargoVisionRoutine = new JoystickButton(xboxControllerOne, xboxControllerOne.getAxisType(2)); // Left trigger
+  // Button tapeVisionRoutine = new JoystickButton(xboxControllerOne, xboxControllerOne.getAxisType(3)); // Right trigger
 
-  // Button toggleDriveOrientation = new JoystickButton(xboxController, 8); // start button, which isn't available for some reason
+  // xbox controller two
+  // left joystick = arm
+  // right joystick = wrist
+  // Button clawOut = new JoystickButton(xboxControllerTwo, xboxControllerTwo.getAxisType(3)); // Right trigger
+  // Button clawIn = new JoystickButton(xboxControllerTwo, xboxControllerTwo.getAxisType(2)); // Left trigger
+  // Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
+  // Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
+  // Button hatchLowMacro = new JoystickButton(xboxControllerTwo, 1); // A button
+  // Button hatchMiddleMacro = new JoystickButton(xboxControllerTwo, 2); // B button
+  // Button hatchStationPickupMacro = new JoystickButton(xboxControllerTwo, 3); // X button
+  // Button releaseHatchMacro = new JoystickButton(xboxControllerTwo, 4); // Y button
+
+
+  // -------------------------
+
+  Button eleDownBut = new JoystickButton(xboxControllerOne, 1); // A button
+  Button eleUpBut = new JoystickButton(xboxControllerOne, 2); // B button
+
+  Button shoulderDownBut = new JoystickButton(xboxControllerOne, 3); // X button
+  Button shoulderUpBut = new JoystickButton(xboxControllerOne, 4); // Y button
+
+  Button wristUpBut = new JoystickButton(xboxControllerOne, 5); // Left bumper
+  Button wristDownBut = new JoystickButton(xboxControllerOne, 6); // Right bumper
+
+  Button openBut = new JoystickButton(xboxControllerOne, 7); // Back button
+  Button closeBut = new JoystickButton(xboxControllerOne, 8); // Start button
+
+  // --------------------------
+
+  // Button hatchLowMacro = new JoystickButton(xboxControllerOne, 1); // A button
+  // Button hatchMiddleMacro = new JoystickButton(xboxControllerOne, 2); // B button
+  // Button pickupCargo = new JoystickButton(xboxControllerOne, 3); // X button
+  // Button pickupHatchLoadStation = new JoystickButton(xboxControllerOne, 4); // Y button
+  // Button cargoVisionRoutine = new JoystickButton(xboxControllerOne, 5); // Left bumper
+  // Button tapeVisionRoutine = new JoystickButton(xboxControllerOne, 6); // Right bumper
+  // Button backButton = new JoystickButton(xboxControllerOne, 7); // Back button
+  // Button climbButton = new JoystickButton(xboxControllerOne, 8); // Start button
   
   public OI() {
-    hatchLowMacro.whenPressed(new PlaceHatchLowMacro());
-    hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
-    hatchHighMacro.whenPressed(new PlaceHatchHighMacro());
-    climbButton.whenPressed(new Climb());
-    visionButton.whenReleased(new VisionRoutine());
-	  
-    // toggleDriveOrientation.whenPressed(new InstantCommand() {
-		// 	@Override
-		// 	protected void initialize() {
-		// 		RobotMap.orientForward = !RobotMap.orientForward;
-		// 	}
-    // });
-    
+    eleDownBut.whileHeld(new eleDown());
+    eleUpBut.whileHeld(new eleUp());
+    shoulderUpBut.whileHeld(new shoulderUp());
+    shoulderDownBut.whileHeld(new shoulderDown());
+    wristUpBut.whileHeld(new wristUp());
+    wristDownBut.whileHeld(new wristDown());
+    openBut.whileHeld(new openClaw());
+    closeBut.whileHeld(new closeClaw());
+
+    // hatchLowMacro.whenPressed(new PlaceHatchLowMacro());
+    // hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
+    // cargoVisionRoutine.whenPressed(new CargoVisionRoutine());
+    // tapeVisionRoutine.whenPressed(new TapeVisionRoutine());
+    // climbButton.whenPressed(new Climb());
   }
 }

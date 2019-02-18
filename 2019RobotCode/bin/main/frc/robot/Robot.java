@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Encoder; 
@@ -23,8 +24,8 @@ import edu.wpi.first.wpilibj.Encoder;
 public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain driveTrain;
-  public static ElevatorSystem elevator;
-  public static Claw hatchSystem;
+  public static ElevatorSystem elevatorSystem;
+  public static Claw claw;
   public static Solenoids solenoids;
   public static VisionSystem visionSystem;
   public static Encoder pivEncoder;
@@ -40,16 +41,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driveTrain = new Drivetrain();
-    elevator = new ElevatorSystem();
-    hatchSystem = new Claw();
+    elevatorSystem = new ElevatorSystem();
+    claw = new Claw();
     solenoids = new Solenoids();
     visionSystem = new VisionSystem();
     
     oi = new OI(); // Make sure the OI is initialized LAST
-
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    // SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -131,6 +128,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    elevatorSystem.printEncoders();
   }
 
   /**
@@ -138,6 +136,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    
+    elevatorSystem.printEncoders();
   }
 }
