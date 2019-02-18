@@ -23,13 +23,6 @@ public class PickupHatchStationMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // this code might be in here or it might be in initialize, idk for now
-    // btw these '_systems' are NOT the actual names, they are just examples
-    // and can be replaced with the names of the actual subsystems (same with methods):
-
-    // Robot.elevatorSystem.raiseElevator([insert speed here], [insert time here]);
-    // Thread.sleep(1000);
-    // Robot.armSystem.setMotors([speed], [time]);
   }
 
   // Make this return true when this Command no longer needs to run execute()

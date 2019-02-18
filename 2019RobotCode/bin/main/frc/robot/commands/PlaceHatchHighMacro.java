@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class PlaceHatchHighMacro extends Command {
   public PlaceHatchHighMacro() {
     super();
-    requires(Robot.elevator);
+    requires(Robot.elevatorSystem);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ public class PlaceHatchHighMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.setArm("hi");
+    Robot.elevatorSystem.setArm("hi");
   }
 
   // Make this return true when this Command no longer needs to run execute()

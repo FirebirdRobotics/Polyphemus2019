@@ -12,10 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class wristDown extends Command {
-  public wristDown() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class shoulderUp extends Command {
+  public shoulderUp() {
     super();
     requires(Robot.elevatorSystem);
   }
@@ -28,22 +26,22 @@ public class wristDown extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // double stickValue = Robot.oi.xboxControllerTwo.getY(Hand.kRight);
-    // Robot.elevatorSystem.moveWrist((stickValue) * RobotMap.wristSpeed);
-    Robot.elevatorSystem.wristDown();
+    // double stickValue = Robot.oi.xboxControllerOne.getY(Hand.kLeft);
+    // Robot.elevatorSystem.moveShoulder((stickValue) * RobotMap.shoulderSpeed);
+    Robot.elevatorSystem.shoulderUp();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.elevatorSystem.wristState.get();
+    return !Robot.elevatorSystem.shoulderState.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevatorSystem.wristStop();
-    System.out.println("Wrist stopping");
+    Robot.elevatorSystem.shoulderStop();
+    System.out.println("Shoulder stopping");
   }
 
   // Called when another command which requires one or more of the same

@@ -9,15 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.*;
 
-public class wristDown extends Command {
-  public wristDown() {
+public class CargoVisionRoutine extends Command {
+  public CargoVisionRoutine() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    super();
-    requires(Robot.elevatorSystem);
+    requires(Robot.visionSystem);
   }
 
   // Called just before this Command runs the first time
@@ -28,22 +25,20 @@ public class wristDown extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // double stickValue = Robot.oi.xboxControllerTwo.getY(Hand.kRight);
-    // Robot.elevatorSystem.moveWrist((stickValue) * RobotMap.wristSpeed);
-    Robot.elevatorSystem.wristDown();
+    Robot.visionSystem.cargoVisionRoutine(RobotMap.visionSpeed, RobotMap.visionSpeed);
+    System.out.println("completed cargo vision routine");
+    System.out.println(Robot.oi.xboxControllerOne.getTriggerAxis(Hand.kRight));
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.elevatorSystem.wristState.get();
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevatorSystem.wristStop();
-    System.out.println("Wrist stopping");
   }
 
   // Called when another command which requires one or more of the same

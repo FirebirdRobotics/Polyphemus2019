@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.*;
 
@@ -24,9 +25,9 @@ public class TapeVisionRoutine extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.visionSystem.tapeVisionRoutine(0.2, 0.2);
-    System.out.println("completed vision routine");
-    System.out.println(Robot.oi.xboxController.getXButton());
+    Robot.visionSystem.tapeVisionRoutine(RobotMap.visionSpeed, RobotMap.visionSpeed);
+    System.out.println("completed tape vision routine");
+    System.out.println(Robot.oi.xboxControllerOne.getTriggerAxis(Hand.kLeft));
   }
 
   // Make this return true when this Command no longer needs to run execute()

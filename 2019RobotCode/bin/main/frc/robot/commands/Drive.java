@@ -19,19 +19,7 @@ public class Drive extends Command {
 	public Drive() {
 		super();
     requires(Robot.driveTrain);
-    
-    // these variables need to be defined as the xbox stick:
-    // when the xbox stick is 0, then the robot is not moving
-    move = Robot.oi.xboxController.getY(Hand.kLeft);
-    turn = Robot.oi.xboxController.getX(Hand.kRight);
   }
-  
-	// public Drive(double move, double turn){
-	// 	super();
-	// 	requires(Robot.driveTrain);
-	// 	this.move = move;
-	// 	this.turn = turn;
-	// }
 
   // Called just before this Command runs the first time
   @Override
@@ -44,19 +32,14 @@ public class Drive extends Command {
     // create the type of drive
     Robot.driveTrain.arcadeDrive(move * RobotMap.driveSpeed, turn * RobotMap.turnSpeed);
 
+    // these variables need to be defined as the xbox stick:
+    // when the xbox stick is 0, then the robot is not moving
+    move = Robot.oi.xboxControllerOne.getY(Hand.kLeft);
+    turn = Robot.oi.xboxControllerOne.getX(Hand.kLeft);
+
     // place move and turn values onto smartdashboard
     // SmartDashboard.putNumber("move", move);
     // SmartDashboard.putNumber("turn", turn);
-    
-    // just in case we have the drivetrain going backwards (whether it be electrical or programming)
-    // we have this code to change the value of the move
-		// if (RobotMap.orientForward) {
-		// 	move = -Robot.oi.xboxController.getY(Hand.kLeft);
-		// 	turn = Robot.oi.xboxController.getX(Hand.kLeft);
-		// } else {
-		// 	move = Robot.oi.xboxController.getY(Hand.kLeft);
-		// 	turn = Robot.oi.xboxController.getX(Hand.kLeft);
-		// }
   }
 
   // Make this return true when this Command no longer needs to run execute()

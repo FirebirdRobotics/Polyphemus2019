@@ -7,15 +7,15 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class eleDown extends Command {
   public eleDown() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     super();
-    requires(Robot.elevator);
+    requires(Robot.elevatorSystem);
   }
 
   // Called just before this Command runs the first time
@@ -26,18 +26,22 @@ public class eleDown extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.eleDown();
+    // double stickValue = Robot.oi.xboxControllerOne.getY(Hand.kRight);
+    // Robot.elevatorSystem.moveElevator((stickValue) * RobotMap.eleSpeed);
+    Robot.elevatorSystem.eleDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.elevatorSystem.elevatorState.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.elevatorSystem.eleStop();
+    System.out.println("Elevator stopping");
   }
 
   // Called when another command which requires one or more of the same
