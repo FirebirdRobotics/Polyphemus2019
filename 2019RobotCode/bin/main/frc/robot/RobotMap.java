@@ -14,18 +14,19 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // Scale Factors
+  // Speed Constants
   public static double driveSpeed = 0.1;
   public static double turnSpeed = 1.0;
+  public static double eleSpeed = .1;
+  public static double shoulderSpeed = .1;
+  public static double wristSpeed = .1;
+  public static double clawSpeed = .1;
 
   // CAN Motor Controller Ports (Drivetrain)
 	public static int rightFront = 1;
   public static int rightBack = 2;
 	public static int leftFront = 3;
 	public static int leftBack = 4;
-  
-  // also for Drivetrain
-  // public static boolean orientForward = false;
 
   // PWM Ports
   public static int elevatorPort = 7; // temporary
