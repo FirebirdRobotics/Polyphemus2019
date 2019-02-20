@@ -35,7 +35,7 @@ public class Drive extends Command {
     // these variables need to be defined as the xbox stick:
     // when the xbox stick is 0, then the robot is not moving
     move = Robot.oi.xboxControllerOne.getY(Hand.kLeft);
-    turn = Robot.oi.xboxControllerOne.getX(Hand.kLeft);
+    turn = -Robot.oi.xboxControllerOne.getX(Hand.kLeft);
 
     // place move and turn values onto smartdashboard
     // SmartDashboard.putNumber("move", move);

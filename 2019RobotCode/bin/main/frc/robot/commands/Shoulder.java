@@ -7,16 +7,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class eleUp extends Command {
-  public eleUp() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class Shoulder extends Command {
+
+  double joystickValue;
+
+  public Shoulder() {
     super();
-    requires(Robot.elevatorSystem);
+    requires(Robot.shoulderSystem);
   }
 
   // Called just before this Command runs the first time
@@ -27,36 +29,30 @@ public class eleUp extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // double stickValue = Robot.oi.xboxControllerOne.getY(Hand.kRight);
-    // Robot.elevatorSystem.moveElevator((stickValue) * RobotMap.eleSpeed);
-    Robot.elevatorSystem.setElevator(RobotMap.eleSpeed);
+    joystickValue = Robot.oi.xboxControllerTwo.getY(Hand.kLeft);
+
+    if(joystickValue < 0) {
+      Robot.shoulderSystem.setShoulder(joystickValue * RobotMap.shoulderSpeed);
+      System.out.println("shoulder up");
+    } else if(joystickValue > 0) {
+      Robot.shoulderSystem.setShoulder(joystickValue * RobotMap.shoulderSpeed);
+      System.out.println("shoulder down");
+    } else {
+      Robot.shoulderSystem.setShoulder(0.0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
-  boolean done = false;
   @Override
-  
   protected boolean isFinished() {
-    // return !Robot.elevatorSystem.elevatorState.get();
-    if(Robot.elevatorSystem.elevatorState.get()) {
-
-      if(Robot.elevatorSystem.elevatorMotor.getActiveTrajectoryVelocity() != 0) {
-        
-        done = false;
-        // Thread.sleep(200);
-      }else{
-        done = true;
-      }
-    }
-    return done;
-    
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.elevatorSystem.setElevator(0.0);
-    System.out.println("elevator stopped");
+    Robot.shoulderSystem.setShoulder(0.0);
+    System.out.println("shoulder stopped");
   }
 
   // Called when another command which requires one or more of the same
