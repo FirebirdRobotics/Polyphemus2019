@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
+import frc.robot.commands.Shoulder;
+import frc.robot.commands.Wrist;
 
 
 //Look at TalonSRX set(ControlMode.Position, EncoderTicks); !!!! asdlkfnbsdxlkfvnlxskdncvx lkzdnvxclk 
@@ -23,59 +25,37 @@ public class ElevatorSystem extends Subsystem {
   // here. Call these from Commands.
 
     public static TalonSRX elevatorMotor;
-    public static TalonSRX shoulderMotor;
-    public static TalonSRX wristMotor;
 
     public DigitalInput elevatorState;
-    public DigitalInput shoulderState;
-    public DigitalInput wristState;
 
     static Encoder eleEncoder;
-    static Encoder shoulderEncoder;
-    static Encoder wristEncoder;
 
     public ElevatorSystem() {
         // define motors
         elevatorMotor = new TalonSRX(RobotMap.elevatorPort);   
-        shoulderMotor = new TalonSRX(RobotMap.shoulderPort);
-        wristMotor = new TalonSRX(RobotMap.wristPort);
 
-        // create DigitalInputs
+        // create DigitalInput
         elevatorState = new DigitalInput(RobotMap.elevatorPort);
-        shoulderState = new DigitalInput(RobotMap.shoulderPort);
-        wristState = new DigitalInput(RobotMap.wristPort);
 
         // set motors inverted if needed
         elevatorMotor.setInverted(true);
-        shoulderMotor.setInverted(false);
-        wristMotor.setInverted(false);
 
         // 0 and 1 are the port numbers for the two digital inputs and false tells the encoder to not invert the counting direction.
         //if then encoders are counting the wrong way, switch the false to true instead of changing all the < & > operators
        
         elevatorMotor.configFactoryDefault();
-        shoulderMotor.configFactoryDefault();
-        wristMotor.configFactoryDefault();
 
         // initQuadrature();
 
         elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
-        shoulderMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
-        wristMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
 
         elevatorMotor.setSensorPhase(true);
-        shoulderMotor.setSensorPhase(true);
-        wristMotor.setSensorPhase(true);
     }
 
     public void printEncoders(){
         int elePos = elevatorMotor.getSelectedSensorPosition(0);
-        int shldrPos = shoulderMotor.getSelectedSensorPosition(0);
-        int wrstPos = wristMotor.getSelectedSensorPosition(0);
     
         System.out.println("elevator Position: " + elePos + " ");
-        System.out.println("shoulder position: " + shldrPos + " ");
-        System.out.println("Wrist Position: " + wrstPos + " ");
     }
     
     
@@ -127,43 +107,8 @@ public class ElevatorSystem extends Subsystem {
 //3 wrist hopefully one motor
 //i wanna die ya, still do
 
-public void moveElevator(double speed){
+public void setElevator(double speed){
     elevatorMotor.set(ControlMode.PercentOutput, speed);
-}
-public void eleUp(){
-    elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
-}   
-public void eleDown(){
-    elevatorMotor.set(ControlMode.PercentOutput, -RobotMap.eleSpeed);
-}  
-public void eleStop(){
-    elevatorMotor.set(ControlMode.PercentOutput, 0);
-}
-
-public void moveShoulder(double speed){
-    shoulderMotor.set(ControlMode.PercentOutput, speed);
-}
-public void shoulderUp(){
-    shoulderMotor.set(ControlMode.PercentOutput, RobotMap.shoulderSpeed);
-}
-public void shoulderDown(){
-    shoulderMotor.set(ControlMode.PercentOutput, -RobotMap.shoulderSpeed);
-}
-public void shoulderStop(){
-    shoulderMotor.set(ControlMode.PercentOutput, 0);
-}
-
-public void moveWrist(double speed) {
-    wristMotor.set(ControlMode.PercentOutput, speed);
-}
-public void wristUp(){
-    wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
-}
-public void wristDown(){
-    wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
-}
-public void wristStop(){
-    wristMotor.set(ControlMode.PercentOutput, 0);
 }
 
 //This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
@@ -198,28 +143,6 @@ public void wristStop(){
                     //dop nothing, loop will be exited
                 }
             }
-            while(shoulderEncoder.get() < RobotMap.lowShoulder || shoulderEncoder.get() > RobotMap.lowShoulder) {
-                if(shoulderEncoder.get() > RobotMap.lowShoulder) {
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                } else if (shoulderEncoder.get() < RobotMap.lowShoulder) {
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                } else {
-                    //do nothing
-                }
-            }
-            while(wristEncoder.get() < RobotMap.lowWrist - 3 || wristEncoder.get() > RobotMap.lowWrist + 3) {
-                if(wristEncoder.get() > RobotMap.lowWrist) {
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-            } else if (wristEncoder.get() < RobotMap.lowWrist) {
-                wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-            } else {
-                //do nothing
-            }
-            }
            /* while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
                 if(elbowEncoder.get() < RobotMap.lowElbow){
                     elbowMotor.set(.3);
@@ -251,30 +174,6 @@ public void wristStop(){
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
-                }
-            }
-            while(shoulderEncoder.get() < RobotMap.midShoulder || shoulderEncoder.get() > RobotMap.midShoulder){
-                if(shoulderEncoder.get() > RobotMap.midShoulder){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                }else if (shoulderEncoder.get() < RobotMap.midShoulder){
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-
-            while(wristEncoder.get() < RobotMap.midWrist - 3 || wristEncoder.get() > RobotMap.midWrist + 5 ){
-                
-                    if(wristEncoder.get() > RobotMap.midWrist){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
-                }else if (wristEncoder.get() < RobotMap.midWrist){
-                    wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
-                }else{
-                    //do nothing
                 }
             }
            /* while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
@@ -349,30 +248,6 @@ public void wristStop(){
                     //dop nothing, loop will be exited
                 }
             }
-            while(shoulderEncoder.get() < RobotMap.climbShoulder || shoulderEncoder.get() > RobotMap.climbShoulder){
-                if(shoulderEncoder.get() > RobotMap.climbShoulder){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                }else if (shoulderEncoder.get() < RobotMap.climbShoulder){
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-
-            while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
-                
-                    if(wristEncoder.get() > RobotMap.midWrist){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-                }else if (wristEncoder.get() < RobotMap.midWrist){
-                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-                }else{
-                    //do nothing
-                }
-            }
         }
         if(s == "ballPick"){
             while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5){
@@ -384,30 +259,6 @@ public void wristStop(){
                     //dop nothing, loop will be exited
                 }
             }
-            while(shoulderEncoder.get() < RobotMap.ballPickShoulder || shoulderEncoder.get() > RobotMap.ballPickShoulder){
-                if(shoulderEncoder.get() > RobotMap.ballPickShoulder){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                }else if (shoulderEncoder.get() < RobotMap.ballPickShoulder){
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-
-            while(wristEncoder.get() < RobotMap.ballPickWrist - 3 || wristEncoder.get() > RobotMap.ballPickWrist + 5 ){
-                
-                    if(wristEncoder.get() > RobotMap.ballPickWrist){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-                }else if (wristEncoder.get() < RobotMap.ballPickWrist){
-                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-                }else{
-                    //do nothing
-                }
-            }
         }if(s == "lowBall"){
             while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5){
                 if(eleEncoder.get() > RobotMap.lowBallEle){
@@ -416,30 +267,6 @@ public void wristStop(){
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
                 }else{
                     //dop nothing, loop will be exited
-                }
-            }
-            while(shoulderEncoder.get() < RobotMap.lowBallShoulder || shoulderEncoder.get() > RobotMap.lowBallShoulder){
-                if(shoulderEncoder.get() > RobotMap.lowBallShoulder){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                }else if (shoulderEncoder.get() < RobotMap.lowBallShoulder){
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-
-            while(wristEncoder.get() < RobotMap.lowBallWrist - 3 || wristEncoder.get() > RobotMap.lowBallWrist + 5 ){
-                
-                    if(wristEncoder.get() > RobotMap.lowBallWrist){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-                }else if (wristEncoder.get() < RobotMap.lowBallWrist){
-                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-                }else{
-                    //do nothing
                 }
             }
         
@@ -453,31 +280,6 @@ public void wristStop(){
                     //dop nothing, loop will be exited
                 }
             }
-            while(shoulderEncoder.get() < RobotMap.midBallShoulder || shoulderEncoder.get() > RobotMap.midBallShoulder){
-                if(shoulderEncoder.get() > RobotMap.midBallShoulder){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-                }else if (shoulderEncoder.get() < RobotMap.midBallShoulder){
-                    shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-
-            while(wristEncoder.get() < RobotMap.midBallWrist - 3 || wristEncoder.get() > RobotMap.midBallWrist + 5 ){
-                
-                    if(wristEncoder.get() > RobotMap.midBallWrist){
-                        //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                        //but then again im just an programmer
-                    wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-                }else if (wristEncoder.get() < RobotMap.midBallWrist){
-                    wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-                }else{
-                    //do nothing
-                }
-            }
-        
         }
     }
 
