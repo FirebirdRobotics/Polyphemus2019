@@ -5,13 +5,14 @@ Robot Template Type: Command-Based
 The current code is located in the ***bin directory***, not the src directory (src directory is not updated & file directories are weird so idk)
 
 ## Full List of Macros:
-- Climb
-- PlaceHatchLowMacro
-- PlaceHatchMiddleMacro
-- PickupHatchStationMacro
-- PickupBallMacro
-- TapeVisionRoutine
-- BallVisionRoutine
+- [x] Climb
+- [x] TapeVisionRoutine
+- [x] BallVisionRoutine
+- [ ] PlaceHatchLowMacro
+- [ ] PlaceHatchMiddleMacro
+- [ ] PickupHatchStationMacro
+- [ ] PickupBallMacro
+- [ ] SetRobotDefault
 
 ## Controls/OI:
 ##### XBOX1 = MOVEMENT
