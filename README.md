@@ -42,18 +42,20 @@ The current code is located in the ***bin directory***, not the src directory (s
 
 ## Stuff we want to display on the SmartDashboard//Shuffleboard:
 - camera feed (vision stuff) 
-- type of drive
 - distance from robot (or camera) to detected field element
-- eagle-eye view of robot & pathing (arrow showing where the robot might go next)
 
 ## Stuff to do/Improvements:
+- Externalize variables (put on SmartDashboard)
+- Add motor current limits (we have them for talons but idk how to do victors)
+- Reset/default button (for solenoids, height of elevator, arm & claw position, etc.)
+- Figure out climb timing using MANUAL SOLENOIDS (create commands to just pop up pistons and then estimate time needed for driving forward and such)
 - Ball pickup
-- SetLowestPosition macro-
+- SetLowestPosition macro:
    a) put a method in each subsystem to do that & just run it in climb macro file
    b) make a new command file to do that
 - Distance detection
 - Dance function
-- Make a document w/ what to do when code doesn't work (ex. check firmware, PCM must be id 0)
+- Make a document w/ what to do when code doesn't work (ex. check firmware, PDP must be id 0, etc.)
 - Maybe a document showing off our code to judges (vision, macros, etc.)
 
 ## Other stuff (idk):
