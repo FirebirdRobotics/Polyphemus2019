@@ -13,7 +13,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - TapeVisionRoutine
 - BallVisionRoutine
 
-## Control Ideas/OI (for now):
+## Controls/OI:
 ##### XBOX1 = MOVEMENT
 ##### XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
 
@@ -40,23 +40,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - Y button = place/release hatch macro & drive back
 - start button? = dance macro (?)
 
-## Stuff we want to display on the SmartDashboard//Shuffleboard:
-- camera feed (vision stuff) 
-- distance from robot (or camera) to detected field element
 
-## Stuff to do/Improvements:
-- Externalize variables (put on SmartDashboard)
-- Add motor current limits (we have them for talons but idk how to do victors)
-- Reset/default button (for solenoids, height of elevator, arm & claw position, etc.)
-- Figure out climb timing using MANUAL SOLENOIDS (create commands to just pop up pistons and then estimate time needed for driving forward and such)
-- Ball pickup
-- SetLowestPosition macro:
-   a) put a method in each subsystem to do that & just run it in climb macro file
-   b) make a new command file to do that
-- Distance detection
-- Dance function
-- Make a document w/ what to do when code doesn't work (ex. check firmware, PDP must be id 0, etc.)
-- Maybe a document showing off our code to judges (vision, macros, etc.)
 
 ## Other stuff (idk):
 Read this to install the CTR-Electronics Phoenix software framework (for CAN motors/motor controllers):
