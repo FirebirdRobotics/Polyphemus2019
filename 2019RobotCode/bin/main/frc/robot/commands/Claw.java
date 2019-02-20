@@ -28,10 +28,10 @@ public class Claw extends Command {
   protected void execute() {
     if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kLeft) != 0){
       Robot.claw.setClaw(RobotMap.clawSpeed);
-      System.out.println("open claw");
+      // System.out.println("open claw");
     }else if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kRight) != 0){
       Robot.claw.setClaw(-RobotMap.clawSpeed);
-      System.out.println("close claw");
+      // System.out.println("close claw");
     }else{
       Robot.claw.setClaw(0.0);
     }

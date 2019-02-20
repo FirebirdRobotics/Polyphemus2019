@@ -33,10 +33,10 @@ public class Wrist extends Command {
 
     if(joystickValue < 0) {
       Robot.wristSystem.setWrist(joystickValue * RobotMap.wristSpeed);
-      System.out.println("wrist up");
+      // System.out.println("wrist up");
     } else if(joystickValue > 0) {
       Robot.wristSystem.setWrist(joystickValue * RobotMap.wristSpeed);
-      System.out.println("wrist down");
+      // System.out.println("wrist down");
     } else {
       Robot.wristSystem.setWrist(0.0);
     }
