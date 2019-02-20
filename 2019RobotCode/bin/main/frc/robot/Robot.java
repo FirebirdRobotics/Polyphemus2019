@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder; 
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,6 +34,7 @@ public class Robot extends TimedRobot {
   public static VisionSystem visionSystem;
   public static Encoder pivEncoder;
   public static Encoder eleEncoder;
+  Compressor c = new Compressor(0);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -49,6 +52,7 @@ public class Robot extends TimedRobot {
     visionSystem = new VisionSystem();
     
     oi = new OI(); // Make sure the OI is initialized LAST
+    c.setClosedLoopControl(true);
   }
 
   /**

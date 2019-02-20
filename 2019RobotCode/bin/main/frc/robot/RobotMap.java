@@ -15,13 +15,13 @@ package frc.robot;
  */
 public class RobotMap {
   // Speed Constants (be careful with these)
-  public static double driveSpeed = 0.65;
+  public static double driveSpeed = .8;
   public static double turnSpeed = 0.75;
   public static double eleSpeed = 0.5;
   public static double shoulderSpeed = 0.45;
   public static double wristSpeed = 0.2;
   public static double clawSpeed = 0.25;
-  public static double visionSpeed = 0.1;
+  public static double visionSpeed = 0.2;
 
   // CAN Motor Controller Ports (Drivetrain)
 	public static int rightFront = 1;
@@ -37,9 +37,9 @@ public class RobotMap {
 
   // Solenoids
   public static int frontIn = 0;
-  public static int frontOut = 1;
-  public static int backIn = 2;
-  public static int backOut = 3;
+  public static int frontOut = 2;
+  public static int backIn = 3;
+  public static int backOut = 1;
 
   //encoderCounts
   //all #s are psuedo until we have the robot

@@ -21,10 +21,12 @@ public class OI {
   public XboxController xboxControllerTwo = new XboxController(2);
 
   // xbox controller one
-  // Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
+  Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
   // Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
   // Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
-
+  Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
+  Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // X button
+  
   // xbox controller two
   Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
   Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
@@ -36,5 +38,8 @@ public class OI {
   public OI() {
     eleDown.whileHeld(new eleDown());
     eleUp.whileHeld(new eleUp());
+    tapeVisionButton.whenPressed(new TapeVisionRoutine());
+    cargoVisionButton.whenPressed(new CargoVisionRoutine());
+    climb.whenPressed(new Climb());
   }
 }
