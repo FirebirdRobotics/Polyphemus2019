@@ -9,7 +9,7 @@ package frc.robot;
 
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Encoder; 
@@ -25,14 +25,13 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain driveTrain;
   public static ElevatorSystem elevatorSystem;
-  public static Claw claw;
+  public static ShoulderSystem shoulderSystem;
+  public static WristSystem wristSystem;
+  public static ClawSystem claw;
   public static Solenoids solenoids;
   public static VisionSystem visionSystem;
   public static Encoder pivEncoder;
   public static Encoder eleEncoder;
-
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -40,9 +39,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // initialize subsystems
     driveTrain = new Drivetrain();
     elevatorSystem = new ElevatorSystem();
-    claw = new Claw();
+    shoulderSystem = new ShoulderSystem();
+    wristSystem = new WristSystem();
+    claw = new ClawSystem();
     solenoids = new Solenoids();
     visionSystem = new VisionSystem();
     
@@ -88,19 +90,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
   }
 
   /**
@@ -113,13 +102,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out. 
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
   }
 
   /**
@@ -128,7 +110,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    elevatorSystem.printEncoders();
+    // elevatorSystem.printEncoders();
   }
 
   /**
@@ -136,6 +118,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    elevatorSystem.printEncoders();
+    System.out.println(oi.xboxControllerTwo.getY(Hand.kLeft));
   }
 }
