@@ -1,0 +1,28 @@
+####
+XBOX1 = MOVEMENT
+XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
+####
+
+----XBOX1----
+Xbox1 Left Joystick = drive
+Xbox1 Back button = climb
+left bumper = bump left
+right bumper = bump right
+
+Y button = cargo vision routine
+X button = tape vision routine
+
+----XBOX2----
+left joystick = arm
+right joystick = wrist
+right trigger = claw out
+left trigger = claw in
+left bumper = ele down manual
+right bumper = ele up manual
+
+A button = set arm to hatch low macro
+B button = set arm to hatch middle macro
+X button = hatch station pickup macro
+Y button = place/release hatch macro & drive back
+
+start button? = dance macro (?)

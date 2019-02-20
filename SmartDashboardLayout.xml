@@ -1,45 +1,33 @@
 <xml version="1.0">
 <dashboard>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1003" y="602"/>
+		<location x="1042" y="536"/>
 		<width>261</width>
 		<height>45</height>
 		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="736" y="8"/>
-		<width>785</width>
-		<height>588</height>
+		<location x="821" y="8"/>
+		<width>700</width>
+		<height>525</height>
+		<property name="Camera Choice" value="stream"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1042" y="536"/>
+		<width>261</width>
+		<height>45</height>
+		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="821" y="8"/>
+		<width>700</width>
+		<height>525</height>
 		<property name="Camera Choice" value="stream"/>
 	</static-widget>
 </dashboard>
 <live-window>
-	<widget field="Drivetrain" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
-		<location x="8" y="8"/>
-	</widget>
-	<widget field="HatchSystem" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
-		<location x="16" y="26"/>
-	</widget>
-	<widget field="Solenoids" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
-		<location x="19" y="1"/>
-	</widget>
-	<widget field="ElevatorSystem" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
-		<location x="12" y="19"/>
-	</widget>
-	<widget field="Ungrouped" type="LW Subsystem" class="edu.wpi.first.smartdashboard.livewindow.elements.LWSubsystem">
-		<widget field="DoubleSolenoid[0,0]" type="Double Solenoid" class="edu.wpi.first.smartdashboard.livewindow.elements.RelayController">
-			<location x="6" y="15"/>
-			<height>19</height>
-			<width>176</width>
-		</widget>
-		<widget field="DoubleSolenoid[0,2]" type="Double Solenoid" class="edu.wpi.first.smartdashboard.livewindow.elements.RelayController">
-			<location x="6" y="34"/>
-			<height>19</height>
-			<width>176</width>
-		</widget>
-		<location x="14" y="1"/>
-		<width>188</width>
-		<height>59</height>
+	<widget field="ClawSystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="0" y="377"/>
 	</widget>
 </live-window>
 </xml>
