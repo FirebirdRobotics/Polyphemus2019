@@ -51,14 +51,14 @@ public class ClawSystem extends Subsystem {
 
     
     while(clawTime.get() < 2){
-      Robot.driveTrain.camDrive(.2, .2);
+      Robot.driveTrain.autoDrive(.2);
     }
     close();
 
     
 
     while(clawTime.get() < 3){
-      Robot.driveTrain.camDrive(-.2, -.2);
+      Robot.driveTrain.autoDrive(-.2);
     }
     open();
   }
@@ -73,12 +73,12 @@ public class ClawSystem extends Subsystem {
 
     close();
     while(clawTime.get() < 2){
-      Robot.driveTrain.camDrive(.2, .2);
+      Robot.driveTrain.autoDrive(.2);
     }
 
     open();
     while(clawTime.get() < 3){
-      Robot.driveTrain.camDrive(-.2, -.2);
+      Robot.driveTrain.autoDrive(-.2);
     }
   }
   

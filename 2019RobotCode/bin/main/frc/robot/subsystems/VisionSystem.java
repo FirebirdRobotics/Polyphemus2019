@@ -55,6 +55,7 @@ public class VisionSystem extends Subsystem {
   public void tapeVisionRoutine(double speed) {
     timeInt = 0;
     double rawYaw = tapeYaw.getDouble(0);
+    System.out.println("rawYaw: " + rawYaw);
       while (rawYaw > 2.0 || rawYaw < -2.0) {
         yawValue = (long) Math.abs(rawYaw);
         System.out.println("----");

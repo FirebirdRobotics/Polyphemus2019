@@ -25,8 +25,8 @@ public class Solenoids extends Subsystem {
     
     public Solenoids() {
 
-        // frontPiston = new DoubleSolenoid(RobotMap.frontIn, RobotMap.frontOut);
-        // backPiston = new DoubleSolenoid(RobotMap.backIn, RobotMap.backOut);
+        frontPiston = new DoubleSolenoid(RobotMap.frontIn, RobotMap.frontOut);
+        backPiston = new DoubleSolenoid(RobotMap.backIn, RobotMap.backOut);
         climbTime = new Timer();
         //THIS TOO
         // ele = new ElevatorSystem();
@@ -48,25 +48,31 @@ public class Solenoids extends Subsystem {
         
             frontPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
-                while(climbTime.get()< 3){
-                    Robot.driveTrain.autoDrive(.3);
+                while(climbTime.get() < 2){
+                    Robot.driveTrain.autoDrive(.2);
                 }
              climbTime.reset();
             frontPiston.set(DoubleSolenoid.Value.kReverse);
 
             backPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
-                while(climbTime.get()< 3){
-                    Robot.driveTrain.autoDrive(.3);
+                while(climbTime.get() < 2){
+                    Robot.driveTrain.autoDrive(.2);
                 }
-             climbTime.stop();
+            //  climbTime.stop();
             backPiston.set(DoubleSolenoid.Value.kReverse);
+            while(climbTime.get() < 2){
+             Robot.driveTrain.autoDrive(.2);
+            }
+            Robot.driveTrain.autoDrive(0);
+    }
+
+    public void frontPistonsUp(){
+        frontPiston.set(DoubleSolenoid.Value.kForward);
     }
 
     @Override
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new Climb());
     }
 }
 

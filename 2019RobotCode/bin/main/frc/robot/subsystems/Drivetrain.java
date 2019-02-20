@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import frc.robot.*;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -83,12 +85,12 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void camDrive(double leftSpeed, double rightSpeed) {
-		left.set(leftSpeed);
+		left.set(-leftSpeed);
 		right.set(rightSpeed);
 	}
 	
 	public void autoDrive(double speed) {
-		left.set(speed);
+		left.set(-speed);
 		right.set(speed);
 	}
 }
