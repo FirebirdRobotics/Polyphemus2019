@@ -45,26 +45,38 @@ public class Solenoids extends Subsystem {
         //THIS TOO
             //will add a climb section which pulls shoulder up and elbow in with ele low
             // ele.setArm("climb");    
-        
+
+            // assuming we're starting touching the front of the level 2 platform:
+            // front pistons down
+            // drive forward for about 1 (?) second, get front wheels on platform
+            // STOP DRIVETRAIN
+            // back pistons down
+            // front pistons up
+            // drive forward for about 2 (?) seconds, get middle wheels on platform
+            // STOP DRIVETRAIN
+            // back pistons up
+            // drive forward for about 2 (?) second, get back wheels on platform
+
             frontPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
-                while(climbTime.get() < 2){
-                    Robot.driveTrain.autoDrive(.2);
+                while(climbTime.get() < 1){
+                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
                 }
+                Robot.driveTrain.autoDrive(0);
              climbTime.reset();
             frontPiston.set(DoubleSolenoid.Value.kReverse);
 
             backPiston.set(DoubleSolenoid.Value.kForward);
              climbTime.start();
                 while(climbTime.get() < 2){
-                    Robot.driveTrain.autoDrive(.2);
+                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
                 }
-            //  climbTime.stop();
+                Robot.driveTrain.autoDrive(0);
             backPiston.set(DoubleSolenoid.Value.kReverse);
-            while(climbTime.get() < 2){
-             Robot.driveTrain.autoDrive(.2);
-            }
-            Robot.driveTrain.autoDrive(0);
+                while(climbTime.get() < 2){
+                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
+                }
+                Robot.driveTrain.autoDrive(0);
     }
 
     public void frontPistonsUp(){

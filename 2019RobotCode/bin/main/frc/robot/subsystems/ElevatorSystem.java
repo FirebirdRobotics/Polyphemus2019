@@ -139,8 +139,6 @@ public void setElevator(double speed){
                     elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
                 } else if(eleEncoder.get() < RobotMap.lowEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                } else {
-                    //dop nothing, loop will be exited
                 }
             }
            /* while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
@@ -153,7 +151,7 @@ public void setElevator(double speed){
                 }
              }*/
 
-    }else if(s == "mid"){
+    } else if(s == "mid") {
         /*
         test list for mid:
             elevator below needed with 
@@ -167,13 +165,11 @@ public void setElevator(double speed){
                 shoulder below and elbow above
                 shoudler below and elbow below
         */
-            while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5){
-                if(eleEncoder.get() > RobotMap.midEle){
+            while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5) {
+                if(eleEncoder.get() > RobotMap.midEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                }else if(eleEncoder.get() < RobotMap.midEle){
+                } else if(eleEncoder.get() < RobotMap.midEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }else{
-                    //dop nothing, loop will be exited
                 }
             }
            /* while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
@@ -238,46 +234,39 @@ public void setElevator(double speed){
         // }
         //add a ("climb") so that we can put ele low, shoudler up, elbow down
         //^^^ will makes the Center of gravity as close to the bottom and middle as possible
-        if(s == "climb"){
-            while(eleEncoder.get() > RobotMap.climbEle + 5 || eleEncoder.get() < RobotMap.climbEle - 5){
-                if(eleEncoder.get() > RobotMap.climbEle){
+        if(s == "climb") {
+            while(eleEncoder.get() > RobotMap.climbEle + 5 || eleEncoder.get() < RobotMap.climbEle - 5) {
+                if(eleEncoder.get() > RobotMap.climbEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                }else if(eleEncoder.get() < RobotMap.climbEle){
+                } else if(eleEncoder.get() < RobotMap.climbEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }else{
-                    //dop nothing, loop will be exited
                 }
             }
         }
-        if(s == "ballPick"){
-            while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5){
-                if(eleEncoder.get() > RobotMap.ballPickEle){
+        if(s == "ballPick") {
+            while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5) {
+                if(eleEncoder.get() > RobotMap.ballPickEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                }else if(eleEncoder.get() < RobotMap.ballPickEle){
+                } else if(eleEncoder.get() < RobotMap.ballPickEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }else{
-                    //dop nothing, loop will be exited
                 }
             }
-        }if(s == "lowBall"){
-            while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5){
-                if(eleEncoder.get() > RobotMap.lowBallEle){
+        } 
+        if(s == "lowBall") {
+            while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5) {
+                if(eleEncoder.get() > RobotMap.lowBallEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                }else if(eleEncoder.get() < RobotMap.lowBallEle){
+                } else if(eleEncoder.get() < RobotMap.lowBallEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }else{
-                    //dop nothing, loop will be exited
                 }
             }
-        
-        }if(s == "midBall"){
-            while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5){
-                if(eleEncoder.get() > RobotMap.midBallEle){
+        }
+        if(s == "midBall") {
+            while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5) {
+                if(eleEncoder.get() > RobotMap.midBallEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                }else if(eleEncoder.get() < RobotMap.midBallEle){
+                } else if(eleEncoder.get() < RobotMap.midBallEle) {
                     elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }else{
-                    //dop nothing, loop will be exited
                 }
             }
         }

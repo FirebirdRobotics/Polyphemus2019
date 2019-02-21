@@ -62,13 +62,13 @@ public class VisionSystem extends Subsystem {
         System.out.println("rawYaw: " + rawYaw);
         System.out.println("absYaw: " + yawValue);
           if (rawYaw < -2.0) { // if negative (on right)
-              // put left backwards & right forwards (rotate counter-clockwise)
+              // put left backwards & right forwards (rotate counter-clockwise, or left)
               Robot.driveTrain.camDrive(-speed, speed);
               System.out.println("tapeYaw is on left");
               System.out.println("timeInt: " + timeInt);
           }
           else if (rawYaw > 2.0) { // if positive (on right)
-              // put left forwards & right backwards (rotate clockwise)
+              // put left forwards & right backwards (rotate clockwise, or right)
               Robot.driveTrain.camDrive(speed, -speed);
               System.out.println("tapeYaw is on right");
               System.out.println("timeInt: " + timeInt);
@@ -108,13 +108,13 @@ public class VisionSystem extends Subsystem {
         System.out.println("rawYaw: " + rawYaw);
         System.out.println("absYaw: " + yawValue);
           if (rawYaw < -2.0) { // if negative (on right)
-              // put left backwards & right forwards (rotate counter-clockwise)
+              // put left backwards & right forwards (rotate counter-clockwise, or left)
               Robot.driveTrain.camDrive(-speed, speed);
               System.out.println("cargoYaw is on left");
               System.out.println("timeInt: " + timeInt);
           }
           else if (rawYaw > 2.0) { // if positive (on right)
-              // put left forwards & right backwards (rotate clockwise)
+              // put left forwards & right backwards (rotate clockwise, or right)
               Robot.driveTrain.camDrive(speed, -speed);
               System.out.println("cargoYaw is on right");
               System.out.println("timeInt: " + timeInt);
