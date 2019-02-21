@@ -22,6 +22,9 @@ public class RobotMap {
   public static double wristSpeed = 0.2;
   public static double clawSpeed = 0.25;
   public static double visionSpeed = 0.2;
+  public static double climbSpeed = 0.2;
+  public static double bumpSpeed = 0.2;
+  public static double startDriveSpeed = 0.3;
 
   // CAN Motor Controller Ports (Drivetrain)
 	public static int rightFront = 1;

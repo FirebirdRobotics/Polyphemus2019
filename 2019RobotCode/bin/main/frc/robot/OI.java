@@ -22,24 +22,35 @@ public class OI {
 
   // xbox controller one
   Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
-  // Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
-  // Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
+  Button driveOff = new JoystickButton(xboxControllerOne, 8); // Start button
+  Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
+  Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
   Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
   Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // X button
   
   // xbox controller two
   Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
   Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
-  // Button hatchLowMacro = new JoystickButton(xboxControllerTwo, 1); // A button
-  // Button hatchMiddleMacro = new JoystickButton(xboxControllerTwo, 2); // B button
-  // Button hatchStationPickupMacro = new JoystickButton(xboxControllerTwo, 3); // X button
-  // Button releaseHatchMacro = new JoystickButton(xboxControllerTwo, 4); // Y button
+  Button hatchLowMacro = new JoystickButton(xboxControllerTwo, 1); // A button
+  Button hatchMiddleMacro = new JoystickButton(xboxControllerTwo, 2); // B button
+  Button hatchStationPickupMacro = new JoystickButton(xboxControllerTwo, 3); // X button
+  Button releaseHatchMacro = new JoystickButton(xboxControllerTwo, 4); // Y button
   
   public OI() {
-    eleDown.whileHeld(new eleDown());
-    eleUp.whileHeld(new eleUp());
+    // xbox controller one
+    climb.whenPressed(new Climb());
+    driveOff.whenPressed(new DriveOff());
+    bumpLeft.whenPressed(new BumpLeft());
+    bumpRight.whenPressed(new BumpRight());
     tapeVisionButton.whenPressed(new TapeVisionRoutine());
     cargoVisionButton.whenPressed(new CargoVisionRoutine());
-    climb.whenPressed(new Climb());
+
+    // xbox controller two
+    eleDown.whileHeld(new EleDown());
+    eleUp.whileHeld(new EleUp());
+    hatchLowMacro.whenPressed(new PlaceHatchLowMacro());
+    hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
+    hatchStationPickupMacro.whenPressed(new PickupHatchStationMacro());
+    releaseHatchMacro.whenPressed(new ReleaseHatchMacro());
   }
 }
