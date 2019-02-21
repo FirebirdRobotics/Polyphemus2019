@@ -13,7 +13,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - [ ] PickupHatchStationMacro
 - [ ] PickupBallMacro
 - [ ] SetRobotDefault
-- [ ] DriveOff
+- [ ] StartDriveOff
 
 ## Controls/OI:
 ##### XBOX1 = MOVEMENT
