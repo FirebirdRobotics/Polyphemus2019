@@ -4,8 +4,9 @@ XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
 ####
 
 ----XBOX1----
-Xbox1 Left Joystick = drive
-Xbox1 Back button = climb
+left Joystick = drive
+back button = climb
+start button = drive off (starting)
 left bumper = bump left
 right bumper = bump right
 
@@ -25,4 +26,7 @@ B button = set arm to hatch middle macro
 X button = hatch station pickup macro
 Y button = place/release hatch macro & drive back
 
-start button? = dance macro (?)
+start button = dance macro (?)
+
+- start drive off macro
+- distance from target (vision)
