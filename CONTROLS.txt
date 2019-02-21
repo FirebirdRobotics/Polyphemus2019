@@ -27,6 +27,3 @@ X button = hatch station pickup macro
 Y button = place/release hatch macro & drive back
 
 start button = dance macro (?)
-
-- start drive off macro
-- distance from target (vision)
