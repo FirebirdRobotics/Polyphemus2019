@@ -22,11 +22,14 @@ public class OI {
 
   // xbox controller one
   Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
-  Button driveOff = new JoystickButton(xboxControllerOne, 8); // Start button
+  Button startDriveOff = new JoystickButton(xboxControllerOne, 8); // Start button
   Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
   Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
   Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
-  Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // X button
+  Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // Y button
+  // (temporary, for testing)
+  Button frontPistons = new JoystickButton(xboxControllerOne, 1);
+  Button backPistons = new JoystickButton(xboxControllerOne, 2);
   
   // xbox controller two
   Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
@@ -39,11 +42,14 @@ public class OI {
   public OI() {
     // xbox controller one
     climb.whenPressed(new Climb());
-    driveOff.whenPressed(new DriveOff());
+    startDriveOff.whenPressed(new StartDriveOff());
     bumpLeft.whenPressed(new BumpLeft());
     bumpRight.whenPressed(new BumpRight());
     tapeVisionButton.whenPressed(new TapeVisionRoutine());
     cargoVisionButton.whenPressed(new CargoVisionRoutine());
+    // (temporary, for testing)
+    frontPistons.whenPressed(new FrontPistonsToggle());
+    backPistons.whenPressed(new BackPistonsToggle());
 
     // xbox controller two
     eleDown.whileHeld(new EleDown());

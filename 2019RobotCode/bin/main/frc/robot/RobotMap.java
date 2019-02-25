@@ -47,35 +47,40 @@ public class RobotMap {
   //encoderCounts
   //all #s are psuedo until we have the robot
   //these need to be given values before the placeHatch method can be called because it relies on comparing to these vals
-  public static int lowEle = 50;
-  public static int midEle = 100;
-  public static int hiEle = 200; //cant do hi
-  public static int climbEle = 50;
+  public static int lowEle;
+  public static int midEle;
+  public static int hiEle; //cant do hi
+  public static int climbEle;
 
-  public static int lowShoulder = 50;
-  public static int midShoulder = 100;
-  public static int hiShoulder = 120; // cant do hi
-  public static int climbShoulder = 50;
+  public static int lowShoulder;
+  public static int midShoulder;
+  public static int hiShoulder; // cant do hi
+  public static int climbShoulder;
 
-  public static int lowWrist = 50;
-  public static int midWrist = 50;
-  public static int climbWrist = 50;
+  public static int lowWrist;
+  public static int midWrist;
+  public static int climbWrist;
 
   /*public static int lowElbow;
   public static int midElbow;
   public static int hiElbow;
   */
-  public static int lowBallEle = 50;
-  public static int lowBallShoulder = 50;
-  public static int lowBallWrist = 50;
+  public static int lowBallEle;
+  public static int lowBallShoulder;
+  public static int lowBallWrist;
 
-  public static int midBallEle = 50;
-  public static int midBallShoulder = 50;
-  public static int midBallWrist = 50;
+  public static int midBallEle;
+  public static int midBallShoulder;
+  public static int midBallWrist;
 
-  public static int ballPickEle = 50;
-  public static int ballPickShoulder = 50;
-  public static int ballPickWrist = 50;
+  public static int ballPickEle;
+  public static int ballPickShoulder;
+  public static int ballPickWrist;
+
+  public static int clawDefault;
+  public static int elevatorDefault;
+  public static int shoulderDefault;
+  public static int wristDefault;
 
 
   //cant do ball hi
