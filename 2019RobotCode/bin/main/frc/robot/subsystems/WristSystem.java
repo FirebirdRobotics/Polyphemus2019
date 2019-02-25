@@ -240,6 +240,11 @@ public class WristSystem extends Subsystem {
     }
 }
 
+  public void resetWristDefault() {
+    // set wrist to default using encoder count
+    wristMotor.set(ControlMode.Position, RobotMap.wristDefault);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new Wrist());

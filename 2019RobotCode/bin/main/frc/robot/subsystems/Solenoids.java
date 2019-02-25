@@ -83,6 +83,18 @@ public class Solenoids extends Subsystem {
         frontPiston.set(DoubleSolenoid.Value.kForward);
     }
 
+    public void frontPistonsDown(){
+        frontPiston.set(DoubleSolenoid.Value.kReverse);
+    }
+
+    public void backPistonsUp(){
+        backPiston.set(DoubleSolenoid.Value.kForward);
+    }
+
+    public void backPistonsDown(){
+        backPiston.set(DoubleSolenoid.Value.kReverse);
+    }
+
     @Override
     public void initDefaultCommand() {
     }

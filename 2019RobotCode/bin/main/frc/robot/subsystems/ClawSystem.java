@@ -127,6 +127,11 @@ public class ClawSystem extends Subsystem {
     // }
   }
 
+  public void resetClawDefault() {
+    // set claw to default using encoder count
+    clawMotor.set(ControlMode.Position, RobotMap.clawDefault);
+  }
+
   @Override
   public void initDefaultCommand() {
     // create a command that sets the hatch system back to default

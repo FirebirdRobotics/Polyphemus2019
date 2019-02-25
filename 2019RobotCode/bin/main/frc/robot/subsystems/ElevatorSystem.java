@@ -272,6 +272,11 @@ public void setElevator(double speed){
         }
     }
 
+    public void resetElevatorDefault() {
+        // set elevator to default using encoder count
+        elevatorMotor.set(ControlMode.Position, RobotMap.elevatorDefault);
+    }
+
     @Override
     public void initDefaultCommand() {
     }

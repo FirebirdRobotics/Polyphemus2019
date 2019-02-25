@@ -235,6 +235,11 @@ public class ShoulderSystem extends Subsystem {
     shoulderMotor.set(ControlMode.PercentOutput, speed);
   }
 
+  public void resetShoulderDefault() {
+    // set shoulder to default using encoder count
+    shoulderMotor.set(ControlMode.Position, RobotMap.shoulderDefault);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new Shoulder());
