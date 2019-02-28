@@ -1,0 +1,16 @@
+If the Robot isn't wokring:
+
+1.) turn it off and back on
+
+2.) read the error messages being given
+  try to interpret them and fix them
+    issues faced: 
+      pdp sticky fault - fix in phoenix tuner, go to pdp and clear faults
+        Make sure PDP is ID 0 on phoenix tuner
+      elevator CAN error - check the ribbon cable from the elevator encoder
+      
+      
+      
+3.) Blame Theo
+
+4.) Blame Jaden
