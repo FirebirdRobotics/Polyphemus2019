@@ -112,7 +112,7 @@ public void setElevator(double speed){
 }
 
 //This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
-    public void setArm(String s) {
+public void setElevatorPreset(String s) {
 
         //this compares the input to the different levels
         //low, mid, hi
@@ -120,6 +120,8 @@ public void setElevator(double speed){
         //and all of the loops have a bit of tollerance but no more than +- 5 counts, this can and most likely will be adjusted
 
         if(s == "low") {
+            elevatorMotor.set(ControlMode.Position, RobotMap.lowEle);
+            System.out.println("set elevator to low (encoder value)");
             // done?
             /*
             test list for low:
@@ -134,13 +136,13 @@ public void setElevator(double speed){
                 shoulder below and elbow above
                 shoudler below and elbow below
             */
-            while(eleEncoder.get() > RobotMap.lowEle + 5 || eleEncoder.get() < RobotMap.lowEle - 5) {
-                if(eleEncoder.get() > RobotMap.lowEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.lowEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
+            // while(eleEncoder.get() > RobotMap.lowEle + 5 || eleEncoder.get() < RobotMap.lowEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.lowEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput, RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.lowEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
            /* while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
                 if(elbowEncoder.get() < RobotMap.lowElbow){
                     elbowMotor.set(.3);
@@ -152,6 +154,8 @@ public void setElevator(double speed){
              }*/
 
     } else if(s == "mid") {
+        elevatorMotor.set(ControlMode.Position, RobotMap.midEle);
+        System.out.println("set elevator to mid (encoder value)");
         /*
         test list for mid:
             elevator below needed with 
@@ -165,13 +169,13 @@ public void setElevator(double speed){
                 shoulder below and elbow above
                 shoudler below and elbow below
         */
-            while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5) {
-                if(eleEncoder.get() > RobotMap.midEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.midEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
+            // while(eleEncoder.get() > RobotMap.midEle + 5 || eleEncoder.get() < RobotMap.midEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.midEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.midEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
            /* while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
                 if(elbowEncoder.get() < RobotMap.midElbow){
                     elbowMotor.set(.3);
@@ -234,48 +238,70 @@ public void setElevator(double speed){
         // }
         //add a ("climb") so that we can put ele low, shoudler up, elbow down
         //^^^ will makes the Center of gravity as close to the bottom and middle as possible
-        if(s == "climb") {
-            while(eleEncoder.get() > RobotMap.climbEle + 5 || eleEncoder.get() < RobotMap.climbEle - 5) {
-                if(eleEncoder.get() > RobotMap.climbEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.climbEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
-        }
-        if(s == "ballPick") {
-            while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5) {
-                if(eleEncoder.get() > RobotMap.ballPickEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.ballPickEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
+        else if(s == "climb") {
+            // while(eleEncoder.get() > RobotMap.climbEle + 5 || eleEncoder.get() < RobotMap.climbEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.climbEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.climbEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
+            elevatorMotor.set(ControlMode.Position, RobotMap.climbEle);
+            System.out.println("set elevator to climb (encoder value)");
         } 
-        if(s == "lowBall") {
-            while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5) {
-                if(eleEncoder.get() > RobotMap.lowBallEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.lowBallEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
-        }
-        if(s == "midBall") {
-            while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5) {
-                if(eleEncoder.get() > RobotMap.midBallEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
-                } else if(eleEncoder.get() < RobotMap.midBallEle) {
-                    elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
-                }
-            }
+        //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
+        else if(s == "default"){
+            // while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
+                
+            //         if(wristEncoder.get() > RobotMap.midWrist){
+            //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+            //             //but then again im just an programmer
+            //         wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
+            //     }else if (wristEncoder.get() < RobotMap.midWrist){
+            //         wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
+            //     }else{
+            //         //do nothing
+            //     }
+            // }
+            elevatorMotor.set(ControlMode.Position, RobotMap.defaultElevator);
+            System.out.println("set elevator to default (encoder value)");
+        } else if(s == "ballPick") {
+            // while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.ballPickEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.ballPickEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
+            elevatorMotor.set(ControlMode.Position, RobotMap.ballPickEle);
+            System.out.println("set elevator to ballPick (encoder value)");
+        } else if(s == "lowBall") {
+            // while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.lowBallEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.lowBallEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
+            elevatorMotor.set(ControlMode.Position, RobotMap.lowBallEle);
+            System.out.println("set elevator to lowBall (encoder value)");
+        } else if(s == "midBall") {
+            // while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5) {
+            //     if(eleEncoder.get() > RobotMap.midBallEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,RobotMap.eleSpeed);
+            //     } else if(eleEncoder.get() < RobotMap.midBallEle) {
+            //         elevatorMotor.set(ControlMode.PercentOutput,-RobotMap.eleSpeed);
+            //     }
+            // }
+            elevatorMotor.set(ControlMode.Position, RobotMap.midBallEle);
+            System.out.println("set elevator to midBall (encoder value)");
         }
     }
 
-    public void resetElevatorDefault() {
-        // set elevator to default using encoder count
-        elevatorMotor.set(ControlMode.Position, RobotMap.elevatorDefault);
-    }
+    // public void resetElevatorDefault() {
+    //     // set elevator to default using encoder count
+    //     elevatorMotor.set(ControlMode.Position, RobotMap.defaultElevator);
+    // }
 
     @Override
     public void initDefaultCommand() {

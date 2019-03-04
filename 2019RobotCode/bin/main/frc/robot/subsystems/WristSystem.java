@@ -48,7 +48,7 @@ public class WristSystem extends Subsystem {
     wristMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void setArm(String s) {
+  public void setWristPreset(String s) {
 
     //this compares the input to the different levels
     //low, mid, hi
@@ -56,6 +56,8 @@ public class WristSystem extends Subsystem {
     //and all of the loops have a bit of tollerance but no more than +- 5 counts, this can and most likely will be adjusted
 
     if(s == "low") {
+        wristMotor.set(ControlMode.Position, RobotMap.lowWrist);
+        System.out.println("set wrist to low (encoder value)");
         // done?
         /*
         test list for low:
@@ -70,17 +72,17 @@ public class WristSystem extends Subsystem {
             shoulder below and elbow above
             shoudler below and elbow below
         */
-        while(wristEncoder.get() < RobotMap.lowWrist - 3 || wristEncoder.get() > RobotMap.lowWrist + 3) {
-            if(wristEncoder.get() > RobotMap.lowWrist) {
-                //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                //but then again im just an programmer
-            wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-        } else if (wristEncoder.get() < RobotMap.lowWrist) {
-            wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-        } else {
-            //do nothing
-        }
-        }
+        // while(wristEncoder.get() < RobotMap.lowWrist - 3 || wristEncoder.get() > RobotMap.lowWrist + 3) {
+        //     if(wristEncoder.get() > RobotMap.lowWrist) {
+        //         //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //         //but then again im just an programmer
+        //     wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
+        // } else if (wristEncoder.get() < RobotMap.lowWrist) {
+        //     wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
+        // } else {
+        //     //do nothing
+        // }
+        // }
        /* while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
             if(elbowEncoder.get() < RobotMap.lowElbow){
                 elbowMotor.set(.3);
@@ -91,7 +93,9 @@ public class WristSystem extends Subsystem {
             }
          }*/
 
-}else if(s == "mid"){
+} else if(s == "mid") {
+    wristMotor.set(ControlMode.Position, RobotMap.midWrist);
+    System.out.println("set wrist to mid (encoder value)");
     /*
     test list for mid:
         elevator below needed with 
@@ -104,19 +108,19 @@ public class WristSystem extends Subsystem {
             shoudler above and elbow below
             shoulder below and elbow above
             shoudler below and elbow below
-    */
-        while(wristEncoder.get() < RobotMap.midWrist - 3 || wristEncoder.get() > RobotMap.midWrist + 5 ){
+    // */
+    //     while(wristEncoder.get() < RobotMap.midWrist - 3 || wristEncoder.get() > RobotMap.midWrist + 5 ){
             
-                if(wristEncoder.get() > RobotMap.midWrist){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
-            }else if (wristEncoder.get() < RobotMap.midWrist){
-                wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
-            }else{
-                //do nothing
-            }
-        }
+    //             if(wristEncoder.get() > RobotMap.midWrist){
+    //                 //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+    //                 //but then again im just an programmer
+    //             wristMotor.set(ControlMode.PercentOutput, -RobotMap.wristSpeed);
+    //         }else if (wristEncoder.get() < RobotMap.midWrist){
+    //             wristMotor.set(ControlMode.PercentOutput, RobotMap.wristSpeed);
+    //         }else{
+    //             //do nothing
+    //         }
+    //     }
        /* while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
             if(elbowEncoder.get() < RobotMap.midElbow){
                 elbowMotor.set(.3);
@@ -179,11 +183,11 @@ public class WristSystem extends Subsystem {
     // }
     //add a ("climb") so that we can put ele low, shoudler up, elbow down
     //^^^ will makes the Center of gravity as close to the bottom and middle as possible
-    if(s == "climb"){
+    else if(s == "climb"){
 
-        while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
+        // while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
             
-                if(wristEncoder.get() > RobotMap.midWrist){
+                /*if(wristEncoder.get() > RobotMap.midWrist){
                     //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                     //but then again im just an programmer
                 wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
@@ -191,14 +195,32 @@ public class WristSystem extends Subsystem {
                 wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
             }else{
                 //do nothing
-            }
-        }
+            }*/
+        // }
+        wristMotor.set(ControlMode.Position, RobotMap.climbWrist);
+        System.out.println("set wrist to climb (encoder value)");
     }
-    if(s == "ballPick"){
-
-        while(wristEncoder.get() < RobotMap.ballPickWrist - 3 || wristEncoder.get() > RobotMap.ballPickWrist + 5 ){
+    //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
+    else if(s == "default"){
+        // while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
             
-                if(wristEncoder.get() > RobotMap.ballPickWrist){
+        //         if(wristEncoder.get() > RobotMap.midWrist){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
+        //     }else if (wristEncoder.get() < RobotMap.midWrist){
+        //         wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        wristMotor.set(ControlMode.Position, RobotMap.defaultWrist);
+        System.out.println("set wrist to default (encoder value)");
+    } else if(s == "ballPick") {
+
+        // while(wristEncoder.get() < RobotMap.ballPickWrist - 3 || wristEncoder.get() > RobotMap.ballPickWrist + 5 ){
+            
+            /*    if(wristEncoder.get() > RobotMap.ballPickWrist){
                     //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                     //but then again im just an programmer
                 wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
@@ -207,11 +229,14 @@ public class WristSystem extends Subsystem {
             }else{
                 //do nothing
             }
-        }
-    }if(s == "lowBall"){
+            */
+        // }
+        wristMotor.set(ControlMode.Position, RobotMap.ballPickWrist);
+        System.out.println("set wrist to ballPick (encoder value)");
+    } else if(s == "lowBall") {
 
-        while(wristEncoder.get() < RobotMap.lowBallWrist - 3 || wristEncoder.get() > RobotMap.lowBallWrist + 5 ){
-            
+        // while(wristEncoder.get() < RobotMap.lowBallWrist - 3 || wristEncoder.get() > RobotMap.lowBallWrist + 5 ){
+            /*
                 if(wristEncoder.get() > RobotMap.lowBallWrist){
                     //this motor holds a lot of weight but seems stable to me, thats why it is fast\
                     //but then again im just an programmer
@@ -221,28 +246,34 @@ public class WristSystem extends Subsystem {
             }else{
                 //do nothing
             }
-        }
-    
-    }if(s == "midBall"){
-        while(wristEncoder.get() < RobotMap.midBallWrist - 3 || wristEncoder.get() > RobotMap.midBallWrist + 5 ){
+            */
+        // }
+        wristMotor.set(ControlMode.Position, RobotMap.lowBallWrist);
+        System.out.println("set wrist to lowBall (encoder value)");
+    } else if(s == "midBall") {
+        // while(wristEncoder.get() < RobotMap.midBallWrist - 3 || wristEncoder.get() > RobotMap.midBallWrist + 5 ){
             
-                if(wristEncoder.get() > RobotMap.midBallWrist){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
-            }else if (wristEncoder.get() < RobotMap.midBallWrist){
-                wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
-            }else{
-                //do nothing
-            }
-        }
-    
+        //    /*     if(wristEncoder.get() > RobotMap.midBallWrist){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
+        //     }else if (wristEncoder.get() < RobotMap.midBallWrist){
+        //         wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
+        //     }else{
+        //         //do nothing
+         
+        //     }
+            
+        // */}
+        
+        wristMotor.set(ControlMode.Position, RobotMap.midBallWrist);
+        System.out.println("set wrist to midBall (encoder value)");
+      }
     }
-}
 
   public void resetWristDefault() {
     // set wrist to default using encoder count
-    wristMotor.set(ControlMode.Position, RobotMap.wristDefault);
+    wristMotor.set(ControlMode.Position, RobotMap.defaultWrist);
   }
 
   @Override

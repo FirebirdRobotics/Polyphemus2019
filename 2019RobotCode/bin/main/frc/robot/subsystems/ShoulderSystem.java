@@ -46,7 +46,7 @@ public class ShoulderSystem extends Subsystem {
     System.out.println("shoulder position: " + shldrPos + " ");
   }
   
-  public void setArm(String s) {
+  public void setShoulderPreset(String s) {
 
     //this compares the input to the different levels
     //low, mid, hi
@@ -54,6 +54,8 @@ public class ShoulderSystem extends Subsystem {
     //and all of the loops have a bit of tollerance but no more than +- 5 counts, this can and most likely will be adjusted
 
     if(s == "low") {
+        shoulderMotor.set(ControlMode.Position, RobotMap.lowShoulder);
+        System.out.println("set shoulder to low (encoder value)");
         // done?
         /*
         test list for low:
@@ -68,17 +70,17 @@ public class ShoulderSystem extends Subsystem {
             shoulder below and elbow above
             shoudler below and elbow below
         */
-        while(shoulderEncoder.get() < RobotMap.lowShoulder || shoulderEncoder.get() > RobotMap.lowShoulder) {
-            if(shoulderEncoder.get() > RobotMap.lowShoulder) {
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            } else if (shoulderEncoder.get() < RobotMap.lowShoulder) {
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            } else {
-                //do nothing
-            }
-        }
+        // while(shoulderEncoder.get() < RobotMap.lowShoulder || shoulderEncoder.get() > RobotMap.lowShoulder) {
+        //     if(shoulderEncoder.get() > RobotMap.lowShoulder) {
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     } else if (shoulderEncoder.get() < RobotMap.lowShoulder) {
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     } else {
+        //         //do nothing
+        //     }
+        // }
        /* while(elbowEncoder.get() < RobotMap.lowElbow - 3 || elbowEncoder.get() > RobotMap.lowElbow +3){
             if(elbowEncoder.get() < RobotMap.lowElbow){
                 elbowMotor.set(.3);
@@ -90,6 +92,8 @@ public class ShoulderSystem extends Subsystem {
          }*/
 
   } else if(s == "mid") {
+      shoulderMotor.set(ControlMode.Position, RobotMap.midShoulder);
+      System.out.println("set shoulder to mid (encoder value)");
     /*
     test list for mid:
         elevator below needed with 
@@ -103,17 +107,17 @@ public class ShoulderSystem extends Subsystem {
             shoulder below and elbow above
             shoudler below and elbow below
     */
-        while(shoulderEncoder.get() < RobotMap.midShoulder || shoulderEncoder.get() > RobotMap.midShoulder){
-            if(shoulderEncoder.get() > RobotMap.midShoulder){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            }else if (shoulderEncoder.get() < RobotMap.midShoulder){
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            }else{
-                //do nothing
-            }
-        }
+        // while(shoulderEncoder.get() < RobotMap.midShoulder || shoulderEncoder.get() > RobotMap.midShoulder){
+        //     if(shoulderEncoder.get() > RobotMap.midShoulder){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     }else if (shoulderEncoder.get() < RobotMap.midShoulder){
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
        /* while(elbowEncoder.get() < RobotMap.midElbow - 3 || elbowEncoder.get() > RobotMap.midElbow +3){
             if(elbowEncoder.get() < RobotMap.midElbow){
                 elbowMotor.set(.3);
@@ -176,68 +180,84 @@ public class ShoulderSystem extends Subsystem {
     // }
     //add a ("climb") so that we can put ele low, shoudler up, elbow down
     //^^^ will makes the Center of gravity as close to the bottom and middle as possible
-    if(s == "climb"){
-        while(shoulderEncoder.get() < RobotMap.climbShoulder || shoulderEncoder.get() > RobotMap.climbShoulder){
-            if(shoulderEncoder.get() > RobotMap.climbShoulder){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            }else if (shoulderEncoder.get() < RobotMap.climbShoulder){
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            }else{
-                //do nothing
-            }
-        }
-    }
-    if(s == "ballPick"){
-        while(shoulderEncoder.get() < RobotMap.ballPickShoulder || shoulderEncoder.get() > RobotMap.ballPickShoulder){
-            if(shoulderEncoder.get() > RobotMap.ballPickShoulder){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            }else if (shoulderEncoder.get() < RobotMap.ballPickShoulder){
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            }else{
-                //do nothing
-            }
-        }
-
-    }if(s == "lowBall"){
-       
-        while(shoulderEncoder.get() < RobotMap.lowBallShoulder || shoulderEncoder.get() > RobotMap.lowBallShoulder){
-            if(shoulderEncoder.get() > RobotMap.lowBallShoulder){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            }else if (shoulderEncoder.get() < RobotMap.lowBallShoulder){
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            }else{
-                //do nothing
-            }
-        }
-    
-    }if(s == "midBall"){
-        while(shoulderEncoder.get() < RobotMap.midBallShoulder || shoulderEncoder.get() > RobotMap.midBallShoulder){
-            if(shoulderEncoder.get() > RobotMap.midBallShoulder){
-                    //this motor holds a lot of weight but seems stable to me, thats why it is fast\
-                    //but then again im just an programmer
-                shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
-            }else if (shoulderEncoder.get() < RobotMap.midBallShoulder){
-                shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
-            }else{
-                //do nothing
-            }
-        }
+    else if(s == "climb") {
+        // while(shoulderEncoder.get() < RobotMap.climbShoulder || shoulderEncoder.get() > RobotMap.climbShoulder){
+        //     if(shoulderEncoder.get() > RobotMap.climbShoulder){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     }else if (shoulderEncoder.get() < RobotMap.climbShoulder){
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        shoulderMotor.set(ControlMode.Position, RobotMap.climbShoulder);
+        System.out.println("set shoulder to climb (encoder value)");
+    } 
+    //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
+    else if(s == "default"){
+        // while(wristEncoder.get() < RobotMap.climbWrist - 3 || wristEncoder.get() > RobotMap.climbWrist + 5 ){
+            
+        //         if(wristEncoder.get() > RobotMap.midWrist){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         wristMotor.set(ControlMode.PercentOutput,-RobotMap.wristSpeed);
+        //     }else if (wristEncoder.get() < RobotMap.midWrist){
+        //         wristMotor.set(ControlMode.PercentOutput,RobotMap.wristSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        shoulderMotor.set(ControlMode.Position, RobotMap.defaultShoulder);
+        System.out.println("set shoulder to default (encoder value)");
+    } else if(s == "ballPick") {
+        // while(shoulderEncoder.get() < RobotMap.ballPickShoulder || shoulderEncoder.get() > RobotMap.ballPickShoulder){
+        //     if(shoulderEncoder.get() > RobotMap.ballPickShoulder){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     }else if (shoulderEncoder.get() < RobotMap.ballPickShoulder){
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        shoulderMotor.set(ControlMode.Position, RobotMap.ballPickShoulder);
+        System.out.println("set shoulder to ballPick (encoder value)");
+    } else if(s == "lowBall") {
+        // while(shoulderEncoder.get() < RobotMap.lowBallShoulder || shoulderEncoder.get() > RobotMap.lowBallShoulder){
+        //     if(shoulderEncoder.get() > RobotMap.lowBallShoulder){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     }else if (shoulderEncoder.get() < RobotMap.lowBallShoulder){
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        shoulderMotor.set(ControlMode.Position, RobotMap.lowBallShoulder);
+        System.out.println("set shoulder to lowBall (encoder value)");
+    } else if(s == "midBall") {
+        // while(shoulderEncoder.get() < RobotMap.midBallShoulder || shoulderEncoder.get() > RobotMap.midBallShoulder){
+        //     if(shoulderEncoder.get() > RobotMap.midBallShoulder){
+        //             //this motor holds a lot of weight but seems stable to me, thats why it is fast\
+        //             //but then again im just an programmer
+        //         shoulderMotor.set(ControlMode.PercentOutput,-RobotMap.shoulderSpeed);
+        //     }else if (shoulderEncoder.get() < RobotMap.midBallShoulder){
+        //         shoulderMotor.set(ControlMode.PercentOutput,RobotMap.shoulderSpeed);
+        //     }else{
+        //         //do nothing
+        //     }
+        // }
+        shoulderMotor.set(ControlMode.Position, RobotMap.midBallShoulder);
+        System.out.println("set shoulder to midBall (encoder value)");
     }
   }
 
   public void setShoulder(double speed){
     shoulderMotor.set(ControlMode.PercentOutput, speed);
-  }
-
-  public void resetShoulderDefault() {
-    // set shoulder to default using encoder count
-    shoulderMotor.set(ControlMode.Position, RobotMap.shoulderDefault);
   }
 
   @Override

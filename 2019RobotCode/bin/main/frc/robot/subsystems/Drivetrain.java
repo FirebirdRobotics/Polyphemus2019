@@ -44,6 +44,7 @@ public class Drivetrain extends Subsystem {
 		rightFrontMotor.setInverted(false);
 		rightRearMotor.setInverted(false);
 
+		
 		// create motor controller groups
 		left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
 		right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
@@ -63,6 +64,10 @@ public class Drivetrain extends Subsystem {
 	// 	tal.configPeakCurrentLimit(amps, 1000);
 	// 	tal.configPeakCurrentDuration(0, 1000);
 	// 	tal.enableCurrentLimit(true);
+	// }
+
+	
+	// private void setVictorCurrLimit(WPI_VictorSPX vic, int amps){
 	// }
 
   	@Override
