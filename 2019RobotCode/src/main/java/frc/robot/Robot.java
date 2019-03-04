@@ -7,22 +7,14 @@
 
 package frc.robot;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode.PixelFormat;
-import edu.wpi.first.wpilibj.CameraServer;
-
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.command.*;
+import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder; 
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,18 +24,17 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  // public static Drivetrain driveTrain = new Drivetrain();
-  // public static Elevator elevator = new Elevator();
-  // public static IntakeSystem intakeSystem = new IntakeSystem();
-  // public static Climb climb = new Climb();
-  // public static ProximitySensor proximitySensor = new ProximitySensor();
-  // public static ColorSensor colorSensor = new ColorSensor();
-  // public static VisionProcessing visionProcessing = new VisionProcessing();
-  public static OI m_oi;
-
-  Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  public static OI oi;
+  public static Drivetrain driveTrain;
+  public static ElevatorSystem elevatorSystem;
+  public static ShoulderSystem shoulderSystem;
+  public static WristSystem wristSystem;
+  public static ClawSystem claw;
+  public static Solenoids solenoids;
+  public static VisionSystem visionSystem;
+  public static Encoder pivEncoder;
+  public static Encoder eleEncoder;
+  Compressor c = new Compressor(0);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -51,23 +42,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    // SmartDashboard.putData("Auto mode", m_chooser);
+    // initialize subsystems
+    driveTrain = new Drivetrain();
+    elevatorSystem = new ElevatorSystem();
+    shoulderSystem = new ShoulderSystem();
+    wristSystem = new WristSystem();
+    claw = new ClawSystem();
+    solenoids = new Solenoids();
+    visionSystem = new VisionSystem();
     
-    // This thread is for camera feed (1st line is simple vision, rest of it doesn't work idk)
-    // UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-    // camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 120);
-    // new Thread(() -> {
-    //     CvSink cvSink = CameraServer.getInstance().getVideo();
-    //     CvSource outputStream = CameraServer.getInstance().putVideo("camera stream", 320, 240);
-    //     Mat source = new Mat();
-    //     while(!Thread.interrupted()) {
-    //         cvSink.grabFrame(source);
-    //         outputStream.putFrame(source);
-    //     }
-    // }).start();
+    oi = new OI(); // Make sure the OI is initialized LAST
+    c.setClosedLoopControl(true);
   }
 
   /**
@@ -109,19 +94,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
   }
 
   /**
@@ -134,13 +106,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
   }
 
   /**
@@ -149,6 +114,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    // elevatorSystem.printEncoders();
   }
 
   /**
@@ -156,5 +122,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    System.out.println(oi.xboxControllerTwo.getY(Hand.kLeft));
   }
 }

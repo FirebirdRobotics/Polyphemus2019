@@ -7,29 +7,56 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
-/**
+/*
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  public XboxController xboxController = new XboxController(0);
+  public XboxController xboxControllerOne = new XboxController(1);
+  public XboxController xboxControllerTwo = new XboxController(2);
 
-  Button intake = new JoystickButton(xboxController, 1);
-  Button outtake = new JoystickButton(xboxController, 2);
-  Button elevatorUp = new JoystickButton(xboxController, 3);
-  Button elevatorDown = new JoystickButton(xboxController, 4);
-  Button activateClimb = new JoystickButton(xboxController, 5);
+  // xbox controller one
+  Button climb = new JoystickButton(xboxControllerOne, 7); // Back button
+  Button startDriveOff = new JoystickButton(xboxControllerOne, 8); // Start button
+  Button bumpLeft = new JoystickButton(xboxControllerOne, 5); // Left bumper
+  Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
+  Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
+  Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // Y button
+  // (temporary, for testing)
+  Button frontPistons = new JoystickButton(xboxControllerOne, 1); // A button
+  Button backPistons = new JoystickButton(xboxControllerOne, 2); // B button
+  
+  // xbox controller two
+  Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
+  Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
+  Button hatchLowMacro = new JoystickButton(xboxControllerTwo, 1); // A button
+  Button hatchMiddleMacro = new JoystickButton(xboxControllerTwo, 2); // B button
+  Button hatchStationPickupMacro = new JoystickButton(xboxControllerTwo, 3); // X button
+  Button releaseHatchMacro = new JoystickButton(xboxControllerTwo, 4); // Y button
   
   public OI() {
-    // intake.whenPressed(new ActivateIntake(true)); // intake(true) = intake
-    // outtake.whenPressed(new ActivateIntake(false)); // intake(false) = outtake
-    // elevatorUp.whileHeld(new ActivateElevator(true)); // elevator(true) = elevator up
-    // elevatorDown.whileHeld(new ActivateElevator(false)); // elevator(false) = elevator down
-    // activateClimb.whenPressed(new ActivateClimb()); // macro
+    // xbox controller one
+    climb.whenPressed(new Climb());
+    startDriveOff.whenPressed(new StartDriveOff());
+    bumpLeft.whenPressed(new BumpLeft());
+    bumpRight.whenPressed(new BumpRight());
+    tapeVisionButton.whenPressed(new TapeVisionRoutine());
+    cargoVisionButton.whenPressed(new CargoVisionRoutine());
+    // (temporary, for testing)
+    frontPistons.whenPressed(new FrontPistonsToggle());
+    backPistons.whenPressed(new BackPistonsToggle());
+
+    // xbox controller two
+    eleDown.whileHeld(new EleDown());
+    eleUp.whileHeld(new EleUp());
+    hatchLowMacro.whenPressed(new PlaceHatchLowMacro());
+    hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
+    hatchStationPickupMacro.whenPressed(new PickupHatchStationMacro());
+    releaseHatchMacro.whenPressed(new ReleaseHatchMacro());
   }
 }
