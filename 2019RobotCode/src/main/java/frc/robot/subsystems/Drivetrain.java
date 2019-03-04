@@ -7,31 +7,95 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.*;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.*;
 
-/**
- * Add your docs here.
- */
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-//  new Talon frontLeft;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
-  // frontLeft = new Talon(RobotMap.FLTalon);
-  // Talon frontRight = new Talon(FRTalon);
-  // Talon backLeft = new Talon(BLTalon);
-  // Talon backRight = new Talon(BRTalon);
-
   
+  	WPI_VictorSPX leftFrontMotor;
+	WPI_TalonSRX leftRearMotor;
+	WPI_TalonSRX rightFrontMotor;
+	WPI_VictorSPX rightRearMotor;
+	DifferentialDrive dd;
+	SpeedControllerGroup left;
+	SpeedControllerGroup right;
+	
+	public Drivetrain() {
+		super();
+		
+		// define motors
+		leftFrontMotor = new WPI_VictorSPX(RobotMap.leftFront);
+		leftRearMotor = new WPI_TalonSRX(RobotMap.leftBack);
+		rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFront);
+		rightRearMotor = new WPI_VictorSPX(RobotMap.rightBack);
+		
+		// set motors inverted if needed
+		leftFrontMotor.setInverted(false);
+		leftRearMotor.setInverted(false);
+		rightFrontMotor.setInverted(false);
+		rightRearMotor.setInverted(false);
 
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+		
+		// create motor controller groups
+		left = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
+		right = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+		// set motor controller groups inverted if needed
+		left.setInverted(true);
+		right.setInverted(true);
+		
+		dd = new DifferentialDrive(left, right);
+		dd.setSafetyEnabled(false);
+		dd.setDeadband(0.1);
+	}
+	
+	//Sets max current/amps for talon srxs
+	// private void setTalonCurrLimit(WPI_TalonSRX tal,  int amps) {
+	// 	tal.configContinuousCurrentLimit(amps, 1000);
+	// 	tal.configPeakCurrentLimit(amps, 1000);
+	// 	tal.configPeakCurrentDuration(0, 1000);
+	// 	tal.enableCurrentLimit(true);
+	// }
 
-    // setDefaultCommand(new drive());
-  }
+	
+	// private void setVictorCurrLimit(WPI_VictorSPX vic, int amps){
+	// }
+
+  	@Override
+ 	public void initDefaultCommand() {
+    	setDefaultCommand(new Drive());
+	}
+	
+	// Below are the various drives that we use throughout the robot code
+
+	public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+		dd.arcadeDrive(moveSpeed * RobotMap.driveSpeed, rotateSpeed * RobotMap.turnSpeed);
+	}
+	
+	public void curvatureDrive(double moveSpeed, double rotateSpeed) {
+		dd.curvatureDrive(moveSpeed * RobotMap.driveSpeed, rotateSpeed * RobotMap.turnSpeed, true);
+	}
+
+	public void tankDrive(double leftSpeed, double rightSpeed) {
+		dd.tankDrive(leftSpeed, rightSpeed);
+	}
+
+	public void camDrive(double leftSpeed, double rightSpeed) {
+		left.set(-leftSpeed);
+		right.set(rightSpeed);
+	}
+	
+	public void autoDrive(double speed) {
+		left.set(-speed);
+		right.set(speed);
+	}
 }
