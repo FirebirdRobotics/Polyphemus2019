@@ -44,27 +44,25 @@ public class RobotMap {
   public static int backIn = 3;
   public static int backOut = 1;
 
-  //encoderCounts
+  // Encoder Counts
   //all #s are psuedo until we have the robot
   //these need to be given values before the placeHatch method can be called because it relies on comparing to these vals
+  // elevator encoder counts
   public static int lowEle;
   public static int midEle;
-  public static int hiEle; //cant do hi
   public static int climbEle;
 
+  // shoulder encoder counts
   public static int lowShoulder;
   public static int midShoulder;
-  public static int hiShoulder; // cant do hi
   public static int climbShoulder;
 
+  // wrist encoder counts
   public static int lowWrist;
   public static int midWrist;
   public static int climbWrist;
 
-  /*public static int lowElbow;
-  public static int midElbow;
-  public static int hiElbow;
-  */
+  // ball encoder counts
   public static int lowBallEle;
   public static int lowBallShoulder;
   public static int lowBallWrist;
@@ -73,17 +71,15 @@ public class RobotMap {
   public static int midBallShoulder;
   public static int midBallWrist;
 
+  // ball pickup encoder counts
   public static int ballPickEle;
   public static int ballPickShoulder;
   public static int ballPickWrist;
 
-  public static int clawDefault;
-  public static int elevatorDefault;
-  public static int shoulderDefault;
-  public static int wristDefault;
-
-
-  //cant do ball hi
-
+  // default position encoder counts
+  public static int defaultWrist;
+  public static int defaultShoulder;
+  public static int defaultElevator;
+  
   public static int kTimeoutMs = 30;
 }

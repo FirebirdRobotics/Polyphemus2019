@@ -28,8 +28,8 @@ public class OI {
   Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
   Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // Y button
   // (temporary, for testing)
-  Button frontPistons = new JoystickButton(xboxControllerOne, 1);
-  Button backPistons = new JoystickButton(xboxControllerOne, 2);
+  Button frontPistons = new JoystickButton(xboxControllerOne, 1); // A button
+  Button backPistons = new JoystickButton(xboxControllerOne, 2); // B button
   
   // xbox controller two
   Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
