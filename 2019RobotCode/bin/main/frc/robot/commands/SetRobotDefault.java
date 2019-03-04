@@ -22,10 +22,9 @@ public class SetRobotDefault extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.claw.resetClawDefault();
-    Robot.elevatorSystem.resetElevatorDefault();
-    Robot.shoulderSystem.resetShoulderDefault();
-    Robot.wristSystem.resetWristDefault();
+    Robot.elevatorSystem.setElevatorPreset("default");
+    Robot.shoulderSystem.setShoulderPreset("default");
+    Robot.wristSystem.setWristPreset("default");
   }
 
   // Make this return true when this Command no longer needs to run execute()

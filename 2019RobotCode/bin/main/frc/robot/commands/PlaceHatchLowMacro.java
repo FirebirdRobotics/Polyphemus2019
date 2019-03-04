@@ -24,7 +24,7 @@ public class PlaceHatchLowMacro extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevatorSystem.setArm("low");
+    Robot.elevatorSystem.setElevatorPreset("low");
   }
 
   // Make this return true when this Command no longer needs to run execute()
