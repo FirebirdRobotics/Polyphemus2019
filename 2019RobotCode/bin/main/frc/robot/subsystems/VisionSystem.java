@@ -44,6 +44,11 @@ public class VisionSystem extends Subsystem {
 
     tapeVision = cargoVision = false;
     driverVision = true;
+
+    // set the tracking to drive (no tracking)
+    driveWanted.setBoolean(true);
+    tapeWanted.setBoolean(false);
+    cargoWanted.setBoolean(false);
   }
 
   @Override
@@ -54,6 +59,11 @@ public class VisionSystem extends Subsystem {
 
   public void tapeVisionRoutine(double speed) {
     timeInt = 0;
+    // set the tracking to tape
+    driveWanted.setBoolean(false);
+    tapeWanted.setBoolean(true);
+    cargoWanted.setBoolean(false);
+
     double rawYaw = tapeYaw.getDouble(0);
     System.out.println("rawYaw: " + rawYaw);
       while (rawYaw > 2.0 || rawYaw < -2.0) {
@@ -95,13 +105,25 @@ public class VisionSystem extends Subsystem {
       }
       // stop motors after exiting while loop
       Robot.driveTrain.camDrive(0, 0);
+
+      // set the tracking to drive (no tracking)
+      driveWanted.setBoolean(true);
+      tapeWanted.setBoolean(false);
+      cargoWanted.setBoolean(false);
+
       System.out.println("final yaw: " + tapeYaw.getDouble(0));
       System.out.println("final rawYaw: " + rawYaw);
   }
 
   public void cargoVisionRoutine(double speed) {
     timeInt = 0;
+    // set the tracking to cargo
+    driveWanted.setBoolean(false);
+    tapeWanted.setBoolean(false);
+    cargoWanted.setBoolean(true);
+
     double rawYaw = cargoYaw.getDouble(0);
+    System.out.println("rawYaw: " + rawYaw);
       while (rawYaw > 2.0 || rawYaw < -2.0) {
         yawValue = (long) Math.abs(rawYaw);
         System.out.println("----");
@@ -141,30 +163,20 @@ public class VisionSystem extends Subsystem {
       }
       // stop motors after exiting while loop
       Robot.driveTrain.camDrive(0, 0);
+
+      // set the tracking to driver (no tracking)
+      driveWanted.setBoolean(true);
+      tapeWanted.setBoolean(false);
+      cargoWanted.setBoolean(false);
+
       System.out.println("final yaw: " + cargoYaw.getDouble(0));
       System.out.println("final rawYaw: " + rawYaw);
   }
-
-  /*
-  Drive TOWARDS THE TAPE STRAIGHT LINE?!
-  public double l = .2;
-  public double r = .2; 
-  Timer camTime = new Timer();
-  public void driveToward(){
-    camTime.start();
-    Robot.driveTrain.camDrive(l, r);
-      while(camTime.get() < 3){
-        if(tapeYaw.getDouble(0) <= -1){
-          r += .1;
-          l -= .1;
-          Robot.driveTrain.camDrive(l, r);
-        }else if(tapeYaw.getDouble(0) >= 1){
-          r -= .1;
-          l += .1;
-          Robot.driveTrain.camDrive(l, r);
-        } else Robot.driveTrain.camDrive(.2, .2);
-        
-      }
+  
+  public void setDriverVision() {
+    // set the tracking to driver (no tracking)
+    driveWanted.setBoolean(true);
+    tapeWanted.setBoolean(false);
+    cargoWanted.setBoolean(false);
   }
-  */ 
 }
