@@ -57,7 +57,7 @@ public class WristSystem extends Subsystem {
 
     if(s == "low") {
         wristMotor.set(ControlMode.Position, RobotMap.lowWrist);
-        System.out.println("set wrist to low (encoder value)");
+        System.out.println("set wrist to low (using encoder value)");
         // done?
         /*
         test list for low:
@@ -95,7 +95,7 @@ public class WristSystem extends Subsystem {
 
 } else if(s == "mid") {
     wristMotor.set(ControlMode.Position, RobotMap.midWrist);
-    System.out.println("set wrist to mid (encoder value)");
+    System.out.println("set wrist to mid (using encoder value)");
     /*
     test list for mid:
         elevator below needed with 
@@ -198,7 +198,7 @@ public class WristSystem extends Subsystem {
             }*/
         // }
         wristMotor.set(ControlMode.Position, RobotMap.climbWrist);
-        System.out.println("set wrist to climb (encoder value)");
+        System.out.println("set wrist to climb (using encoder value)");
     }
     //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
     else if(s == "default"){
@@ -215,7 +215,7 @@ public class WristSystem extends Subsystem {
         //     }
         // }
         wristMotor.set(ControlMode.Position, RobotMap.defaultWrist);
-        System.out.println("set wrist to default (encoder value)");
+        System.out.println("set wrist to default (using encoder value)");
     } else if(s == "ballPick") {
 
         // while(wristEncoder.get() < RobotMap.ballPickWrist - 3 || wristEncoder.get() > RobotMap.ballPickWrist + 5 ){
@@ -232,7 +232,7 @@ public class WristSystem extends Subsystem {
             */
         // }
         wristMotor.set(ControlMode.Position, RobotMap.ballPickWrist);
-        System.out.println("set wrist to ballPick (encoder value)");
+        System.out.println("set wrist to ballPick (using encoder value)");
     } else if(s == "lowBall") {
 
         // while(wristEncoder.get() < RobotMap.lowBallWrist - 3 || wristEncoder.get() > RobotMap.lowBallWrist + 5 ){
@@ -249,7 +249,7 @@ public class WristSystem extends Subsystem {
             */
         // }
         wristMotor.set(ControlMode.Position, RobotMap.lowBallWrist);
-        System.out.println("set wrist to lowBall (encoder value)");
+        System.out.println("set wrist to lowBall (using encoder value)");
     } else if(s == "midBall") {
         // while(wristEncoder.get() < RobotMap.midBallWrist - 3 || wristEncoder.get() > RobotMap.midBallWrist + 5 ){
             
@@ -267,7 +267,7 @@ public class WristSystem extends Subsystem {
         // */}
         
         wristMotor.set(ControlMode.Position, RobotMap.midBallWrist);
-        System.out.println("set wrist to midBall (encoder value)");
+        System.out.println("set wrist to midBall (using encoder value)");
       }
     }
 

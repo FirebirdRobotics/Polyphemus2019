@@ -55,7 +55,7 @@ public class ShoulderSystem extends Subsystem {
 
     if(s == "low") {
         shoulderMotor.set(ControlMode.Position, RobotMap.lowShoulder);
-        System.out.println("set shoulder to low (encoder value)");
+        System.out.println("set shoulder to low (using encoder value)");
         // done?
         /*
         test list for low:
@@ -93,7 +93,7 @@ public class ShoulderSystem extends Subsystem {
 
   } else if(s == "mid") {
       shoulderMotor.set(ControlMode.Position, RobotMap.midShoulder);
-      System.out.println("set shoulder to mid (encoder value)");
+      System.out.println("set shoulder to mid (using encoder value)");
     /*
     test list for mid:
         elevator below needed with 
@@ -193,7 +193,7 @@ public class ShoulderSystem extends Subsystem {
         //     }
         // }
         shoulderMotor.set(ControlMode.Position, RobotMap.climbShoulder);
-        System.out.println("set shoulder to climb (encoder value)");
+        System.out.println("set shoulder to climb (using encoder value)");
     } 
     //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
     else if(s == "default"){
@@ -210,7 +210,7 @@ public class ShoulderSystem extends Subsystem {
         //     }
         // }
         shoulderMotor.set(ControlMode.Position, RobotMap.defaultShoulder);
-        System.out.println("set shoulder to default (encoder value)");
+        System.out.println("set shoulder to default (using encoder value)");
     } else if(s == "ballPick") {
         // while(shoulderEncoder.get() < RobotMap.ballPickShoulder || shoulderEncoder.get() > RobotMap.ballPickShoulder){
         //     if(shoulderEncoder.get() > RobotMap.ballPickShoulder){
@@ -224,7 +224,7 @@ public class ShoulderSystem extends Subsystem {
         //     }
         // }
         shoulderMotor.set(ControlMode.Position, RobotMap.ballPickShoulder);
-        System.out.println("set shoulder to ballPick (encoder value)");
+        System.out.println("set shoulder to ballPick (using encoder value)");
     } else if(s == "lowBall") {
         // while(shoulderEncoder.get() < RobotMap.lowBallShoulder || shoulderEncoder.get() > RobotMap.lowBallShoulder){
         //     if(shoulderEncoder.get() > RobotMap.lowBallShoulder){
@@ -238,7 +238,7 @@ public class ShoulderSystem extends Subsystem {
         //     }
         // }
         shoulderMotor.set(ControlMode.Position, RobotMap.lowBallShoulder);
-        System.out.println("set shoulder to lowBall (encoder value)");
+        System.out.println("set shoulder to lowBall (using encoder value)");
     } else if(s == "midBall") {
         // while(shoulderEncoder.get() < RobotMap.midBallShoulder || shoulderEncoder.get() > RobotMap.midBallShoulder){
         //     if(shoulderEncoder.get() > RobotMap.midBallShoulder){
@@ -252,7 +252,7 @@ public class ShoulderSystem extends Subsystem {
         //     }
         // }
         shoulderMotor.set(ControlMode.Position, RobotMap.midBallShoulder);
-        System.out.println("set shoulder to midBall (encoder value)");
+        System.out.println("set shoulder to midBall (using encoder value)");
     }
   }
 

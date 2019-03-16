@@ -15,16 +15,17 @@ package frc.robot;
  */
 public class RobotMap {
   // Speed Constants (be careful with these)
-  public static double driveSpeed = .8;
-  public static double turnSpeed = 0.75;
+  public static double driveSpeed = 1.0;
+  public static double turnSpeed = 1.0;
   public static double eleSpeed = 0.5;
-  public static double shoulderSpeed = 0.45;
-  public static double wristSpeed = 0.2;
-  public static double clawSpeed = 0.25;
-  public static double visionSpeed = 0.2;
-  public static double climbSpeed = 0.2;
+  public static double shoulderSpeed = 0.5;
+  public static double wristSpeed = 0.35;
+  public static double clawSpeed = 0.35;
+  public static double visionSpeed = 0.35; // works at 0.2, just randomly changing to 0.35 at comp bc we cant turn
+  // public static double climbSpeed = 0.2; // currently setting it manually
   public static double bumpSpeed = 0.2;
-  public static double startDriveSpeed = 0.3;
+  public static double startDriveSpeed = 0.25;
+  public static double startDriveSpeed2 = 0.75; // temporary
 
   // CAN Motor Controller Ports (Drivetrain)
 	public static int rightFront = 1;

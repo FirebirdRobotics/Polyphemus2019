@@ -15,9 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
-import frc.robot.commands.Shoulder;
-import frc.robot.commands.Wrist;
-
+import frc.robot.commands.*;
 
 //Look at TalonSRX set(ControlMode.Position, EncoderTicks); !!!! asdlkfnbsdxlkfvnlxskdncvx lkzdnvxclk 
 public class ElevatorSystem extends Subsystem {
@@ -106,9 +104,12 @@ public class ElevatorSystem extends Subsystem {
 //2 - elbow *    has 2 motors :((((     * ...will figure out l8r...
 //3 wrist hopefully one motor
 //i wanna die ya, still do
-
+public int count;
 public void setElevator(double speed){
     elevatorMotor.set(ControlMode.PercentOutput, speed);
+    // count = elevatorMotor.getSelectedSensorPosition();
+    // SmartDashboard.putNumber("count", count);
+    // System.out.println(count);
 }
 
 //This WILL NOT RUN yet because no values have been given to the needed encoder thingies in RobotMap
@@ -121,7 +122,7 @@ public void setElevatorPreset(String s) {
 
         if(s == "low") {
             elevatorMotor.set(ControlMode.Position, RobotMap.lowEle);
-            System.out.println("set elevator to low (encoder value)");
+            System.out.println("set elevator to low (using encoder value)");
             // done?
             /*
             test list for low:
@@ -155,7 +156,7 @@ public void setElevatorPreset(String s) {
 
     } else if(s == "mid") {
         elevatorMotor.set(ControlMode.Position, RobotMap.midEle);
-        System.out.println("set elevator to mid (encoder value)");
+        System.out.println("set elevator to mid (using encoder value)");
         /*
         test list for mid:
             elevator below needed with 
@@ -247,7 +248,7 @@ public void setElevatorPreset(String s) {
             //     }
             // }
             elevatorMotor.set(ControlMode.Position, RobotMap.climbEle);
-            System.out.println("set elevator to climb (encoder value)");
+            System.out.println("set elevator to climb (using encoder value)");
         } 
         //add a ("default") for the beginning of the match so we can basically initialize the starting positions for before the match starts
         else if(s == "default"){
@@ -264,7 +265,7 @@ public void setElevatorPreset(String s) {
             //     }
             // }
             elevatorMotor.set(ControlMode.Position, RobotMap.defaultElevator);
-            System.out.println("set elevator to default (encoder value)");
+            System.out.println("set elevator to default (using encoder value)");
         } else if(s == "ballPick") {
             // while(eleEncoder.get() > RobotMap.ballPickEle + 5 || eleEncoder.get() < RobotMap.ballPickEle - 5) {
             //     if(eleEncoder.get() > RobotMap.ballPickEle) {
@@ -274,7 +275,7 @@ public void setElevatorPreset(String s) {
             //     }
             // }
             elevatorMotor.set(ControlMode.Position, RobotMap.ballPickEle);
-            System.out.println("set elevator to ballPick (encoder value)");
+            System.out.println("set elevator to ballPick (using encoder value)");
         } else if(s == "lowBall") {
             // while(eleEncoder.get() > RobotMap.lowBallEle + 5 || eleEncoder.get() < RobotMap.lowBallEle - 5) {
             //     if(eleEncoder.get() > RobotMap.lowBallEle) {
@@ -284,7 +285,7 @@ public void setElevatorPreset(String s) {
             //     }
             // }
             elevatorMotor.set(ControlMode.Position, RobotMap.lowBallEle);
-            System.out.println("set elevator to lowBall (encoder value)");
+            System.out.println("set elevator to lowBall (using encoder value)");
         } else if(s == "midBall") {
             // while(eleEncoder.get() > RobotMap.midBallEle + 5 || eleEncoder.get() < RobotMap.midBallEle - 5) {
             //     if(eleEncoder.get() > RobotMap.midBallEle) {
@@ -294,7 +295,7 @@ public void setElevatorPreset(String s) {
             //     }
             // }
             elevatorMotor.set(ControlMode.Position, RobotMap.midBallEle);
-            System.out.println("set elevator to midBall (encoder value)");
+            System.out.println("set elevator to midBall (using encoder value)");
         }
     }
 
@@ -305,6 +306,7 @@ public void setElevatorPreset(String s) {
 
     @Override
     public void initDefaultCommand() {
+        setDefaultCommand(new Elevator());
     }
 }
 

@@ -30,11 +30,11 @@ public class StartDriveOff extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    driveTime.start();
-    while(driveTime.get() < 3) {
+    // driveTime.start();
+    // while(driveTime.get() < 3) {
       // command to drive off of the platform (level 2) @ starting
       Robot.driveTrain.autoDrive(RobotMap.startDriveSpeed);
-    }
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -11,7 +11,6 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.*;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder; 
 

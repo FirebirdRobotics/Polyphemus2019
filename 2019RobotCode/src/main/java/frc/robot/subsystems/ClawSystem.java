@@ -98,7 +98,7 @@ public class ClawSystem extends Subsystem {
   }
 
   public void ballDrop(){
-    //needs to have thje arm in the right spot
+    //needs to have the arm in the right spot
     
     open();
   }

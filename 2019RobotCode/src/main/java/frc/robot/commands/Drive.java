@@ -30,7 +30,8 @@ public class Drive extends Command {
   @Override
   protected void execute() {
     // create the type of drive
-    Robot.driveTrain.arcadeDrive(move * RobotMap.driveSpeed, turn * RobotMap.turnSpeed);
+    // Robot.driveTrain.arcadeDrive(move * RobotMap.driveSpeed, turn * RobotMap.turnSpeed);
+    Robot.driveTrain.arcadeDrive(move, turn);
 
     // these variables need to be defined as the xbox stick:
     // when the xbox stick is 0, then the robot is not moving

@@ -7,19 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class BumpRight extends Command {
-
-  Timer moveTime;
-
-  public BumpRight() {
+public class TemporaryConstantDrive extends Command {
+  public TemporaryConstantDrive() {
     requires(Robot.driveTrain);
-
-    moveTime = new Timer();
   }
 
   // Called just before this Command runs the first time
@@ -30,12 +24,7 @@ public class BumpRight extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    moveTime.start();
-    while(moveTime.get() < 0.2) {
-      // turn right for 0.2s
-      Robot.driveTrain.camDrive(-RobotMap.bumpSpeed, RobotMap.bumpSpeed);
-    }
-    // Robot.driveTrain.autoDrive(.18);
+    Robot.driveTrain.autoDrive(RobotMap.startDriveSpeed2);
   }
 
   // Make this return true when this Command no longer needs to run execute()

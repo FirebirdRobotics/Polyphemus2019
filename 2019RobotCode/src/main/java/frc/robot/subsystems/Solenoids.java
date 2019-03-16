@@ -57,26 +57,33 @@ public class Solenoids extends Subsystem {
             // back pistons up
             // drive forward for about 2 (?) second, get back wheels on platform
 
+            // front pistons sequence
             frontPiston.set(DoubleSolenoid.Value.kForward);
-             climbTime.start();
-                while(climbTime.get() < 1){
-                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
+            climbTime.start();
+                while(climbTime.get() < 0.35){
+                    Robot.driveTrain.autoDrive(0.25);
                 }
                 Robot.driveTrain.autoDrive(0);
-             climbTime.reset();
+            climbTime.reset();
             frontPiston.set(DoubleSolenoid.Value.kReverse);
-
             backPiston.set(DoubleSolenoid.Value.kForward);
-             climbTime.start();
-                while(climbTime.get() < 2){
-                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
+
+            // back pistons sequence
+            climbTime.start();
+                while(climbTime.get() < 0.45){
+                    Robot.driveTrain.autoDrive(0.75);
                 }
                 Robot.driveTrain.autoDrive(0);
+            climbTime.reset();
             backPiston.set(DoubleSolenoid.Value.kReverse);
-                while(climbTime.get() < 2){
-                    Robot.driveTrain.autoDrive(RobotMap.climbSpeed);
+
+            // drive on sequence
+            climbTime.start();
+                while(climbTime.get() < 0.6){
+                    Robot.driveTrain.autoDrive(0.75);
                 }
                 Robot.driveTrain.autoDrive(0);
+            climbTime.reset();
     }
 
     public void frontPistonsUp(){

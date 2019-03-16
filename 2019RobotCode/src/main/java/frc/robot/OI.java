@@ -27,13 +27,13 @@ public class OI {
   Button bumpRight = new JoystickButton(xboxControllerOne, 6); // Right bumper
   Button tapeVisionButton = new JoystickButton(xboxControllerOne, 3); // X button
   Button cargoVisionButton = new JoystickButton(xboxControllerOne, 4); // Y button
-  // (temporary, for testing)
+  // (temporary, for testing) 
   Button frontPistons = new JoystickButton(xboxControllerOne, 1); // A button
   Button backPistons = new JoystickButton(xboxControllerOne, 2); // B button
   
   // xbox controller two
-  Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
-  Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
+  // Button eleDown = new JoystickButton(xboxControllerTwo, 5); // Left bumper
+  // Button eleUp = new JoystickButton(xboxControllerTwo, 6); // Right bumper
   Button hatchLowMacro = new JoystickButton(xboxControllerTwo, 1); // A button
   Button hatchMiddleMacro = new JoystickButton(xboxControllerTwo, 2); // B button
   Button hatchStationPickupMacro = new JoystickButton(xboxControllerTwo, 3); // X button
@@ -41,19 +41,21 @@ public class OI {
   
   public OI() {
     // xbox controller one
-    climb.whenPressed(new Climb());
-    startDriveOff.whenPressed(new StartDriveOff());
+    climb.whenPressed(new TemporaryConstantDrive()); // replace TemporaryConstantDrive with Climb when u want to try full auto climb
+    startDriveOff.whileHeld(new StartDriveOff());
     bumpLeft.whenPressed(new BumpLeft());
     bumpRight.whenPressed(new BumpRight());
     tapeVisionButton.whenPressed(new TapeVisionRoutine());
     cargoVisionButton.whenPressed(new CargoVisionRoutine());
+    // tapeVisionButton.whenReleased(new SetDriverVision());
+    // cargoVisionButton.whenReleased(new SetDriverVision());
     // (temporary, for testing)
     frontPistons.whenPressed(new FrontPistonsToggle());
     backPistons.whenPressed(new BackPistonsToggle());
 
     // xbox controller two
-    eleDown.whileHeld(new EleDown());
-    eleUp.whileHeld(new EleUp());
+    // eleDown.whileHeld(new EleDown());
+    // eleUp.whileHeld(new EleUp());
     hatchLowMacro.whenPressed(new PlaceHatchLowMacro());
     hatchMiddleMacro.whenPressed(new PlaceHatchMiddleMacro());
     hatchStationPickupMacro.whenPressed(new PickupHatchStationMacro());
