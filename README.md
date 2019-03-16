@@ -16,13 +16,14 @@ The current code is located in the ***bin directory***, not the src directory (s
 - [ ] StartDriveOff
 
 ## Controls/OI:
-##### XBOX1 = MOVEMENT
-##### XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
+##### XBOX1 = DRIVER JOYSTICK
+##### XBOX2 = OPERATOR JOYSTICK (ELEVATOR, ARM, CLAW, etc.)
 
 **-=XBOX1=-**
  
 - Left Joystick = drive
 - Back button = climb
+- Start button = start drive off (drive on a button w/ constant speed)
 - left bumper = bump left
 - right bumper = bump right
 - right trigger = cargo vision routine
@@ -34,8 +35,8 @@ The current code is located in the ***bin directory***, not the src directory (s
 - right joystick = wrist
 - right trigger = claw out
 - left trigger = claw in
-- left bumper = ele down manual
-- right bumper = ele up manual
+- left bumper = ele down
+- right bumper = ele up
 - A button = set arm to hatch low macro
 - B button = set arm to hatch middle macro
 - X button = hatch station pickup macro
