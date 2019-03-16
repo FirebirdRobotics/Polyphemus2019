@@ -48,6 +48,7 @@ The current code is located in the ***bin directory***, not the src directory (s
 - distance from robot (or camera) to detected field element
 
 ## Stuff to do/Improvements:
+- Remove the old elevator stuff
 - Externalize variables (put on SmartDashboard)
 - Add motor current limits (we have them for talons but idk how to do victors)
 - Reset/default button (for solenoids, height of elevator, arm & claw position, etc.)
