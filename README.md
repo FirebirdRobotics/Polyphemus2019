@@ -16,8 +16,8 @@ The current code is located in the ***bin directory***, not the src directory (s
 - [ ] StartDriveOff
 
 ## Controls/OI:
-##### XBOX1 = DRIVER JOYSTICK
-##### XBOX2 = OPERATOR JOYSTICK (ELEVATOR, ARM, CLAW, etc.)
+##### XBOX1 = DRIVER CONTROLS
+##### XBOX2 = OPERATOR CONTROLS (ELEVATOR, ARM, CLAW, etc.)
 
 **-=XBOX1=-**
  
