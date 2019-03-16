@@ -2,7 +2,7 @@
 Robot Template Type: Command-Based
  
 ## Current Code Location:
-The current code is located in the ***bin directory***, not the src directory (src directory is not updated & file directories are weird so idk)
+**directory**: 2019/2019RobotCode/src/main/java/frc/robot/
 
 ## Full List of Macros (ones that are checked have been tested and fully work):
 - [ ] Climb
