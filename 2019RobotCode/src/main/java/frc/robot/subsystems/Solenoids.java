@@ -40,50 +40,37 @@ public class Solenoids extends Subsystem {
         /*
             LOWER EVERYTING TO BOTTOM AND CENTER?!?!?!
         */
-        
 
-        //THIS TOO
-            //will add a climb section which pulls shoulder up and elbow in with ele low
-            // ele.setArm("climb");    
+        // NOTE: to create this macro, what we will do is increase the TIMER by 0.05 every run
+        // we will also only test one part at a time (ex. front pistons sequence first, then both front pistons sequence and back pistons sequence, etc.)
 
-            // assuming we're starting touching the front of the level 2 platform:
-            // front pistons down
-            // drive forward for about 1 (?) second, get front wheels on platform
-            // STOP DRIVETRAIN
-            // back pistons down
-            // front pistons up
-            // drive forward for about 2 (?) seconds, get middle wheels on platform
-            // STOP DRIVETRAIN
-            // back pistons up
-            // drive forward for about 2 (?) second, get back wheels on platform
+        // front pistons sequence
+        frontPiston.set(DoubleSolenoid.Value.kForward);
+        climbTime.start();
+            while(climbTime.get() < 0.1){
+                Robot.driveTrain.autoDrive(0.25);
+            }
+            Robot.driveTrain.autoDrive(0);
+        climbTime.reset();
+        frontPiston.set(DoubleSolenoid.Value.kReverse);
+        backPiston.set(DoubleSolenoid.Value.kForward);
 
-            // front pistons sequence
-            frontPiston.set(DoubleSolenoid.Value.kForward);
-            climbTime.start();
-                while(climbTime.get() < 0.35){
-                    Robot.driveTrain.autoDrive(0.25);
-                }
-                Robot.driveTrain.autoDrive(0);
-            climbTime.reset();
-            frontPiston.set(DoubleSolenoid.Value.kReverse);
-            backPiston.set(DoubleSolenoid.Value.kForward);
+        // back pistons sequence
+        climbTime.start();
+            while(climbTime.get() < 0.1){
+                Robot.driveTrain.autoDrive(0.75);
+            }
+            Robot.driveTrain.autoDrive(0);
+        climbTime.reset();
+        backPiston.set(DoubleSolenoid.Value.kReverse);
 
-            // back pistons sequence
-            climbTime.start();
-                while(climbTime.get() < 0.45){
-                    Robot.driveTrain.autoDrive(0.75);
-                }
-                Robot.driveTrain.autoDrive(0);
-            climbTime.reset();
-            backPiston.set(DoubleSolenoid.Value.kReverse);
-
-            // drive on sequence
-            climbTime.start();
-                while(climbTime.get() < 0.6){
-                    Robot.driveTrain.autoDrive(0.75);
-                }
-                Robot.driveTrain.autoDrive(0);
-            climbTime.reset();
+        // drive on sequence
+        climbTime.start();
+            while(climbTime.get() < 0.1){
+                Robot.driveTrain.autoDrive(0.75);
+            }
+            Robot.driveTrain.autoDrive(0);
+        climbTime.reset();
     }
 
     public void frontPistonsUp(){

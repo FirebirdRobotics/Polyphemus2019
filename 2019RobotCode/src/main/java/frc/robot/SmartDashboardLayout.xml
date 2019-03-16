@@ -1,0 +1,36 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="9" y="6"/>
+		<width>708</width>
+		<height>529</height>
+		<property name="Camera Choice" value="rPi Camera"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1042" y="536"/>
+		<width>261</width>
+		<height>45</height>
+		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="817" y="8"/>
+		<width>704</width>
+		<height>527</height>
+		<property name="Camera Choice" value="stream"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1042" y="536"/>
+		<width>261</width>
+		<height>45</height>
+		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="821" y="8"/>
+		<width>700</width>
+		<height>525</height>
+		<property name="Camera Choice" value="stream"/>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>

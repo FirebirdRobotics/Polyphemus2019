@@ -41,7 +41,7 @@ public class OI {
   
   public OI() {
     // xbox controller one
-    climb.whenPressed(new TemporaryConstantDrive()); // replace TemporaryConstantDrive with Climb when u want to try full auto climb
+    climb.whenPressed(new Climb()); // replace TemporaryConstantDrive with Climb when u want to try full auto climb
     startDriveOff.whileHeld(new StartDriveOff());
     bumpLeft.whenPressed(new BumpLeft());
     bumpRight.whenPressed(new BumpRight());
