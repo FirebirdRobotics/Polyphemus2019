@@ -4,7 +4,7 @@ XBOX2 = ELEVATOR, ARM, CLAW, etc. (everything else)
 ####
 
 ----XBOX1----
-left Joystick = drive
+left joystick = drive
 back button = climb
 start button = drive off (starting)
 left bumper = bump left
