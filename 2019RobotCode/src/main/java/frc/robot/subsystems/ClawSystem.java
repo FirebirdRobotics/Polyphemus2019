@@ -9,7 +9,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 import frc.robot.commands.Claw;
@@ -18,13 +21,15 @@ public class ClawSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  public static VictorSPX clawMotor;
+  // public static VictorSPX clawMotor;
+  public static DoubleSolenoid clawSolenoid;
   Timer clawTime;
   
 
   public ClawSystem() {
 
-    clawMotor = new VictorSPX(RobotMap.clawPort);
+    // clawMotor = new VictorSPX(RobotMap.clawPort);
+    clawSolenoid = new DoubleSolenoid(RobotMap.clawIn, RobotMap.clawOut);
     clawTime = new Timer();
 
   }
@@ -82,8 +87,9 @@ public class ClawSystem extends Subsystem {
     }
   }
   
-  public void setClaw(Double speed) {
-    clawMotor.set(ControlMode.PercentOutput, speed);
+  public void setClaw(Value speed) {
+    // clawMotor.set(ControlMode.PercentOutput, speed);
+    clawSolenoid.set(speed);
   }
 
   public void ballPickup(){
@@ -111,20 +117,13 @@ public class ClawSystem extends Subsystem {
   //}
 
   public void open() {
-    // clawTime.reset();
-    // clawTime.start();
-    // while(clawTime.get() <= .5) {
-      
-      clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
-    // }
+    // clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
+    clawSolenoid.set(Value.kForward);
   }
 
   public void close() {
-    // clawTime.reset();
-    // clawTime.start();
-    // while(clawTime.get() <= .5) {
-      clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
-    // }
+    // clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
+    clawSolenoid.set(Value.kReverse);
   }
 
   @Override

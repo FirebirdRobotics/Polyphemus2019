@@ -44,6 +44,8 @@ public class RobotMap {
   public static int frontOut = 2;
   public static int backIn = 3;
   public static int backOut = 1;
+  public static int clawIn = 4;
+  public static int clawOut = 5;
 
   // Encoder Counts
   //all #s are psuedo until we have the robot
