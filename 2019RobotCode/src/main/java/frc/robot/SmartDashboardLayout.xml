@@ -1,34 +1,108 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1411" y="0"/>
+		<property name="Text" value="CONTROLS"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1370" y="354"/>
+		<property name="Text" value="start button = dance macro (?)"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1351" y="337"/>
+		<property name="Text" value="Y button = release hatch & drive back "/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1350" y="320"/>
+		<property name="Text" value="X button = hatch station pickup macro"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1342" y="305"/>
+		<property name="Text" value="B button = set arm to hatch middle macro"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1350" y="289"/>
+		<property name="Text" value="A button = set arm to hatch low macro"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1381" y="258"/>
+		<property name="Text" value="right bumper = ele up manual"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1391" y="224"/>
+		<property name="Text" value="left trigger = claw in"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1383" y="207"/>
+		<property name="Text" value="right trigger = claw out"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1380" y="190"/>
+		<property name="Text" value="right joystick = wrist"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1385" y="174"/>
+		<property name="Text" value="left joystick = arm"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1408" y="158"/>
+		<property name="Text" value="----XBOX2----"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1394" y="127"/>
+		<property name="Text" value="X button = tape vision routine"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1393" y="111"/>
+		<property name="Text" value="Y button = cargo vision routine"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1371" y="94"/>
+		<property name="Text" value="right bumper = bump right"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1377" y="79"/>
+		<property name="Text" value="left bumper = bump left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1377" y="63"/>
+		<height>13</height>
+		<property name="Text" value="start button = drive off (starting)"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1377" y="47"/>
+		<width>93</width>
+		<property name="Text" value="back button = climb"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1378" y="31"/>
+		<property name="Text" value="left joystick = drive"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1404" y="16"/>
+		<property name="Text" value="----XBOX1----"/>
+	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="9" y="6"/>
-		<width>708</width>
-		<height>529</height>
+		<location x="8" y="9"/>
+		<width>656</width>
+		<height>536</height>
 		<property name="Camera Choice" value="rPi Camera"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1042" y="536"/>
+		<location x="886" y="543"/>
 		<width>261</width>
-		<height>45</height>
-		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
+		<height>44</height>
+		<property name="Text" value="Instructions: Y to detect ball, X to detect tape"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="817" y="8"/>
-		<width>704</width>
-		<height>527</height>
+		<location x="672" y="7"/>
+		<width>668</width>
+		<height>543</height>
 		<property name="Camera Choice" value="stream"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1042" y="536"/>
-		<width>261</width>
-		<height>45</height>
-		<property name="Text" value="Instructions: LB to detect ball, RB to detect tape"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="821" y="8"/>
-		<width>700</width>
-		<height>525</height>
-		<property name="Camera Choice" value="stream"/>
+		<location x="1387" y="241"/>
+		<property name="Text" value="left bumper = ele down manual"/>
 	</static-widget>
 </dashboard>
 <live-window>
