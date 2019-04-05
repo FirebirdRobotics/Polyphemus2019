@@ -83,7 +83,7 @@ public class VisionSystem extends Subsystem {
               System.out.println("tapeYaw is on right");
               System.out.println("timeInt: " + timeInt);
           }
-          if (timeInt++ >= 10) {
+          if (timeInt++ >= 5) {
             Robot.driveTrain.camDrive(0, 0);
             System.out.println("pausing motors");
             return;
@@ -139,7 +139,7 @@ public class VisionSystem extends Subsystem {
               System.out.println("cargoYaw is on right");
               System.out.println("timeInt: " + timeInt);
           }
-          if (timeInt++ >= 10) {
+          if (timeInt++ >= 5) {
             Robot.driveTrain.camDrive(0, 0);
             System.out.println("pausing motors");
             return;

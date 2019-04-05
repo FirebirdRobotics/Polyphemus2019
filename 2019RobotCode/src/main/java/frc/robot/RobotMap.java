@@ -21,7 +21,7 @@ public class RobotMap {
   public static double shoulderSpeed = 0.5;
   public static double wristSpeed = 0.35;
   public static double clawSpeed = 0.35;
-  public static double visionSpeed = 0.35; // works at 0.2, just randomly changing to 0.35 at comp bc we cant turn
+  public static double visionSpeed = 0.25; // changed from 0.2 to 0.25
   // public static double climbSpeed = 0.2; // currently setting it manually
   public static double bumpSpeed = 0.2;
   public static double startDriveSpeed = 0.25;

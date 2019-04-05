@@ -27,24 +27,25 @@ public class Claw extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // code for old claw (using motor)
-    // if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kLeft) != 0){
-    //   Robot.claw.setClaw(RobotMap.clawSpeed);
-    //   // System.out.println("open claw");
-    // }else if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kRight) != 0){
-    //   Robot.claw.setClaw(-RobotMap.clawSpeed);
-    //   // System.out.println("close claw");
-    // }else{
-    //   Robot.claw.setClaw(0.0);
-    // }
-
-    if(Robot.claw.clawSolenoid.get() == Value.kReverse) {
-      Robot.claw.setClaw(Value.kForward);
-    } else if(Robot.claw.clawSolenoid.get() == Value.kForward) {
-      Robot.claw.setClaw(Value.kReverse);
-    } else {
-      Robot.claw.setClaw(Value.kOff);
+    // code for motor claw
+    if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kLeft) != 0){
+      Robot.claw.setClaw(RobotMap.clawSpeed);
+      // System.out.println("open claw");
+    }else if(Robot.oi.xboxControllerTwo.getTriggerAxis(Hand.kRight) != 0){
+      Robot.claw.setClaw(-RobotMap.clawSpeed);
+      // System.out.println("close claw");
+    }else{
+      Robot.claw.setClaw(0.0);
     }
+
+    // code for solenoid claw
+    // if(Robot.claw.clawSolenoid.get() == Value.kReverse) {
+    //   Robot.claw.setClaw(Value.kForward);
+    // } else if(Robot.claw.clawSolenoid.get() == Value.kForward) {
+    //   Robot.claw.setClaw(Value.kReverse);
+    // } else {
+    //   Robot.claw.setClaw(Value.kOff);
+    // }
    
   }
 
@@ -57,8 +58,8 @@ public class Claw extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    // Robot.claw.setClaw(0.0);
-    Robot.claw.setClaw(Value.kOff);
+    Robot.claw.setClaw(0.0);
+    // Robot.claw.setClaw(Value.kOff);
     System.out.println("claw stopped");
   }
 

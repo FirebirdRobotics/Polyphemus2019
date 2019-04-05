@@ -21,15 +21,15 @@ public class ClawSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  // public static VictorSPX clawMotor;
-  public static DoubleSolenoid clawSolenoid;
+  public static VictorSPX clawMotor;
+  // public static DoubleSolenoid clawSolenoid;
   Timer clawTime;
   
 
   public ClawSystem() {
 
-    // clawMotor = new VictorSPX(RobotMap.clawPort);
-    clawSolenoid = new DoubleSolenoid(RobotMap.clawIn, RobotMap.clawOut);
+    clawMotor = new VictorSPX(RobotMap.clawPort);
+    // clawSolenoid = new DoubleSolenoid(RobotMap.clawIn, RobotMap.clawOut);
     clawTime = new Timer();
 
   }
@@ -87,9 +87,9 @@ public class ClawSystem extends Subsystem {
     }
   }
   
-  public void setClaw(Value speed) {
-    // clawMotor.set(ControlMode.PercentOutput, speed);
-    clawSolenoid.set(speed);
+  public void setClaw(double speed) {
+    clawMotor.set(ControlMode.PercentOutput, speed);
+    // clawSolenoid.set(speed);
   }
 
   public void ballPickup(){
@@ -117,13 +117,13 @@ public class ClawSystem extends Subsystem {
   //}
 
   public void open() {
-    // clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
-    clawSolenoid.set(Value.kForward);
+    clawMotor.set(ControlMode.PercentOutput, RobotMap.clawSpeed);
+    // clawSolenoid.set(Value.kForward);
   }
 
   public void close() {
-    // clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
-    clawSolenoid.set(Value.kReverse);
+    clawMotor.set(ControlMode.PercentOutput, -RobotMap.clawSpeed);
+    // clawSolenoid.set(Value.kReverse);
   }
 
   @Override
