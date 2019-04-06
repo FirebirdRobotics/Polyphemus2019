@@ -121,6 +121,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    System.out.println(oi.xboxControllerTwo.getY(Hand.kLeft));
+    // System.out.println(oi.xboxControllerTwo.getY(Hand.kLeft));
+    // Scheduler.getInstance().run();
+    // System.out.println(ShoulderSystem.shoulderMotor.getSelectedSensorPosition());
   }
 }

@@ -46,9 +46,9 @@ public class VisionSystem extends Subsystem {
     driverVision = true;
 
     // set the tracking to drive (no tracking)
-    driveWanted.setBoolean(true);
-    tapeWanted.setBoolean(false);
-    cargoWanted.setBoolean(false);
+    // driveWanted.setBoolean(true);
+    // tapeWanted.setBoolean(false);
+    // cargoWanted.setBoolean(false);
   }
 
   @Override
@@ -60,9 +60,9 @@ public class VisionSystem extends Subsystem {
   public void tapeVisionRoutine(double speed) {
     timeInt = 0;
     // set the tracking to tape
-    driveWanted.setBoolean(false);
-    tapeWanted.setBoolean(true);
-    cargoWanted.setBoolean(false);
+    // driveWanted.setBoolean(false);
+    // tapeWanted.setBoolean(true);
+    // cargoWanted.setBoolean(false);
 
     double rawYaw = tapeYaw.getDouble(0);
     System.out.println("rawYaw: " + rawYaw);
@@ -107,7 +107,7 @@ public class VisionSystem extends Subsystem {
       Robot.driveTrain.camDrive(0, 0);
 
       // set the tracking to drive (no tracking)
-      setDriverVision();
+      // setDriverVision();
 
       System.out.println("final yaw: " + tapeYaw.getDouble(0));
       System.out.println("final rawYaw: " + rawYaw);
@@ -116,9 +116,9 @@ public class VisionSystem extends Subsystem {
   public void cargoVisionRoutine(double speed) {
     timeInt = 0;
     // set the tracking to cargo
-    driveWanted.setBoolean(false);
-    tapeWanted.setBoolean(false);
-    cargoWanted.setBoolean(true);
+    // driveWanted.setBoolean(false);
+    // tapeWanted.setBoolean(false);
+    // cargoWanted.setBoolean(true);
 
     double rawYaw = cargoYaw.getDouble(0);
     System.out.println("rawYaw: " + rawYaw);
@@ -163,7 +163,7 @@ public class VisionSystem extends Subsystem {
       Robot.driveTrain.camDrive(0, 0);
 
       // set the tracking to driver (no tracking)
-      setDriverVision();
+      // setDriverVision();
 
       System.out.println("final yaw: " + cargoYaw.getDouble(0));
       System.out.println("final rawYaw: " + rawYaw);
