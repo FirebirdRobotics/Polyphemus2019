@@ -2,7 +2,8 @@
 Robot Template Type: Command-Based
  
 ## Current Code Location:
-**directory**: 2019/2019RobotCode/src/main/java/frc/robot/
+**directory - master branch**: 2019/2019RobotCode/src/main/java/frc/robot/
+**directory - simplified branch**: robot
 
 ## Full List of Macros (ones that are checked have been tested and fully work):
 - [ ] Climb
@@ -13,7 +14,7 @@ Robot Template Type: Command-Based
 - [ ] PickupHatchStationMacro
 - [ ] PickupBallMacro
 - [ ] SetRobotDefault
-- [ ] StartDriveOff
+- [x] StartDriveOff
 
 ## Controls/OI:
 ##### XBOX1 = DRIVER CONTROLS
