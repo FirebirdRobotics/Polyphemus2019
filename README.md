@@ -1,5 +1,5 @@
 # Team 3019 Robot Code, 2018-2019 FRC Season
-Robot Template Type: Command-Based
+Robot Template Type: Command-Based (Old)
  
 ## Current Code Location:
 **directory - master branch**: 2019RobotCode/src/main/java/frc/robot/
